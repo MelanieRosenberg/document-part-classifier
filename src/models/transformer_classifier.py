@@ -14,9 +14,40 @@ from sklearn.metrics import classification_report, f1_score
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
+class RobertaForSequenceClassification(nn.Module):
+    """
+    Standard classification model (without CRF) for baseline comparison
+    """
+    def __init__(self, num_labels: int):
+        super().__init__()
+        self.roberta = RobertaModel.from_pretrained('roberta-large')
+        self.dropout = nn.Dropout(0.1)
+        self.classifier = nn.Linear(self.roberta.config.hidden_size, num_labels)
+        
+    def forward(
+        self,
+        input_ids: torch.Tensor,
+        attention_mask: torch.Tensor,
+        labels: Optional[torch.Tensor] = None
+    ) -> Union[torch.Tensor, torch.Tensor]:
+        outputs = self.roberta(input_ids=input_ids, attention_mask=attention_mask)
+        pooled_output = outputs[1]  # [CLS] token representation
+        pooled_output = self.dropout(pooled_output)
+        logits = self.classifier(pooled_output)
+        
+        if labels is not None:
+            loss_fct = nn.CrossEntropyLoss()
+            # Take first label since we're doing sequence classification
+            labels = labels[:, 0]
+            loss = loss_fct(logits, labels)
+            return loss
+        else:
+            return logits
+
 class RobertaWithCRF(nn.Module):
     def __init__(self, num_labels: int):
         super().__init__()
+        self.num_labels = num_labels
         self.roberta = RobertaModel.from_pretrained('roberta-large')
         self.dropout = nn.Dropout(0.1)
         self.classifier = nn.Linear(self.roberta.config.hidden_size, num_labels)
@@ -47,9 +78,10 @@ class RobertaWithCRF(nn.Module):
                 valid_labels
             )
             
-            # CRF loss (negative log likelihood)
-            log_likelihood = self.crf(emissions, valid_labels, mask=mask, reduction='mean')
-            return -log_likelihood
+            # IMPORTANT: The CRF implementation in torchcrf returns the NEGATIVE
+            # log likelihood by default, so we don't need to negate it
+            loss = self.crf(emissions, valid_labels, mask=mask, reduction='mean')
+            return loss
         else:
             # During inference
             # Create mask for padding tokens
@@ -63,11 +95,12 @@ class DocumentPartClassifier:
         self,
         model_name: str = 'roberta-large',
         max_length: int = 512,
-        batch_size: int = 32,
-        learning_rate: float = 1e-5,
-        num_epochs: int = 20,
+        batch_size: int = 16,
+        learning_rate: float = 2e-5,
+        num_epochs: int = 10,
         context_window: int = 2,
-        warmup_ratio: float = 0.1
+        warmup_ratio: float = 0.1,
+        use_crf: bool = True
     ):
         self.model_name = model_name
         self.max_length = max_length
@@ -76,6 +109,7 @@ class DocumentPartClassifier:
         self.num_epochs = num_epochs
         self.context_window = context_window
         self.warmup_ratio = warmup_ratio
+        self.use_crf = use_crf
         
         # Label mapping
         self.label_map = {'FORM': 0, 'TABLE': 1, 'TEXT': 2}
@@ -86,18 +120,23 @@ class DocumentPartClassifier:
         special_tokens = {
             'additional_special_tokens': ['[TARGET_START]', '[TARGET_END]']
         }
-        self.tokenizer.add_special_tokens(special_tokens)
+        num_added = self.tokenizer.add_special_tokens(special_tokens)
+        logger.info(f"Added {num_added} special tokens to tokenizer")
         
         # Check for CUDA availability
         self.device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
         
         # Initialize model
         try:
-            self.model = RobertaWithCRF(num_labels=len(self.label_map))
+            if use_crf:
+                self.model = RobertaWithCRF(num_labels=len(self.label_map))
+            else:
+                self.model = RobertaForSequenceClassification(num_labels=len(self.label_map))
+                
             # Resize token embeddings to account for new special tokens
             self.model.roberta.resize_token_embeddings(len(self.tokenizer))
             self.model.to(self.device)
-            logger.info(f"Initialized classifier with {model_name} on {self.device}")
+            logger.info(f"Initialized {'CRF' if use_crf else 'standard'} classifier with {model_name} on {self.device}")
         except Exception as e:
             logger.error(f"Error initializing model: {e}")
             raise
@@ -154,44 +193,49 @@ class DocumentPartClassifier:
             return_tensors='pt'
         )
         
-        if labels is not None:
+        if labels is not None and not isinstance(labels, torch.Tensor):
             # Convert string labels to tensor
             label_ids = torch.tensor([self.label_map[label] for label in labels])
             
-            # For CRF, we need a label for each token
-            # But we'll handle this differently - we'll only use the target line label
-            # Create sequence labels where:
-            # - Target line tokens get the actual label
-            # - Context tokens get a -100 (will be ignored in loss calculation)
-            
-            # First, create a tensor filled with -100 (ignore index)
-            expanded_labels = torch.full(
-                (len(lines), encodings['input_ids'].size(1)),
-                -100,
-                dtype=torch.long
-            )
-            
-            # Then, for each sequence, find target tokens and set their labels
-            for i in range(len(lines)):
-                # Get input_ids for this sequence
-                input_ids = encodings['input_ids'][i]
+            if self.use_crf:
+                # For CRF, we need a label for each token
+                # We'll handle this by expanding the label to all tokens in the sequence
+                # And using -100 for tokens we don't want to count in the loss
+                expanded_labels = torch.full(
+                    (len(lines), encodings['input_ids'].size(1)),
+                    -100,  # Ignore index
+                    dtype=torch.long
+                )
                 
-                # Find target start and end token indices
-                target_start_idx = (input_ids == self.tokenizer.convert_tokens_to_ids('[TARGET_START]')).nonzero(as_tuple=True)[0]
-                target_end_idx = (input_ids == self.tokenizer.convert_tokens_to_ids('[TARGET_END]')).nonzero(as_tuple=True)[0]
-                
-                # If both tokens are found, set labels for tokens between them
-                if len(target_start_idx) > 0 and len(target_end_idx) > 0:
-                    start_idx = target_start_idx[0].item() + 1  # +1 to skip [TARGET_START]
-                    end_idx = target_end_idx[0].item()  # Don't include [TARGET_END]
+                # For each sequence, find target tokens and set their labels
+                for i in range(len(lines)):
+                    # Get input_ids for this sequence
+                    input_ids = encodings['input_ids'][i]
                     
-                    # Set all tokens in the target span to the label
-                    expanded_labels[i, start_idx:end_idx] = label_ids[i]
-                else:
-                    # Fallback to using first token if target markers not found
-                    expanded_labels[i, 1] = label_ids[i]  # Use first non-special token
+                    # Find target start and end token indices
+                    target_start_idx = (input_ids == self.tokenizer.convert_tokens_to_ids('[TARGET_START]')).nonzero(as_tuple=True)[0]
+                    target_end_idx = (input_ids == self.tokenizer.convert_tokens_to_ids('[TARGET_END]')).nonzero(as_tuple=True)[0]
+                    
+                    # If both tokens are found, set labels for tokens between them
+                    if len(target_start_idx) > 0 and len(target_end_idx) > 0:
+                        start_idx = target_start_idx[0].item() + 1  # +1 to skip [TARGET_START]
+                        end_idx = target_end_idx[0].item()  # Don't include [TARGET_END]
+                        
+                        # Set all tokens in the target span to the label
+                        expanded_labels[i, start_idx:end_idx] = label_ids[i]
+                    else:
+                        # Fallback to using first token if target markers not found
+                        expanded_labels[i, 1] = label_ids[i]  # Use first non-special token
+                
+                labels_tensor = expanded_labels
+            else:
+                # For standard classification, we just need one label per sequence
+                labels_tensor = label_ids
             
-            return encodings, expanded_labels
+            return encodings, labels_tensor
+        elif labels is not None:
+            # Labels is already a tensor
+            return encodings, labels
         
         return encodings, None
 
@@ -357,11 +401,12 @@ class DocumentPartClassifier:
         # Save model with complete configuration
         torch.save({
             'model_state_dict': self.model.state_dict(),
-            'tokenizer_name': self.model_name,  # Save tokenizer info for reproducibility
+            'tokenizer_name': self.model_name,
             'label_map': self.label_map,
             'reverse_label_map': self.reverse_label_map,
             'context_window': self.context_window,
-            'max_length': self.max_length
+            'max_length': self.max_length,
+            'use_crf': self.use_crf
         }, model_path)
         logger.info(f"Model saved to {model_path}")
         
@@ -394,39 +439,48 @@ class DocumentPartClassifier:
                 
                 if len(batch) > 2:
                     labels = batch[2].to(self.device)
-                    # Get true labels - we'll use the first target token for each sequence
-                    for i in range(labels.size(0)):
-                        # Find first non-ignored position
-                        non_ignored = (labels[i] != -100).nonzero(as_tuple=True)[0]
-                        if len(non_ignored) > 0:
-                            # Get the label at this position
-                            all_true_labels.append(labels[i, non_ignored[0]].item())
-                        else:
-                            # If all positions are ignored, skip this example
-                            logger.warning(f"Sequence {i} has all positions ignored in evaluation")
-                            all_true_labels.append(0)  # Default to first class
+                    
+                    if self.use_crf:
+                        # For CRF, get true labels from sequence
+                        for i in range(labels.size(0)):
+                            # Find first non-ignored position
+                            non_ignored = (labels[i] != -100).nonzero(as_tuple=True)[0]
+                            if len(non_ignored) > 0:
+                                # Get the label at this position
+                                all_true_labels.append(labels[i, non_ignored[0]].item())
+                            else:
+                                # If all positions are ignored, skip this example
+                                logger.warning(f"Sequence {i} has all positions ignored in evaluation")
+                                all_true_labels.append(0)  # Default to first class
+                    else:
+                        # For standard classification, just use the first label
+                        all_true_labels.extend(labels[:, 0].cpu().tolist())
                 
                 # Get predictions
-                predictions = self.model(
+                output = self.model(
                     input_ids=input_ids,
                     attention_mask=attention_mask
                 )
                 
-                # Extract predictions - each batch prediction is a list of label indices
-                # For each sequence in the batch, get the majority predicted class
-                for pred_sequence in predictions:
-                    # Filter out padding (-100)
-                    filtered_preds = [p for p in pred_sequence if p >= 0 and p < len(self.label_map)]
-                    if filtered_preds:
-                        # Get most common prediction (majority vote)
-                        counts = {}
-                        for p in filtered_preds:
-                            counts[p] = counts.get(p, 0) + 1
-                        majority_class = max(counts.items(), key=lambda x: x[1])[0]
-                        all_preds.append(majority_class)
-                    else:
-                        # Default to first class if all predictions were filtered
-                        all_preds.append(0)
+                if self.use_crf:
+                    # CRF model returns list of lists with predictions
+                    for pred_sequence in output:
+                        # Filter out padding (-100)
+                        filtered_preds = [p for p in pred_sequence if p >= 0 and p < len(self.label_map)]
+                        if filtered_preds:
+                            # Get most common prediction (majority vote)
+                            counts = {}
+                            for p in filtered_preds:
+                                counts[p] = counts.get(p, 0) + 1
+                            majority_class = max(counts.items(), key=lambda x: x[1])[0]
+                            all_preds.append(majority_class)
+                        else:
+                            # Default to first class if all predictions were filtered
+                            all_preds.append(0)
+                else:
+                    # Standard classification model returns logits
+                    preds = torch.argmax(output, dim=1).cpu().tolist()
+                    all_preds.extend(preds)
         
         # Calculate metrics
         labels = [self.reverse_label_map[i] for i in all_true_labels]
@@ -470,26 +524,30 @@ class DocumentPartClassifier:
                 attention_mask = batch[1].to(self.device)
                 
                 # Get predictions
-                predictions = self.model(
+                output = self.model(
                     input_ids=input_ids,
                     attention_mask=attention_mask
                 )
                 
-                # Extract predictions - each batch prediction is a list of label indices
-                # For each sequence in the batch, get the majority predicted class
-                for pred_sequence in predictions:
-                    # Filter out padding (-100)
-                    filtered_preds = [p for p in pred_sequence if p >= 0 and p < len(self.label_map)]
-                    if filtered_preds:
-                        # Get most common prediction (majority vote)
-                        counts = {}
-                        for p in filtered_preds:
-                            counts[p] = counts.get(p, 0) + 1
-                        majority_class = max(counts.items(), key=lambda x: x[1])[0]
-                        all_preds.append(majority_class)
-                    else:
-                        # Default to first class if all predictions were filtered
-                        all_preds.append(0)
+                if self.use_crf:
+                    # CRF model returns list of lists with predictions
+                    for pred_sequence in output:
+                        # Filter out padding (-100)
+                        filtered_preds = [p for p in pred_sequence if p >= 0 and p < len(self.label_map)]
+                        if filtered_preds:
+                            # Get most common prediction (majority vote)
+                            counts = {}
+                            for p in filtered_preds:
+                                counts[p] = counts.get(p, 0) + 1
+                            majority_class = max(counts.items(), key=lambda x: x[1])[0]
+                            all_preds.append(majority_class)
+                        else:
+                            # Default to first class if all predictions were filtered
+                            all_preds.append(0)
+                else:
+                    # Standard classification model returns logits
+                    preds = torch.argmax(output, dim=1).cpu().tolist()
+                    all_preds.extend(preds)
         
         # Convert numeric predictions to label strings
         predicted_labels = [self.reverse_label_map[pred] for pred in all_preds]
@@ -551,6 +609,7 @@ class DocumentPartClassifier:
             self.reverse_label_map = checkpoint['reverse_label_map']
             self.context_window = checkpoint.get('context_window', self.context_window)
             self.max_length = checkpoint.get('max_length', self.max_length)
+            self.use_crf = checkpoint.get('use_crf', True)  # Default to CRF for backward compatibility
             
             # Check if tokenizer name is in checkpoint and update if needed
             tokenizer_name = checkpoint.get('tokenizer_name', self.model_name)
@@ -568,7 +627,10 @@ class DocumentPartClassifier:
                 self.model_name = tokenizer_name
             
             # Initialize model with correct number of labels
-            self.model = RobertaWithCRF(num_labels=len(self.label_map))
+            if self.use_crf:
+                self.model = RobertaWithCRF(num_labels=len(self.label_map))
+            else:
+                self.model = RobertaForSequenceClassification(num_labels=len(self.label_map))
             
             # Resize token embeddings if needed
             self.model.roberta.resize_token_embeddings(len(self.tokenizer))
@@ -592,9 +654,6 @@ class DocumentPartClassifier:
         Args:
             lines_file: Path to file containing document lines
             tags_file: Path to file containing line tags
-            
-        Returns:
-            Tuple of (lines, tags)
         """
         try:
             with open(lines_file, 'r', encoding='utf-8') as f:
@@ -623,4 +682,4 @@ class DocumentPartClassifier:
             return lines, tags
         except Exception as e:
             logger.error(f"Error loading data: {e}")
-            raise
+            raise           
