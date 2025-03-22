@@ -235,7 +235,7 @@ def train(args):
         classifier.model = type(classifier.model)(num_labels=len(custom_label_map))
         
         # Resize token embeddings to account for special tokens
-        classifier.model.roberta.resize_token_embeddings(len(classifier.tokenizer))
+        classifier.model.deberta.resize_token_embeddings(len(classifier.tokenizer))
         
         classifier.model.to(device)
     
