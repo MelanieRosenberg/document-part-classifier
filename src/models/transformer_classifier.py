@@ -48,9 +48,8 @@ class RobertaWithCRF(nn.Module):
             )
             
             # CRF loss (negative log likelihood)
-            # Note: torchcrf uses negative log likelihood, so no need for the minus sign
-            loss = -1 * self.crf(emissions, valid_labels, mask=mask, reduction='mean')
-            return loss
+            log_likelihood = self.crf(emissions, valid_labels, mask=mask, reduction='mean')
+            return -log_likelihood
         else:
             # During inference
             # Create mask for padding tokens
