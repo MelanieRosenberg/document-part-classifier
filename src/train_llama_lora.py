@@ -432,66 +432,89 @@ class DocumentClassificationTrainer(Trainer):
         """
         Compute metrics for evaluation.
         """
-        predictions, labels = eval_pred
+        logits, labels = eval_pred
         
-        # Debug logging for shapes
-        logger.debug(f"Predictions shape: {predictions.shape}")
-        logger.debug(f"Labels shape: {labels.shape}")
+        # Debug the shapes
+        logger.info(f"Logits shape: {logits.shape}, Labels shape: {labels.shape}")
         
-        # Process predictions to extract class labels
+        # Create arrays to store predictions and true labels
         predicted_labels = []
         true_labels = []
         
-        for i, (pred, label) in enumerate(zip(predictions, labels)):
-            # Get actual label
-            label_tokens = [j for j, id in enumerate(label) if id != -100]
-            if label_tokens:
-                # Fixed: Use j instead of i for token indexing
-                true_label_text = self.tokenizer.decode([label[j] for j in label_tokens])
-                logger.debug(f"True label text: {true_label_text}")
-                
-                for label_id, label_name in self.id2label.items():
-                    if label_name in true_label_text:
-                        true_labels.append(label_id)
+        # Process each example
+        for i in range(len(labels)):
+            # Get the true label from the ignored tokens (-100)
+            true_label = None
+            for label_id, label_name in self.id2label.items():
+                # Look for the label text in non-ignored tokens
+                label_tokens = labels[i] != -100
+                if any(label_tokens):
+                    label_text = self.tokenizer.decode(labels[i][label_tokens])
+                    if label_name in label_text:
+                        true_label = label_id
                         break
             
-            # Get predicted label
-            prompt_length = sum(1 for id in label if id == -100)
-            # Fixed: Ensure we're accessing the correct position in the logits
-            if prompt_length < len(pred):
-                next_token_logits = pred[prompt_length]
-                predicted_token_id = np.argmax(next_token_logits)
-                predicted_token = self.tokenizer.decode(predicted_token_id)
-                logger.debug(f"Predicted token: {predicted_token}")
-                
-                # Map to class
-                predicted_label = None
-                for label_id, label_name in self.id2label.items():
-                    if label_name in predicted_token or predicted_token in label_name:
-                        predicted_label = label_id
-                        break
-                
-                if predicted_label is None:
-                    predicted_label = 2  # Default to TEXT
-                
-                predicted_labels.append(predicted_label)
-            else:
-                logger.warning(f"Prompt length {prompt_length} exceeds prediction length {len(pred)}")
-                predicted_labels.append(2)  # Default to TEXT
+            if true_label is None:
+                logger.warning(f"Could not find true label for example {i}")
+                continue
+            
+            # For prediction, find the next token after prompt
+            # Find index where -100 ends (this is where prompt ends)
+            prompt_end_idx = 0
+            while prompt_end_idx < len(labels[i]) and labels[i][prompt_end_idx] == -100:
+                prompt_end_idx += 1
+            
+            # If we're at the end of the sequence, use the last token's logits
+            if prompt_end_idx >= len(logits[i]):
+                prompt_end_idx = len(logits[i]) - 1
+            
+            # Get the logits for the first token after the prompt
+            token_logits = logits[i][prompt_end_idx]
+            
+            # Get the predicted token
+            predicted_token_id = np.argmax(token_logits)
+            predicted_token = self.tokenizer.decode(predicted_token_id)
+            
+            # Map predicted token to a class
+            predicted_label = None
+            for label_id, label_name in self.id2label.items():
+                if label_name in predicted_token:
+                    predicted_label = label_id
+                    break
+            
+            # Default to most common class if no match
+            if predicted_label is None:
+                predicted_label = 2  # Default to TEXT
+            
+            # Store the labels
+            true_labels.append(true_label)
+            predicted_labels.append(predicted_label)
         
-        # Debug logging for extracted labels
-        logger.debug(f"True labels: {true_labels}")
-        logger.debug(f"Predicted labels: {predicted_labels}")
+        # Make sure we have some labels to compute metrics
+        if len(true_labels) == 0 or len(predicted_labels) == 0:
+            logger.warning("No valid true/predicted labels found!")
+            return {
+                "overall_f1": 0.0,
+                "form_f1": 0.0,
+                "table_f1": 0.0,
+                "text_f1": 0.0,
+                "overall_precision": 0.0,
+                "overall_recall": 0.0
+            }
         
         # Calculate metrics
         precision, recall, f1, _ = precision_recall_fscore_support(
-            true_labels, predicted_labels, average=None, labels=[0, 1, 2]
+            true_labels, predicted_labels, average=None, labels=[0, 1, 2], zero_division=0
         )
         
         # Overall metrics
         overall_precision, overall_recall, overall_f1, _ = precision_recall_fscore_support(
-            true_labels, predicted_labels, average='weighted'
+            true_labels, predicted_labels, average='weighted', zero_division=0
         )
+        
+        # Log some predictions for debugging
+        for i in range(min(5, len(true_labels))):
+            logger.info(f"Example {i}: True={self.id2label[true_labels[i]]}, Pred={self.id2label[predicted_labels[i]]}")
         
         return {
             "overall_f1": overall_f1,
