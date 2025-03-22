@@ -37,8 +37,8 @@ class RobertaWithCRF(nn.Module):
             # During training
             # Create mask for padding tokens
             mask = attention_mask.bool()
-            # CRF loss
-            loss = -self.crf(logits, labels, mask=mask, reduction='mean')
+            # CRF loss (negative log likelihood)
+            loss = self.crf(logits, labels, mask=mask, reduction='mean')
             return loss
         else:
             # During inference
@@ -145,10 +145,12 @@ class DocumentPartClassifier:
         )
         
         if labels is not None:
-            # Convert string labels to tensor and expand to match sequence length
+            # Convert string labels to tensor
             label_ids = torch.tensor([self.label_map[label] for label in labels])
-            # Expand labels to match sequence length
+            # Create sequence labels (same label for all tokens in sequence)
             expanded_labels = label_ids.unsqueeze(1).expand(-1, encodings['input_ids'].size(1))
+            # Set padding tokens to -100 (ignore index)
+            expanded_labels[~encodings['attention_mask'].bool()] = -100
             return encodings, expanded_labels
         
         return encodings, None

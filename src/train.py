@@ -473,7 +473,7 @@ def main():
     # Training arguments
     parser.add_argument("--batch_size", type=int, default=32, help="Batch size")
     parser.add_argument("--num_epochs", type=int, default=20, help="Number of epochs")
-    parser.add_argument("--learning_rate", type=float, default=1e-5, help="Learning rate")
+    parser.add_argument("--learning_rate", type=float, default=5e-6, help="Learning rate")
     parser.add_argument("--weight_decay", type=float, default=0.01, help="Weight decay")
     parser.add_argument("--warmup_ratio", type=float, default=0.1, help="Ratio of warmup steps")
     parser.add_argument("--max_grad_norm", type=float, default=1.0, help="Maximum gradient norm")
