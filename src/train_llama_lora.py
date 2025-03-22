@@ -18,6 +18,7 @@ from pathlib import Path
 from datetime import datetime
 from typing import Dict, List, Tuple, Optional, Any
 from tqdm import tqdm
+from collections import defaultdict
 
 # Setup logging
 logging.basicConfig(level=logging.INFO)
@@ -262,10 +263,54 @@ Classification: [/INST]"""
             remove_columns=self.val_dataset.column_names
         )
         
-        # Subset validation dataset if needed
+        # Subset validation dataset if needed, maintaining class proportions
         if max_eval_samples and len(val_processed) > max_eval_samples:
             logger.info(f"Subsetting validation dataset from {len(val_processed)} to {max_eval_samples} examples")
-            val_processed = val_processed.select(range(max_eval_samples))
+            
+            # Group examples by label
+            examples_by_label = defaultdict(list)
+            for i, example in enumerate(val_processed):
+                # Get the label from the example
+                label_tokens = [j for j, id in enumerate(example["labels"]) if id != -100]
+                if label_tokens:
+                    label_text = self.tokenizer.decode(example["labels"][label_tokens])
+                    for label_id, label_name in self.id2label.items():
+                        if label_name in label_text:
+                            examples_by_label[label_id].append(i)
+                            break
+            
+            # Calculate proportions from original dataset
+            total = len(val_processed)
+            proportions = {label: len(indices)/total for label, indices in examples_by_label.items()}
+            
+            # Sample proportionally
+            sampled_indices = []
+            for label_id, indices in examples_by_label.items():
+                n_samples = min(int(proportions[label_id] * max_eval_samples), len(indices))
+                sampled_indices.extend(indices[:n_samples])
+            
+            # Ensure we have exactly max_eval_samples
+            if len(sampled_indices) > max_eval_samples:
+                sampled_indices = sampled_indices[:max_eval_samples]
+            
+            # Create stratified subset
+            val_processed = val_processed.select(sampled_indices)
+            
+            # Log the distribution of the subset
+            subset_distribution = defaultdict(int)
+            for idx in sampled_indices:
+                example = val_processed[idx]
+                label_tokens = [j for j, id in enumerate(example["labels"]) if id != -100]
+                if label_tokens:
+                    label_text = self.tokenizer.decode(example["labels"][label_tokens])
+                    for label_id, label_name in self.id2label.items():
+                        if label_name in label_text:
+                            subset_distribution[label_name] += 1
+                            break
+            
+            logger.info("Validation subset distribution:")
+            for label_name, count in subset_distribution.items():
+                logger.info(f"{label_name}: {count} lines")
         
         # Training arguments
         training_args = TrainingArguments(
