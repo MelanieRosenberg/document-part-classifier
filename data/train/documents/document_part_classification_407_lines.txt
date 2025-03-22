@@ -1,0 +1,27 @@
+samples)) / (geometric mean cpm of no drug samples).
+Percentage reductions are used to plot percentage inhibition of growth as a function of drug
+concentrations.
+IC 50 values are determined by linear regression analyses on the linear segments of the curves (IC
+90 values can also be determined by curve-fitting and can provide an useful measure of variation
+between experiments).
+Assays are typically repeated on two or three separate occasions.
+Within each experiment, standard deviations are typically less than 10% of the mean.
+Differences in parasite stages of development can lead to up to two-fold shifts in the IC 50 values
+between experiments; however, these differences rarely affect the overall relationships between the
+parasite lines in terms of their differences in drug response 4-11 .
+Name            Clone                     Origin                      Resistant to            Multiplication Rate  Reference
+Dd2             Yes (from WR'82)          Indochina                   CQ, QN,  PYR,  SDX      5-6                  [3]
+W2              Yes (from Indochina-3)    Indochina                   CQ, QN,  PYR,  SDX      5-6                  [4]
+HB3             Yes                       Honduras                    PYR                     4                    [5]
+3D7             Yes (from NF54)           Apparently West Africa      --                      4                    [5]
+D6              Yes (from Sierra Leone-1) Sierra Leone                --                      4                    [4]
+D10             Yes                       Papua New  Guinea           --                      4-5                  [6]
+CAMP            No                        Malaysia                    PYR                     4-5                  [7]
+FCB             No                        Apparently SE Asia          CQ, QN,  CYC            7-9                  [8]
+7G8             Yes                       Brazil                      CQ, PYR,  CYC           4-5                  [9]
+K1              No                        Thailand                    CQ, PYR                 4-5                  [10]
+Multiplication rate refers to increase in total numbers of viable parasites per 48-hr generation.
+These rates and the drug pheno- types refer to data from the Fidock laboratory (Albert Einstein
+College of Medicine, NY) and may not be the same elsewhere.
+See www.ncbi.nlm.nih.gov/projects/Malaria/epid.html for additional information on these and other P.
+falciparum strains.

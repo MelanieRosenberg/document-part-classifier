@@ -1,0 +1,43 @@
+OOP costs in the year of diagnosis came mostly from professional and non-inpatient facility
+services.
+Figure 8 shows the level of OOP costs by percentile for all study cancers combined.
+In general, patient cost-sharing is higher for out-of-network services than in-network.
+Not surprisingly, cancer patients in the highest decile of OOP spending also incurred the highest
+portion of OOP costs for out- of-network providers; conversely, patients in the lowest decile
+incurred the lowest portion of OOP costs for out-of-network providers.
+$2,000
+A: Chemotherapy, Chemotherapy Administration, and Related Drugs
+$1,800    B: Other Drugs
+t
+e    $1,600    C: Radiation Therapy
+k
+o c  $1,400    D: Hospital Inpatient
+P              E: Facility Services, Other
+f-   $1,200
+o              F: Professional and Other Services excl. Chemo and Rad Therapy                                      OON
+t-   $1,000
+u  t
+O  s   $800                                                                                                        IN
+n t C o $600
+t e    $400
+i
+P a    $200
+1
+1        $0
+2 0             A     B    C    D     E    F     A    B    C     D    E     F    A     B    C    D     E    F
+10th Percentile                  50th Percentile                 90th Percentile
+A patient’s decision to use an OON provider selection may be intentional or accidental.
+Reasons patients may incur OON costs include patient preference for a particular provider or
+specialty care center that may be out of network, the lack of network providers with appropriate
+specialists, and the lack of awareness or transparency about which providers are in the patient’s
+plan network.
+Common scenarios for accidental use of OON providers are emergency care or care from an OON provider
+working at an in-network hospital (e.g., radiologist, assistant surgeon, anesthesiologist).22 23
+Figure 9 suggests that there might be significant financial consequences to the patient going out of
+network, which could be exacerbated if health plans remove popular cancer providers from their
+networks.
+Figure 9 also provides information on the relationship between the OON percentage (right vertical
+axis--relative to total spending) and total patient cost-sharing (left vertical axis).
+While most patients in our study reported under 10% of all OOP cost in the year of diagnosis is
+spent on out-of- network providers, those in the highest percentile of OOP spending incurred as much
+as 40% of those costs out-of-network.

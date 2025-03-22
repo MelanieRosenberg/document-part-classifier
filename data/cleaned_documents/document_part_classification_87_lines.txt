@@ -1,0 +1,26 @@
+Dados  Pessoais do  Segurado/Participante
+Estipulante do Seguro          Nome   do Segurado/Participante                         CPF/CNPJ/MF
+Segurado  Sinistrado                     Data do Sinistro     Apólice  Nº              Certificado
+Dados Nome Pessoais Completo do (sem Beneficiário abreviações) Data de Nascimento   CPF/CNPJ/MF
+Doc. Identificação - Tipo Nº Documento             Grau  de Parentesco com  o Segurado
+Endereço  (Rua, Av.)                                                                        Nº
+Bairro                                    Cidade                                    UF      CEP
+Domicílio  Fiscal (País onde declara o IR)
+Brasil
+Outro (Qual?)                              NIF (Nº de Identificação Fiscal)
+Tel. Celular (DDD+  Nº)   E-mail                                              Profissão
+Autorizo receber informações do Sinistro via SMS
+Faixa de Renda  Mensal
+Sem  Renda      Até 2.500,00     De 2.500,01 a 5.000,00     De 5.000,01 a 10.000,00   Acima  de 10.000,00
+Autorizo a Bradesco Vida e Previdência e/ou Bradesco Seguros a creditar o(s) valor(es) referentes ao(s) Seguro(s) e/ ou Plano(s) de Previdência(s) em conta bancária abaixo indicada, de minha titularidade, para os quais, em sendo pago, dou plena, rasa, irrevogável e irretratável quitação. Comprometo-me neste ato pela exatidão dos dados fornecidos e assumo integralmente a responsabilidade perante essa seguradora e/ou terceiros, por quaisquer prejuízos advindos de informações incorretas a esses dados. Assumo igualmente neste ato o compromisso de comunicar a essa seguradora por escrito e de imediato, qualquer alteração cadastral na referida conta bancária que impossibilite o cumprimento tempestivo da obrigação do depósito por parte dessa seguradora. Reconheço que o preenchimento deste formulário e a autorização de depósito ora reconhecido, bem como a adoção de demais providências por ventura necessária ao eventual recebimento pleiteado, não implica em prévio reconhecimento de cobertura do sinistro e/ou beneficio por parte da Bradesco Vida e Previdência S.A. e/ou Bradesco Seguros e não obriga, automaticamente, a seguradora a efetuar o depósito ora autorizado.
+Conta  Bancária**                      Tipo da Conta  (indicar apenas um tipo)
+Nome  do Banco        Cód. Banco  Díg. Conta-Corrente                  Conta-Poupança
+Cód. Agência                      Díg.    Individual                      Individual
+Conjunta                        Conjunta
+Nº da Conta                       Díg. CPF do Titular:                 CPF do Titular:
+Empresa/Órgão  Público
+Nome  do Cargo ou Função                                   Data Início do Exercício Data Fim do Exercício
+1 - De acordo com o art 4º da Circular nº 445, de 02 de julho de 2012, consideram-se pessoas politicamente expostas os agentes públicos que desempenham ou tenham desempenhado, nos últimos 5 (cinco) anos anteriores, no Brasil ou um países, territórios e dependências estrangeiras, cargos, empregos ou funções públicas relevantes, assim como seus representantes, familiares e outras pessoas de seu relacionamento próximo. I - Os detentores de mandatos eletivos dos Poderes Executivo e Legislativo da União;
+III - Os membros do Conselho Nacional de Justiça, do Supremo Tribunal Federal e dos Tribunais Superiores; IV - Os membros do Conselho Nacional do Ministério Público, o Procurador-Geral da República, o Vice-Procurador-Geral da República, o Procurador-Geral do Trabalho, o Procurador-Geral da Justiça Militar, os Subprocuradores-Gerais da República e os Procuradores-Gerais de Justiça dos Estados e do Distrito Federal; V - os membros do Tribunal de Contas da União e o Procurador-Geral do Ministério Público junto ao Tribunal de Contas da União;
+VI - Os governadores de Estado e do Distrito Federal, os presidentes de Tribunal de Justiça, de Assembleia Legislativa e de Câmara Distrital, e os presidentes de Tribunal e de Conselho de Contas de Estado, de Municípios e do Distrito Federal;
+VII - Os prefeitos e presidentes de Câmara Municipal das capitais de Estado. 2 - Pessoas politicamente expostas estrangeiras, são consideradas aquela que exercem ou exerceram importantes funções públicas em um país estrangeiro; por exemplo, chefes de Estado e de Governo, políticos de alto nível, altos servidores dos poderes públicos, magistrados ou militares de alto nível, dirigentes de empresas públicas ou dirigentes de partidos políticos.

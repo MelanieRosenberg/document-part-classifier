@@ -1,0 +1,47 @@
+n t                                     $7,273  Total monthly spending                                      $8  n t
+t e                       $6,019                per                                                             t e
+i                                                   patient                                                     i
+a   100%                                                                                                    $6  a  s )
+P                                                                                                               P  0
+r                                                                                                               r  0
+e  h 80%                                                                                                        e  0
+P  t                                                                                                        $4  P  $
+l  n 60%                                                                                                        g  (
+a  o                                                                                                            n  h
+t  M                                                                                                            i  t
+o    40%                                                                                                    $2  d  n
+T  r                                                                                                            n  o
+f  e 20%                                                                                                        e  M
+o  P                                                                                                            p  r
+t                                                                                                               S  e
+n      0%                                                                                                   $0  l
+c e        -11  -9  -7  -5  -3  -1  1   3   5   7   9   11  13  15  17  19  21  23  25  27  29  31  33  35      t a P
+r                                                                                                               o
+P e                             Month 0         Months  from Diagnosis                                          T
+Chemotherapy, Chemotherapy Administration, and Related Drugs Other Drugs
+Radiation Therapy                                           Hospital Inpatient
+Facility Services, Other                                    Professional and Other Services excl. Chemo and Rad Therapy
+Lung cancer and colorectal cancer patients had significant use of hospital inpatient services soon after diagnosis, which suggests that many patients underwent inpatient surgery in months 0 or 1. By contrast, breast cancer patients had less inpatient spending in months 0 and 1 and lower overall spending. The average monthly total healthcare spending started to drop two to three months after diagnosis. The mix of costs then became more consistently distributed across various service categories, which may reflect the varying approaches used to treat individual survivors. For example, by the time breast cancer patients reach the second month after diagnosis, the balance of services have shifted to chemotherapy and radiation therapy. The pattern of spending by category shown in Figures 2a-2c illustrates an “aggregate” patient journey for these cancers—individual patients may not follow these patterns.
+Figure 3 presents a cumulative view of total healthcare spending for cancer patients. Over the 47- month period following diagnosis, patients who we could track had average cumulative total healthcare costs of $101,000 for breast cancer, $165,000 for colorectal cancer, and $282,000 for lung cancer. The cumulative figures by month since diagnosis are represented in the left axis using solid lines. Patient OOP costs are shown as dashed lines using the right axis. Relative to total average spending of $101,000 to $282,000 for the 4 year period, the patient OOP of $7,500 to $11,000 suggests that ESI provides substantial protection to many patients. We note that patient contributions to premium would be in addition to the patient OOP costs. Premium contributions averaged approximately $1,100 per employee per year for single coverage, and over $5,000 for family coverage in 2016.20 Patients may face other costs not reflected in these data such as travel expenses and loss of income.
+$300,000                                                                                      $30,000
+■ Lung Cancer
+g            ■ Colorectal Cancer                                                                         t
+n  $250,000    Breast                                                                            $25,000 e
+i            ■       Cancer                                                                              k
+d                                                                                                        c
+n            Solid lines represent total health                                                          o
+e  $200,000                                                                                      $20,000 P
+p            spending                                                                                    f-
+S            Dotted lines represent patient                                                              o
+h                                                                                                        t-
+l t $150,000 out-of-pocket cost                                                                  $15,000 u
+a                                                                                                        O
+e                                                                                                        t
+H  $100,000                                                                                      $10,000 n
+l                                                                                                        e
+a                                                                                                        t i
+o t $50,000                                                                                      $5,000  P a
+T
+$0                                                                                      $0
+0   2  4   6  8  10 12  14 16  18 20  22 24  26 28  30 32  34 36 38  40 42  44 46
+Months from Diagnosis

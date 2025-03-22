@@ -1,0 +1,35 @@
+Cancer      Total, #  Stage   Stage   Stage   Stage    Stage   Stage   Stage   Stage   Stage   Stage  Stage   Stage   Stage   Stage   Stage  Stage
+0, #    I, #    II, #   III, #   IV, #   ?, #    0, %    I, %    II, %   III, % IV, %   ?, %    I, %    II, %   III, % IV, %
+Breast      141654    27344   51515   37083   13360    5415    6937    19.3    36.37   26.18   9.43   3.82    4.9     47.98   34.54   12.44  5.04
+Cervix      7454      NA      3516    894     1402     942     700     NA      47.17   11.99   18.81  12.64   9.39    52.06   13.23   20.76  13.95
+Colon       55378     4872    11342   13393   12000    9849    3922    8.8     20.48   24.18   21.67  17.79   7.08    24.35   28.74   25.76  21.15
+Rectum      22468     2045    5132    3825    4631     3406    3429    9.1     22.84   17.02   20.61  15.16   15.26   30.2    22.5    27.25  20.04
+Esophagus   6786      118     1098    959     1063     2154    1394    1.74    16.18   14.13   15.66  31.74   20.54   20.82   18.18   20.15  40.84
+Kidney      23664     373     12100   2193    3084     4070    1844    1.58    51.13   9.27    13.03  17.2    7.79    56.42   10.23   14.38  18.98
+Larynx      4803      402     1647    644     606      1080    424     8.37    34.29   13.41   12.62  22.49   8.83    41.41   16.2    15.24  27.16
+Liver       15246     NA      3964    2126    2682     2433    4041    NA      26      13.94   17.59  15.96   26.51   35.38   18.97   23.94  21.72
+Lung        86954     34      14847   3083    18639    37467   12884   0.04    17.07   3.55    21.44  43.09   14.82   20.05   4.17    25.18  50.61
+Melanoma    59676     23920   22250   3990    1910     1355    6251    40.08   37.28   6.69    3.2    2.27    10.47   75.39   13.53   6.47   4.59
+Oral        18434     445     3272    2074    2463     6415    3765    2.41    17.75   11.25   13.36  34.8    20.42   23      14.58   17.31  45.1
+Ovary       14295     NA      3427    870     3984     2995    3019    NA      23.97   6.09    27.87  20.95   21.12   30.39   7.72    35.33  26.56
+Pancreas    19545     77      1248    3995    1331     9054    3840    0.39    6.39    20.44   6.81   46.32   19.65   7.99    25.56   8.52   57.93
+Prostate    109601    NA      134     84673   7283     7097    10414   NA      0.12    77.26   6.65   6.48    9.5     0.13    85.37   7.35   7.16
+Stomach     13566     140     2855    1269    1319     5014    2969    1.03    21.05   9.35    9.72   36.96   21.89   27.31   12.13   12.61  47.95
+Testis      4809      11      3249    454     717      0       378     0.23    67.56   9.44    14.91  0       7.86    73.51   10.27   16.22  0
+Thyroid     17968     NA      11375   1466    2134     1890    1103    NA      63.31   8.16    11.88  10.52   6.14    67.45   8.69    12.66  11.21
+Bladder     31628     ---     22875   3434    1401     2331    1587    ---     72.33   10.86   4.43   7.37    5.02    76.15   11.43   4.66   7.76
+Uterus      21710     242     13366   1537    2546     1447    2572    1.11    61.57   7.08    11.73  6.67    11.85   70.74   8.13    13.48  7.66
+Table 3.
+Incidence numbers (column 2 = total, columns 3-7 = stages 0-IV, column 8 = stage unknown or “?”, for
+each row columns 3 through 8 add up to column 2), incidence rates in % for stages 0-IV and stage
+unknown (columns 9-13 = stages 0-IV, column 14 = stage unknown, for each row columns 9 through 14
+add up to 100% up to rounding to 2 digits), and incidence rates for stages I-IV only with stage 0
+and stage unknown specifically excluded (columns 15-18 = stages I-IV, for each row columns 15
+through 18 add up to 100% up to rounding to 2 digits).
+The incidence numbers are based on the data for California adults aged 20 and older diagnosed with
+the cancers listed in column 1 during 2005-2009 as reported in [Morris et al, 2013].
+Some cancer sites in column 1 are abbreviated as follows: Breast = female breast, Cervix = cervix
+uteri, Rectum = rectum and rectosigmoid junction, Kidney = kidney and renal pelvis, liver = liver
+and intrahepatic bile ducts, Lung = lung and bronchus, Melanoma = melanoma of the skin, Oral = oral
+cavity and pharynx, Bladder = urinary bladder, Uterine = uterine corpus.
+For Bladder, stage I includes stage 0 (stage I = stage 0/I).

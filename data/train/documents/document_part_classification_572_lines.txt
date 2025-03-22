@@ -1,0 +1,91 @@
+DRUGS           CONDITIONS          REFERENCES
+Scopolamine         Depression           83, 91-94
+“              Manias                102
+“             Anxiety                93
+Hydroxyzine          Anxiety               84-86
+“               Panic               87-88
+Promethazine         Anxiety                90
+Orphenadrine        Depression            99-100
+Tofenacin         Depression            99, 101
+a physician intentionally stimulates a physiologic response by CO 2 inhalation [31], sodium lactate
+infusion [32,33], or cholecystokinin tetrapeptide (CCK-4) injection [32,34].
+These chemical exposures are used as potent tools to design controlled studies with predictable
+levels of PA episodes.
+In a study with healthy volunteer subjects using carbon dioxide inhalation to provoke panic and
+anxiety, propranolol significantly decreased heart rate, a cardiovascular somatic symptom, but did
+not provide psychic anxiolytic benefit [35].
+Propranolol has also been investigated in patients suffering from severe posttraumatic stress
+disorder (PTSD).
+Two clinical studies of this beta blocker have shown possible benefits in the early-stage
+interventional prevention and subsequent therapy of PTSD [36,37].
+Subsequent reports have also echoed that propranolol might be effective for this condition [38-40],
+although other reports dispute this conclusion [41,42].
+When considered in aggregate these clinical studies of propranolol, as the well known prototypical
+beta blocker, provide convincing evidence that the drug can exert somatic (i.e., peripheral) effects
+on the cardiovascular system in the context of panic and anxiety disorders.
+With regard to affecting the psychic (CNS) symptoms, the results have been negative, inconsistent,
+or inconclusive.
+That being said, there is some limited evidence that propranolol can exert some psychic (CNS)
+benefits in clinical stress trials.
+In a pair of clinical studies, propranolol (a central and peripheral beta-blocker) significantly
+enhanced problem solving during stress, whereas nadolol (peripheral only beta-blocker) and lorezapam
+(benzodiazepine) did not [43, 44].
+Thus, propranolol enhanced cognitive flexibility (“creativity”) during stress.
+It remains unclear whether propranolol alone can appreciably reduce psychic effects.
+In aggregate the clinical evidence does not support a benefit regarding psychic (CNS) anxiety
+symptoms.
+Numerous alternative beta blockers are available in lieu of propranolol.
+Notable among these is the common drug, atenolol, that is available in oral solid dose forms ranging
+from 25 to 100 mg for the treatment of hypertension.
+Multiple doses per day may be permitted.
+It has been used to suppress stage fright in performers when administered orally in advance [45].
+Atenolol is a beta-1 selective peripheral-acting agent without CNS effects, which should reduce the
+risk for asthmatic subjects [46].
+Thus, atenolol might be preferred over the nonselective beta blockers for patients affected by
+asthma or COPD [47].
+Oral atenolol at 50 - 200 mg doses suppressed heart rate by ~ 23 - 24 beats per minute (bpm) vs.
+~ 10 bpm on placebo [46].  Also,.
+Another beta blocker is nadolol, which is non-selective and with a preference for beta-1 receptors.
+It does not pass through the blood-brain barrier.
+In a clinical trial with musicians, nadolol reduced pulse rate and improved one aspect of
+performance related to tremor [48].
+A similar result was obtained for nadolol in students’ singing performance [49].
+In spite of being non- selective, nadolol might ironically benefit the pulmonary function in asthma
+patients based upon the appropriate dosage, an anti-intuitive result [50].
+An alternative beta blocker is pindolol, a non-selective agent, which can enhance the effects of
+co-administered antidepressants and has some 5-HT antagonist property.
+Pindolol reduced symptoms of performance anxiety in musicians [51].
+Another example is betaxolol that can also cross the blood- brain barrier.
+Daily oral betaxalol was delivered at 5 - 40 mg per day in the treatment of generalized anxiety
+disorder and other anxiety-related conditions.
+Anxiety and panic attacks were reduced within several days [52].
+This anxiolytic benefit is prophylactic, as the effects are observed in days, rather than in
+minutes.
+In view of the clinical studies and off-label use of various beta blockers, psychiatrists are aware
+that beta blockers can provide some symptomatic relief with regard to performance anxiety [53].
+However, beta blockers alone do not sufficiently address the aggregate symptoms of panic and acute
+anxiety episodes, and especially the psychic symptoms thereof (e.g., fear, avoidance, and
+anxiousness).
+Beta blockers also exhibit some benefit with regard to alcohol and drug abuse.
+The abuse of alcohol, prescription drugs, and illegal drugs (e.g., opioids, opiates, and cocaine)
+are major mental health care concerns.
+The repetitive abuse of these chemicals can produce physiologic dependence, tolerance, addiction,
+and neurologic damage.
+The symptoms of sudden withdrawal depend upon the abused substance, the impairment of neurological
+and neuroendocrine pathways, as well as somatic organ impairment.
+The withdrawal from addictive substances produces an array of symptoms, many of which overlap with
+the symptoms of panic and acute anxiety episodes.
+Delirium tremens (DTs) occur in some alcoholics upon abrupt cessation of drinking.
+The symptoms of alcohol-related DTs are very similar to those of panic attacks, and are in part
+related to beta adrenergic effects.
+The DTs can have serious and even life- threatening consequences.
+The standards-of-care for DTs are oral benzodiazepines.
+Withdrawal from opioid and/or opiate addiction is physiologically distinct from alcohol withdrawal.
+With regard to beta blockers in substance abuse, atenolol has been shown in placebo-controlled
+trials to be beneficial in alcohol withdrawal [54-56].
+Pindolol has been used to treat alcohol withdrawal [57].
+Timolol had a minimal effect on a subset of symptoms of patients experiencing alcohol withdrawal
+[58].With regard to cocaine abuse, propranolol has been used to treat withdrawal and overdoses [59,
+60].
+Note that propranolol has also been shown to suppress tremors [61], consistent with one of the
+perceived benefits of beta blockers in performance anxiety in musicians (above).

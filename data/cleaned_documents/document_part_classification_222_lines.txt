@@ -1,0 +1,18 @@
+COM     BOLSA     (  )          SEM   BOLSA      (  )
+1. DADOS     ACADÊMICOS:
+UNIDADE      ACADÊMICA:         Avenues  São Paulo
+DISCIPLINA:       Estruturas de dados
+PROFº.   ORIENTADOR:        Andre  Debars
+2. DADOS    DO  MONITOR:
+NOME:    Monica Herz
+Nº MATRÍCULA:      3900661                    MÉDIA   NA  SELEÇÃO:     78%
+CURSO:     Engenharia de software
+ENDEREÇO:       R. Dois, 741 - Sao Francisco, Sao Luis, MA, 65076-010, Brazil
+TELEFONE     RESIDENCIAL:      +55-61-3321-3544                CELULAR:      (99) 3621-1043/5960
+E-MAIL     herz@rdc.puc-rio.br                                       CPF:    75906988491
+BANCO     Banco Máxima                Agência   -                 Conta Corrente   160.568-2
+3. DADOS    DO  ORIENTADOR:
+NOME:    Thomas  Leitz
+Nº MATRÍCULA:      6026133                REGIME    DE  TRABALHO:      Não disponível
+CARGO:     Banco Santander S.A             TITULAÇÃO:       Não disponível
+“Declaro, para os devidos fins, tendo sido aprovado na disciplina/área objeto de seleção de Monitoria, que não sou detentor de cargo público de qualquer natureza, não recebo nenhum outro tipo de bolsa pela UFAL ou de outros órgãos financiadores, e que estou ciente das minhas atribuições como Monitor, comprometendo-me a cumpri-las fielmente.”

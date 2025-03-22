@@ -1,0 +1,12 @@
+TYPE        Visa           EXPIRATION DATE  04-03-2025
+NAME  ON  CREDIT CARD:  Adelaide Feest
+AUTHORIZED   SIGNATURE:
+PHONE:  641-903-7213             TODAY’S DATE:  04-03-2020
+ADDRESS:       15 Short Cir
+CITY, STATE, ZIP:  Conway,  AR  72032
+CHARGES   COVERED   BY THIS CARD         Yes
+All charges
+Room and Tax
+Incidentals Only
+Dollar Amount
+Adelaide  Feest

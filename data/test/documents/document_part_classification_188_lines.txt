@@ -1,0 +1,26 @@
+PROPERTY      OWNER’S     NAME                                                                                        VIN NUMBER
+Michael           Gordon                                                                                               2     L     N      H     M     8      2     V     X      8     X     6      3     2     9      0     2
+ADDRESS                                                                                                               VEHICLE   YEAR
+585      Grove         St                                                                                             2012
+CITY                                                               STATE              ZIP                             VEHICLE   MAKE
+Herndon             VA      20170                                                                                     2016
+VEHICLE   MODEL
+2017
+VEHICLE   MILEAGE     (AS OF  OCT.   1ST)
+Current       Vehicle       Value      . . . . .   $                                                                  12km
+Purchase        Price.     . . . . . . . . . . .   $
+Year     Acquired        . . . . . . . . . . . .
+SUMMARY           OF   COMPLAINT
+No      Comments
+RECOMMENDED                              APPRAISAL                     ACTION:
+(cid:2)   None                                                                           (cid:2)   Vehicle             Review
+(cid:2)   Market             Value          Deduction                                    (cid:2)   Market             Value          Increase
+(cid:2)   Other
+$
+Current      Vehicle      Market      Value.     . .                                                                  Done     this   the                day    of                                             ,  20
+Market      Value     Adjustment         . . . . . .    $                                                             Signed
+CHAIRMAN
+Final    Vehicle      Market      Value.     . . . .    $
+MEMBER
+(cid:2) For  current     tax   year    only
+(cid:2) Unique     vehicle     status                                                                                                                                 MEMBER

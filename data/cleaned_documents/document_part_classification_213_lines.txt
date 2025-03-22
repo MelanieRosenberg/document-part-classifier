@@ -1,0 +1,14 @@
+Company    Name:   Amazon
+Cardholder   Name   (Print):  Margarito Adams
+Cardholder   Signature:
+Cardholder   Phone:  _( 1-903-984-6612 ) -
+Cardholder   Driver’s License  # (Include issuing state)
+I5846994                                             STATE:    NY
+Credit  Card  #  371289649801008 **     **         **
+Expiration   Date    04/23 /                448
+Billing Address  for this Credit Card (include Zip  Code)
+7901 W 52nd Ave #205,Arvada, CO 80002, USA
+Print_Name:    Giuseppina Dicki    Signature:
+Print_Name:                        Signature:
+Print_Name:                        Signature:
+Print_Name:                        Signature:

@@ -1,0 +1,13 @@
+Lever                   Germany                   UK                  Canada                      US
+based          Initial discount                     Yes                   Yes            Yes – provincial level   340B  program,  VA,
+Medicaid
+outcome        Price-volume                         Yes                   Yes                     No                       No
+agreements
+Conditional  coverage                Yes                   Yes                     Yes                      No
+(clinical not cost-    (clinical not cost-    (clinical not cost-       (very limited)
+based                                          effectiveness)        effectiveness)         effectiveness)
+Performance-linked                   Yes                   No                      No                       No
+International reference              Yes                   No                      Yes                      No
+pricing
+Studies of international regulations of drug prices and the Gant Consortium’s own analysis of the Canadian, English, and German experiences suggest that there are several “necessary but not sufficient” components of value-based drug regulations. One study of MEAs argues that key components of successful agreements include:
+Ultimately, managed entry agreements require political consensus and considerable practical effort. American payers have typically been reticent to say no to covering drugs, and MEAs are built on the capacity to deny coverage for some treatments. The technical complexity of MEAs present additional implementation barriers; for example, the administrative burdens and complexity of collecting data and managing agreements with different manufacturers are considerable. Should MEAs be adopted more widely by private insurers, the discounted prices are likely to remain confidential. Finally, MEAs do not resolve underlying controversies regarding appropriate comparator drugs, measures of clinical efficacy, or how to build in other patient considerations.

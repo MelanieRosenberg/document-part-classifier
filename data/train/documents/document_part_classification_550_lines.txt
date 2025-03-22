@@ -1,0 +1,35 @@
+The analysis found that low-income countries could spend on average up to US$ 3800 per cancer
+patient annually on cancer medicines for all newly-diagnosed cancer patients, and the total
+expenditure on these medicines would be within the generously assumed 5% of the total health
+expenditure (Table 4.2).
+In high- income countries, the analysis found that a budget threshold of 5% of the total health
+expenditure would allow a spending of up to US$ 40 600 on cancer medicines per patient per year,
+with a view to providing universal coverage.
+Expenditure
+threshold      1%  total HE       2%  total HE        3%  total HE        4% total HE        5%  total HE
+$ 800              $ 1 500            $ 2 300             $ 3 000             $ 3 800
+Low  income        ($ 600; $ 1 000)  ($ 1 200; $ 2 000)  ($ 1 700; $ 3 000) ($ 2 300; $ 4 100)  ($ 2 900; $ 5 100)
+Lower-middle           $ 1 600            $ 3 200            $ 4 800             $ 6 400             $ 8 000
+income            ($ 1 100; $ 2 600) ($ 2 200; $ 5 200)  ($ 3 300; $ 7 700) ($ 4 300; $ 10 300) ($ 5 400; $ 12 900)
+Upper-middle           $ 3 100            $ 6 200            $ 9 400             $ 12 500           $ 15 600
+income            ($ 1 900; $ 4 500) ($ 3 800; $ 9 100) ($ 5 700; $ 13 600) ($ 7 500; $ 18 100) ($ 9 400; $ 22 600)
+High income            $ 8 100            $ 16 300           $ 24 400           $ 32 500            $ 40 600
+($ 4 700; $ 14 600) ($ 9 400; $ 29 200) ($ 14 100; $ 43 800) ($ 18 800; $ 58 500) ($ 23 500; $ 73 100)
+For question (b), Table 4.3 (p.78) shows the estimated annual costs of standard treatment regimens
+for a select set of cancers, calculated based on the dosages recommended in clinical guidelines and
+the prices of cancer medicines in India, South Africa, Australia and the USA.
+These countries were selected to illustrate prices of medicines in countries of different economies
+and with different levels of price regulations.
+The analysis found that the estimated treatment costs frequently exceeded the per-patient annual
+"budgets" estimated in question (a), despite the generous assumptions of 1% to 5% of total health
+budget being spent.
+on cancer medicines (alone).
+For example, the treatment cost for one patient with chronic myeloid leukaemia for a year would be
+between US$ 800 and US$ 96 700 for imatinib and US$ 800 to US$ 109 400 for dasatinib, which are
+higher than the per-person budget of US$ 800 to US$ 40 600 estimated in Table 4.2.
+The unaffordability was even more prominent when considering the standard treatment regimen for
+early stage HER2- positive breast cancer, where the estimated costs ranged between US$ 18 500 and
+US$ 71 000.
+These examples suggest that, at current prices, universal coverage of cancer medicines (alone) will
+greatly exceed 5% of total expenditure on health care.
+This is unaffordable and unsustainable.

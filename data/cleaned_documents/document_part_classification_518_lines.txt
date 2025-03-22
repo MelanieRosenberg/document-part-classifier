@@ -1,0 +1,27 @@
+Cancer      Stage I,  Stage II, Stage III, Stage  IV,  Stage I,  Stage II, Stage  III, Stage IV,
+$         $         $          $           %         %         %           %
+Breast      29,377    40,989    57,155     67,038      52        32        10          6
+Prostate    ---       26,505    30,541     44,591      ---       84        8           8
+Lung        60,038    73,509    84,726     93,166      22        4         26          48
+Colorectal  49,189    66,613    83,980     108,599     25        29        26          20
+Table 6. Medicare spending per patient in the first year after diagnosis (columns 2-5) and fractions of patients (columns 6-9) by stage at diagnosis based on California beneficiaries diagnosed in 2007-2011 and followed through 2012, as reported in [Schrag, 2015]. Spending estimates are based on Medicare fee-for-service patients only and are adjusted for inflation to 2013 dollars. For prostate cancer stages I and II are combined due to small numbers for stage I.
+Cancer      Stage I,  Stage II, Stage III, Stage  IV,  Stage I,  Stage II, Stage  III, Stage IV,
+$         $         $          $           %         %         %           %
+Breast      64,889    70,931    71,555     70,057      27        32        19          22
+Prostate    ---       66,160    82,621     71,704      ---       66        5           29
+Lung        82,621    78,091    74,186     65,907      13        3         27          57
+Colorectal  83,135    84,098    86,789     79,552      14        21        26          39
+Table 7. Medicare spending per patient in the last year of life (columns 2-5) and fractions of patients (columns 6-9) by stage at diagnosis based on California beneficiaries who were diagnosed in 2007-2011 and died in 2007-2012, as reported in [Schrag, 2015]. Estimates include the full year of Medicare spending prior to and including the month of death, irrespective of when the patient was diagnosed. Spending estimates are based on Medicare fee-for-service patients only and are adjusted for inflation to 2013 dollars. For prostate cancer stages I and II are combined due to small numbers for stage I.
+Cancer     Average  Costs, $  Average  Cost-Savings, $    Average  Cost-Savings, %
+Breast     38130              4330                        11.35
+Prostate   28275              1770                        6.26
+Lung       82897              20787                       25.08
+Colorectal 75170              16623                       22.11
+Stage           Average  Costs, $    Incidence  rate, %
+0               984                  NA
+I               4259                 52.1
+II              12566                32.6
+III             39761                9.7
+IV              42303                5.6
+IV (recurrent)  39281                NA
+Table 9. Average costs in the first year after diagnosis (second column) and incidence rates by stage at diagnosis (third column) for malignant melanoma based on 2008 data as reported in [Styperek and Kimball, 2012]. The incidence rates are given for stages I-IV and add up to 100%.

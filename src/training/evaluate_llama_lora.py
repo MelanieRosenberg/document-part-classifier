@@ -6,6 +6,9 @@ import numpy as np
 from sklearn.metrics import precision_recall_fscore_support
 import os
 from tqdm import tqdm
+from sklearn.metrics import confusion_matrix
+import matplotlib.pyplot as plt
+import seaborn as sns
 
 # Define your document tags/classes
 id2label = {0: "FORM", 1: "TABLE", 2: "TEXT"}
@@ -28,6 +31,8 @@ model = AutoModelForSequenceClassification.from_pretrained(
     device_map="auto",
     local_files_only=True
 )
+
+model.config.pad_token_id = tokenizer.pad_token_id
 
 # Load and apply the trained LoRA adapter
 model = PeftModel.from_pretrained(model, adapter_path)
@@ -54,7 +59,7 @@ def load_data():
     def load_split(split_dir):
         with open(os.path.join(split_dir, "lines.txt"), "r") as f:
             texts = [line.strip() for line in f.readlines()]
-        with open(os.path.join(split_dir, "tags.txt"), "r") as f:
+        with open(os.path.join(split_dir, "labels.txt"), "r") as f:
             labels = [label2id[tag.strip()] for tag in f.readlines()]
         return {"text": texts, "label": labels}
     
@@ -71,46 +76,34 @@ test_dataset = load_data()
 test_dataset = test_dataset.map(preprocess_function, batched=True)
 
 # Function to evaluate the model
-def evaluate_model(model, dataset):
+def evaluate_model(model, dataset, batch_size=8):
     model.eval()
     all_predictions = []
     all_labels = []
-    total_examples = len(dataset)
-    report_interval = max(1, total_examples // 10)  # Report every 10%
     
-    for idx, example in enumerate(tqdm(dataset, desc="Evaluating")):
-        # Get actual label
-        all_labels.append(example["labels"])
+    # Create a PyTorch DataLoader for batching
+    from torch.utils.data import DataLoader
+    from transformers import default_data_collator
+    
+    dataloader = DataLoader(
+        dataset,
+        batch_size=batch_size,
+        collate_fn=default_data_collator,
+        shuffle=False
+    )
+    
+    for batch in tqdm(dataloader, desc="Evaluating"):
+        # Get actual labels
+        labels = batch["labels"].cpu().numpy()
+        all_labels.extend(labels)
         
-        # Get prediction
-        input_ids = torch.tensor(example["input_ids"])
-        attention_mask = torch.tensor(example["attention_mask"])
-        
-        inputs = {
-            "input_ids": input_ids.unsqueeze(0).to(model.device),
-            "attention_mask": attention_mask.unsqueeze(0).to(model.device)
-        }
+        # Move batch to device
+        inputs = {k: v.to(model.device) for k, v in batch.items() if k != "labels"}
         
         with torch.no_grad():
             outputs = model(**inputs)
-            predictions = torch.argmax(outputs.logits, dim=1)
-            all_predictions.append(predictions[0].item())
-        
-        # Report intermediate results every 10%
-        if (idx + 1) % report_interval == 0:
-            # Calculate current metrics
-            current_precision, current_recall, current_f1, _ = precision_recall_fscore_support(
-                all_labels, all_predictions, average=None, labels=[0, 1, 2]
-            )
-            current_overall_f1 = precision_recall_fscore_support(
-                all_labels, all_predictions, average='weighted'
-            )[2]
-            
-            print(f"\nIntermediate Results at {(idx + 1) / total_examples * 100:.1f}%:")
-            print(f"Overall F1: {current_overall_f1:.4f}")
-            print(f"FORM F1: {current_f1[0]:.4f}")
-            print(f"TABLE F1: {current_f1[1]:.4f}")
-            print(f"TEXT F1: {current_f1[2]:.4f}")
+            predictions = torch.argmax(outputs.logits, dim=1).cpu().numpy()
+            all_predictions.extend(predictions)
     
     # Calculate final metrics
     precision, recall, f1, _ = precision_recall_fscore_support(
@@ -121,13 +114,24 @@ def evaluate_model(model, dataset):
     overall_precision, overall_recall, overall_f1, _ = precision_recall_fscore_support(
         all_labels, all_predictions, average='weighted'
     )
-    
+    # Calculate confusion matrix
+    cm = confusion_matrix(all_labels, all_predictions)
+    plt.figure(figsize=(8, 6))
+    sns.heatmap(cm, annot=True, fmt='d', cmap='Blues', 
+                xticklabels=[id2label[i] for i in range(len(id2label))],
+                yticklabels=[id2label[i] for i in range(len(id2label))])
+    plt.xlabel('Predicted')
+    plt.ylabel('True')
+    plt.title('Confusion Matrix')
+    plt.savefig('confusion_matrix.png')
+
     return {
         "overall_f1": overall_f1,
         "form_f1": f1[0],
         "table_f1": f1[1],
         "text_f1": f1[2],
     }
+
 
 # Run evaluation
 print("Starting evaluation...")
@@ -159,9 +163,11 @@ if __name__ == "__main__":
         ).to(model.device)
         
         # Get prediction
-        with torch.no_grad():
-            outputs = model(**inputs)
-            prediction = torch.argmax(outputs.logits, dim=1)
-            predicted_label = id2label[prediction[0].item()]
-        
-        print(f"Text: {text[:50]}...\nPrediction: {predicted_label}\n")
+        try:
+            with torch.no_grad():
+                outputs = model(**inputs)
+                prediction = torch.argmax(outputs.logits, dim=1)
+                predicted_label = id2label[prediction[0].item()]
+            print(f"Text: {text[:50]}...\nPrediction: {predicted_label}\n")
+        except Exception as e:
+            print(f"Error processing example: {e}")

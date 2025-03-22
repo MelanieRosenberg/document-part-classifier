@@ -1,0 +1,32 @@
+Diagnóstico  principal: Amebíase
+Diagnósticos  secundários:   Pressão    alta
+Procedimentos   Cirúrgicos            Não
+1- Cirurgia realizada:                                                         Cirurgião:
+Tipo de anestesia / sedação:                                                           Data:
+2- Cirurgia realizada:                                                         Cirurgião:
+Tipo de anestesia / sedação:                                                           Data:
+Procedimentos   / Exames   Invasivos            Não
+1-                                                                                        Data:
+2-                                                                                        Data:
+3-                                                                                        Data:
+Condições  de  Alta / Transferência
+Curado           Melhorado           Inalterado         Óbito
+Destino:       Residência      Atendimento   domiciliar        Transferência para:
+Retornar:      Consultório em                      dias    Aos cuidados  de:.
+Observações:   Tudo  bem
+Diagnóstico  principal: Amebíase
+Diagnósticos  secundários:   Pressão    alta
+Procedimentos   Cirúrgicos            Não
+1- Cirurgia realizada:                                                         Cirurgião:
+Tipo de anestesia / sedação:                                                           Data:
+2- Cirurgia realizada:                                                         Cirurgião:
+Tipo de anestesia / sedação:                                                           Data:
+Procedimentos   / Exames   Invasivos            Não
+1-                                                                                        Data:
+2-                                                                                        Data:
+3-                                                                                        Data:
+Condições  de  Alta / Transferência
+Curado           Melhorado           Inalterado         Óbito
+Destino:       Residência      Atendimento   domiciliar        Transferência para:
+Retornar:      Consultório em                      dias    Aos cuidados  de:.
+Observações:   Tudo  bem

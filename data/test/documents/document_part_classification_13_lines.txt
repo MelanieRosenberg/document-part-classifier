@@ -1,0 +1,16 @@
+American  Express       Cartão N.º:
+Diners                  Nome:
+Elo                     Validade:
+HiperCard               Código Identif.:
+MasterCard              Fone:
+Visa
+Cia. Aérea :                              Cód. Aut.:                      Data:
+Moeda:         R$ - Real      US$ - Dolar                          N.º. de Parcelas:
+Entrada  + Tx. de Embarque:                              Valor da Parcela:
+Total da Venda:
+3 - Em caso de contestação por parte do Portador, a Agência é responsável pela apresentação deste
+original devidamente preenchido e assinado, com cópia da frente e verso do cartão assinado, cópia do
+bilhete e cópia de um documento oficial (emitido por um órgão Federal, Estadual ou Municipal) que
+comprove a identidade do Portador.
+Esses documentos podem ser solicitados a qualquer momento pela administradora do cartão de crédito e
+devem ser apresentados de maneira legível.

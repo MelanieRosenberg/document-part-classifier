@@ -1,0 +1,25 @@
+Applicant      Alan                                        Locke
+First                MI             Last
+Social Security # 253  -  982   - 905
+Date of birth     03  /  04      / 1991
+mo         day        year
+Current address
+551  LIBERTY     DR
+GREENWOOD,                                 AR,       72936
+city                                                 state       zip
+How   long?      2 year
+Co-Applicant   Name    Andrew                                      Zolli
+First                    MI          Last
+Social Security # 253  -  982   - 960
+Date of birth      03 /  02      / 1992
+mo        day        year
+Current address
+8450  LA PALMA    AVE
+BUENA    PARK                            CA        90620
+city                                                 state       zip
+How   long? 4 year
+I/We hereby authorize Hillcrest Community Cooperative to obtain my/our consumer report/credit information, credit risk scores and other enhancements to my/our consumer report (hereinafter collectively referred to as “Report”) from one or more of the three national credit reporting repositories (Equifax, Experian, Trans Union) and provide a copy of the Report to:
+Alan Locke                                             03-05-2019
+Applicant                                                Date
+Andrew  Zolli                                          03-05-2019
+Co-applicant                                             Date

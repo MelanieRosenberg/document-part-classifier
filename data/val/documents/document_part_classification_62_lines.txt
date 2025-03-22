@@ -1,0 +1,35 @@
+Apólice N°                                Estipulante / Sub Estipulante
+2    Dados     do   segurado     principal    (preencher   somente   quando    o sinistro for de cônjuge)
+Nº certifi cado                           Nome
+Data nasc.                                          CPF                                                        Sexo
+Ocupação                                            Data de admissão                                  Renda / Salário - R$
+3    Dados     do   segurado     sinistrado
+Tipo        Segurado   principal        Cônjuge         N° Certifi cado
+Nome  do sinistrado
+Nascimento                                Sexo                        CPF                                   Estado Civil
+Ocupação                                            Data de admissão                                Renda  / Salário - R$
+Último dia de trabalho
+Situação na data do sinistro       Ativo        Aposentado    (especifi car motivo e data)     Afastado          Outros  (especifi car)
+Descrição da ocorrência (narração clara e circustãnciada) e qual o membro ou orgão do corpo atingido:
+Data                                      Assinatura do estipulante
+Pessoa de contato                                                                                                (DDD)  Telefone
+4    Dados     do   sinistro
+Data do evento                                        Hora                                                            Em serviço        Sim         Não
+Local / endereço                                                                                                 Registro policial      Sim         Não
+Tipo de Sinistro invalidez Permanente    Total ou Parcial por Acidente   - IPA
+Possui seguro em outras seguradoras?         Não         Sim      Se positivo, especifi que
+5     Dados    do   reclamante
+Nome                                                                                         E-mail
+Endereço
+Bairro                                                               Cidade                                                       UF
+CEP                                                                               (DDD)  Telefone
+Local e data                                                         Assintura do reclamante
+Data do  acidente                                       Internou-se para tratamento em  virtude do acidente que o vitimou        Clínico         Cirúrgico
+Data da internação
+Nome   hospital                                                                                      Data da alta hospitalar
+Encontrou  no segurado  outros defeitos físicos, moléstias ou doenças existentes antes da data do acidente?
+Cite especificando lesões/doenças e o percentual de perda funcional.
+Quais os tratamentos que  o segurado foi submetido  até a data indicada acima?
+Foram  esgotados todos recursos terapêuticos visando a recuperação do paciente? Justifique                   Data  da definição da(s) sequela(s)
+Descrição da sequela permanente com  perda funcional causada pelo acidente de quê o segurado foi vítima      Grau  (mínimo, médio ou máximo) ou percentual
+Nome   do médico  responsável                                                                                 CRM

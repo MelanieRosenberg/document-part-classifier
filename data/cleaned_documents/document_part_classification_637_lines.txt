@@ -1,0 +1,24 @@
+É necessário o preenchimento completo de todos os campos com os dados do BENEFICIÁRIO ou do REPRESENTANTE LEGAL, sem rasuras, para correta análise do seu pedido de indenização. Dados incompletos ou incorretos impedem o banco de creditar o pagamento. A conta informada precisa ser de titularidade do BENEFICIÁRIO ou do REPRESENTANTE LEGAL e deve estar regularizada, ativa, desbloqueada e sem impedimento para o crédito de indenização/reembolso.
+Beneficiário entre 0 a 15 anos (pai, mãe, tutor) ou o Incapaz com curador. O formulário deverá ser preenchido com os dados do Representante Legal (Pai, Mãe, Tutor ou Curador). Apenas o Representante Legal precisará assinar o formulário (no campo 2- “Assinatura do Representante Legal”).
+Beneficiário com 16 ou 17 anos - Necessário que o Beneficiário seja assistido por seu “Representante Legal” (Pai, Mãe, Tutor). O formulário deverá ser preenchido com os dados do beneficiário. Necessário que o formulário seja assinado pelo menor de idade (no campo 1 “Assinatura do Beneficiário”) e seu Representante Legal (campo 2 “Assinatura do Representante legal”).
+Número do Sinistro ou ASL             CPF da Vítima                          Nome completo da vítima
+2971                                   03173940458                           Eduardo      Kugelmas
+Nome   completo                                                                    CPF títular da conta               Profissão
+Alessandro   Vieira                                                               083844904-22                       engenheiro
+Endereço                                                                                        Número                Complemento
+Rod. ES-010,  1494  - Santa Luzia                                                               -                     -
+Bairro                                           Cidade                                         Estado                CEP
+-                                               Serra                                           ES                    29165-740
+Email                                                                                                                 Telefone (DDD)
+sen.alessandrovieira@senado.leg.br
+RECUSO   INFORMAR                             SEM   RENDA                                ATÉ  R$ 1.000,00                       R$ 1.001,00  ATÉ R$ 3.000,00
+R$  3.001,00 ATÉ  R$ 5.000,00                   R$ 5.001,00 ATÉ  R$ 7.000,00               R$ 7.001,00 ATÉ  R$ 10.000,00         ACIMA   DE R$  10.000,00
+CONTA    POUPANÇA      (Somente   para os bancos  abaixo. Assinale  uma  opção)           CONTA    CORRENTE     (todos os bancos)
+BRADESCO     (237)      BANCO    DO  BRASIL  (001)       ITAÚ  (341)                 BANCO Nome                                                       NRO
+CAIXA   ECONÔMICA     FEDERAL   (104)                                                 Banco     do  Brasil                                                  -
+AGÊNCIA                               CONTA                                               AGÊNCIA                                   CONTA
+NRO.                         D/V      NRO.                         D/V                    NRO.                         D/V          NRO.                         D/V
+-                        17391-6                        -                          -                       -           400.326-8                     -
+(Informar dígito se existir)             (Informar dígito se existir)                         (Informar dígito se existir)             (Informar dígito se existir)
+Declaro que os dados bancários são de minha titularidade e, comprovada a cobertura securitária para o sinistro, autorizo a Seguradora Líder a efetuar o pagamento da indenização do Seguro DPVAT, mediante o crédito na referida agência e conta. Após efetivado o crédito, reconheço e dou plena quitação do valor indenizado.
+Nova    Friburgo    , 04      de 09                       de 2019

@@ -6,6 +6,7 @@ from transformers import (
     Trainer,
     BitsAndBytesConfig
 )
+from transformers.trainer_callback import EarlyStoppingCallback
 import json 
 from peft import get_peft_model, LoraConfig, TaskType, prepare_model_for_kbit_training
 from datasets import Dataset, load_from_disk
@@ -96,9 +97,9 @@ class LlamaLoRATrainer:
     def load_data(self, data_dir: str) -> Dataset:
         """Load dataset from directory."""
         try:
-            # Load lines and tags from files
+            # Load lines and labels from files
             lines_file = os.path.join(data_dir, "lines.txt")
-            tags_file = os.path.join(data_dir, "tags.txt")
+            tags_file = os.path.join(data_dir, "labels.txt")
             
             with open(lines_file, 'r', encoding='utf-8') as f:
                 lines = [line.strip() for line in f.readlines()]
@@ -185,7 +186,8 @@ class LlamaLoRATrainer:
         
         # Ensure model's padding token is set
         self.base_model.config.pad_token_id = self.tokenizer.pad_token_id
-        
+        self.base_model.gradient_checkpointing_enable()
+
         logger.info("Model loaded successfully")
     
     def preprocess_function(self, examples: Dict[str, List[Any]]) -> Dict[str, torch.Tensor]:
@@ -324,11 +326,18 @@ class LlamaLoRATrainer:
             save_total_limit=save_total_limit,
             report_to="none",
             logging_first_step=True,
-            logging_nan_inf_filter=False,
+            logging_nan_inf_filter=True,
             disable_tqdm=True,
             log_level="error"
         )
         
+        callbacks = [
+            EarlyStoppingCallback(
+                early_stopping_patience=early_stopping_patience,
+                early_stopping_threshold=early_stopping_threshold
+            )
+        ]
+
         # Initialize trainer
         trainer = DocumentClassificationTrainer(
             model=self.model,
@@ -336,7 +345,8 @@ class LlamaLoRATrainer:
             train_dataset=train_processed,
             eval_dataset=val_processed,
             tokenizer=self.tokenizer,
-            compute_metrics=self.compute_metrics
+            compute_metrics=self.compute_metrics,
+            callbacks=callbacks
         )
         
         # Train

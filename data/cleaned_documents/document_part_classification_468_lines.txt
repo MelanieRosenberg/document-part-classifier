@@ -1,0 +1,25 @@
+interior Finish
+AeVolue,   Ae Fa   TU
+Insulation  Betrmen                        Furting  Strips Over
+Furring  Stripe                       Continuaue    Insulation
+f                                         i
+i
+;
+ff
+Wood   furring, rigid insulation  and  ‘4 in.                16  in.              24  in.               16 in.      |        24  in.
+(12 mm)   gymaum   board                        (400 mim}  o.c.      (600  mm)  oc.       (400  mam}  .oc       (00min)    cue.
+“un. (12 iim)  extruded  palystyrana                                Be                   aa                   54                    BA
+2. in (18 mm)  pebyisecyanuratio:                                   45                   50                   65                    6a
+18 in. 438 rm)  eabrkied  polyshrnne                                a                    a5                   a2                    ed
+16in, (38  um}  pahpsocyanurnts                                     es)                  B2                  12                   122
+and    in,
+Matal  turing.  rigid insulation       “4
+(13 mm)   gypoum   beard
+Tin, (25 mn)  eatnkted  polystyrene                                 a4                   42                   65                    a8
+Vin, (25 mem) polysocyanurate                                       a5                   Sa                   BG                    eG
+Thin. (38. im)  axtnusiod potystyenne                               46                   Ba                   a4                    a4
+TCI.  (38  ein) polyieocyarmnurabe                                  a                    Ba                  aFan|                124
+Brick masonry exhibits superior thermal mass, that is, the ability to store and slowly release heat at a later time. These properties help shift the peak heating or cooling loads to off-peak times and reduce the peak temperatures. Current energy codes take thermal mass into account by requiring a lower R-value for mass walls, such as brick cavity walls (see Technical Notes 4B).
+Passive solar design can be used in conjunction with cavity wall construction to take full advantage of masonry's thermal mass properties. Solar design techniques, such as the use of building orientation, daylighting and thermal mass, can provide both comfort and energy savings for the owner and occupants. It is best to incorporate passive solar techniques in a building during the preliminary design phase. Technical Notes 43 Series has information on passive solar design techniques. Other references are available to assist in design [4, 8].
+The results of fire resistance tests clearly show that brick masonry cavity walls have excellent fire resistance. Fire resistance ratings of brick masonry cavity walls range from 2 to 4 hr, depending upon the wall thickness and other factors (see Table 4). Due to their high fire resistance properties, brick walls make excellent fire walls or building separation walls for compartmentation in buildings. By using compartmentation, the spread of fire can be halted. Technical Notes 16 Series describes fire ratings and applicable design conditions.
+fire resistance method. This approach is approved by the model building codes for determining fire ratings of walls that are not physically tested by ASTM E 119 Test Methods for Fire Tests of Building Construction and Materials. The fire rating of cavity walls can be calculated using Technical Notes 16B.

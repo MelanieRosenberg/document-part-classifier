@@ -1,0 +1,24 @@
+Author                                 Number   of publications                     Number   of coauthorships                       Cluster
+Nosten, F.                                        35                                            148                                    2
+White, N. J.                                      28                                            186                                    2
+Imwong,   M.                                      25                                            131                                    2
+Price, R. N.                                      25                                            88                                     7
+Roper, C.                                         23                                            15                                     1
+Plowe, C. V.                                      21                                            74                                     4
+Pradines, B.                                      21                                            28                                     5
+Dondorp,  A. M.                                   20                                            149                                    2
+Rosenthal, P. J.                                  20                                            22                                     1
+Udhayakumar,   V.                                 19                                            31                                     1
+Alifrangis, M.                                    17                                             8                                     1
+Kenangalem,   E.                                  17                                            55                                     7
+Rogier, C.                                        17                                            27                                     5
+Meshnick,  S. R.                                  16                                            35                                     1
+M´ enard, D.                                      24                                            41                                     5
+Sutherland, C. J.                                 16                                            22                                     1
+Anstey, N. M.                                     15                                            51                                     7
+Fairhurst, R. M.                                  15                                            81                                     6
+Fidock, D. A.                                     15                                            14                                     3
+Na-Bangchang,   K.                                15                                             3                                     3
+Ringwald,  P.                                     15                                            70                                     6
+Roepe,  P. D.                                     15                                             5                                     3
+Wirth, D. F.                                      15                                             6                                     3

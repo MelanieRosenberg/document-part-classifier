@@ -1,0 +1,27 @@
+REEMBOLSO           DE   DESPESAS        - RD
+I – PARA USO DO SERVIDOR
+CNPJ/CPF DO NÃO CREDENCIADO     NOME DO  NÃO CREDENCIADO
+CGC/CPF DO NÃO CREDENCIADO
+089.673.518-44                  Wagner  Gentil
+MATRÍCULA                       NOME DO  PACIENTE
+48785                           Daniel Sarmento  de Freitas
+NOME DO TITULAR DO PLAM                                            ÓRGÃO:  rim
+Daniel NOME DO Sarmento TITULAR de DO Freitas PLANO                 RAMAL/TEL: 69- 3216-4140
+DADOS BANCÁRIOS PARA DEPÓSITO
+Banco:    Banco do Brasil      Agência:            Conta Corrente:  saving
+-
+MOTIVO DO REEMBOLSO:     DESPESAS HOSPITALARES COM EQUIPE CIRÚRGICA     EXAMES
+EQUIPE CIRÚRGICA     CONSULTAS      ANESTESIA     REMOÇÕES      TRATAMENTOS
+MOTIVO  DO REEMBOLSO:     DESPESAS HOSPITALARES COM EQUIPE CIRÚRGICA    EXAMES
+PROCEDIMENTOS  AMBULATORIAIS      MATERIAL CIRÚRGICO     LENTE INTRAOCULAR
+EQUIPE CIRÚRGICA      CONSULTAS     ANESTESIA      REMOÇÕES        LENTE INTRAOCULAR
+2. Conta Hospitalar incluindo: material, medicamentos, período de internação, principais intercorrências. 3. Recibos de Honorários de Médicos, Auxiliares, Anestesistas, outros, devidamente assinados e com carimbo do CRM (Conselho Regional de Medicina) ou equivalente. 4. O Reembolso de internação só será autorizado nas localidades onde não exista rede credenciada.
+CÓDIGO   DO PROCEDIMENTO                       VALOR  PAGO       VALOR  REEMBOLSADO
+1-                           547749                       R$50,000            R$25,000
+2-
+3-
+4-
+5-
+TOTAL GERAL                         R$50,000
+EM       / 01/01/19 /
+Assinatura do Conferente

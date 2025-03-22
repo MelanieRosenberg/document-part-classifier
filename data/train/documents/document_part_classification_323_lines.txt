@@ -1,0 +1,57 @@
+Pattern Matching.
+We developed a pattern- matching classifier as a baseline for our more so- phisticated
+classification methods.
+A list of all UMLS string representations for each of 45 codes (including synonyms from source
+vocabularies other than ICD-9-CM) was created as described in the MTI section above.
+The strings were then con- verted to lower case, punctuation was removed, and strings containing
+terms unlikely to be found in a clinical report were pruned.
+For example, Ab- domen NOS pain and Abdominal pain (finding) were reduced to abdominal pain.
+For the same rea- sons, some of the strings were relaxed into pat- terns.
+For example, it is unlikely to see PAIN CHEST in a chart, but very likely to find pain in chest.
+The string, therefore, was relaxed to the fol- lowing pattern: pain.*chest.
+The text of the clinical history and the impression fields of the radiology reports with negated
+expressions removed (see Section 2.2) was broken up into sentences.
+Each sentence was then searched for all available pat- terns.
+A corresponding code was assigned to the document for each matched pattern.
+This pattern matching achieved F-score = 0.79 on the training set.
+To reduce the number of codes assigned to a document, a check for allowed combinations was added as
+a post-processing step.
+The combination of assigned codes was looked up in the table of allowed codes.
+If not present, the codes were re- duced to the combination of assigned codes most frequently
+occurring in the training set.
+This brought the F-score up to 0.84 on the training data.
+As the performance of this classifier was compara- ble to other methods, we decided to include these
+results when combining the predictions of the other classifiers.
+Experience with ad hoc retrieval tasks in the TREC Genomics Track has shown that combining predic-
+tions of several classifiers either significantly im- proves classification results, or at least
+provides more consistent and stable results when the train- ing data set is small (Aronson et al.,
+2005).
+We therefore experimented with stacking (Ting and Witten, 1997), using a simple majority vote and a.
+Table 1 shows the results obtained for the training set.
+The best stacking results were obtained using predictions of all four base classifiers on the text
+with deleted negated expressions and with check- ing for allowed combinations.
+We retained all final predictions with probability of being a valid code greater than 0.3.
+Checking for the allowed combi- nations for the ensemble classifiers degraded the F- score
+significantly.
+Classifier                    F-score
+MTI                           0.83
+SVM                           0.87 (x-validation)
+k-NN                          0.79 (x-validation)
+Pattern Matching              0.84
+Majority                      0.82
+Stacking                      0.89
+Since stacking produced the best F-score on the training corpus and is known to be more robust than
+the individual classifiers, the corresponding results for the test corpus were submitted to the
+Challenge submission website.
+The stacking results for the test corpus achieved an F-score of 0.85 and a secondary, cost-sensitive
+accuracy score of 0.83.
+For comparison purposes, 44 Challenge submis- sions had a mean F-score of 0.77 with a maximum of
+0.89.
+Our F-score of 0.85 falls between the 70th and 75th percentiles.
+It is significant that it was fairly straightforward to port various methods developed for ad hoc
+MED- LINE citation retrieval, indexing and classification to the assignment of codes to clinical
+text.
+The modifications to MTI consisted of replacing Re- strict to MeSH with Restrict to ICD-9-CM,
+training the Related Citations method on clinical text and replacing MTI’s normal post-processing
+with a much simpler version.
+Preprocessing the text using.

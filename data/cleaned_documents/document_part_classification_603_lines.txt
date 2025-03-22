@@ -1,0 +1,19 @@
+Patient Name:  Aaron  Petersen                                   DOB: 28/12/1994
+Provider: BlueShield                              Nurse:  Scott Pinheiro
+Visit Information:
+Chief Complaint:   N/A
+Vital Signs:
+5" 10'                                                     70
+Wt: 151.2lbs  Ht:          BP: 80        HR:           RR:           Temp:
+Verify Allergies: Anaphylaxis Allergic Reactions
+Verify Menses:   N/A
+Verify Smoking:  N/A
+Verify Medications:  panadol   extra
+Progress Note:
+No  Comments
+Meds  and Orders:
+No  Comments
+Vaccine: DTaP           Vaccine:               Vaccine:                Vaccine:
+Lot #:                  Lot #:                 Lot #:                 Lot #:
+Exp Date:              Exp  Date:              Exp Date:              Exp  Date:
+Site Given:            Site Given:             Site Given:            Site Given:

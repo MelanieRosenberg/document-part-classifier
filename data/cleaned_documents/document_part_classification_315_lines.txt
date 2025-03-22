@@ -1,0 +1,12 @@
+To determine if there were possible changes in participants’ ratings before and after the workshop, paired t-tests were run and analyzed. Table 2 shows mean scores and standard deviations (SDs) from the Pre-Workshop Student Survey and the Post-Workshop Student Survey, mean score differences and standard errors (SEs), dependent-samples t-tests results (t statistic and degrees of freedom), p-values, and the effect sizes (measured by dependent-samples Cohen’s d).
+Table 3 shows faculty participants’ self-perception of their previous experience in mentoring and as well as faculty participants’ perceptions of the workshop effectiveness. Before the workshop started, the faculty participants (n = 28) showed a medium average of previous experience in mentoring with a wide variability. Specifically, faculty participants (n = 28) yielded a mean of 3.68 (SD = 1.02) on “Do you have substantial previous experience in mentoring?” This showed some faculty do not have much previous mentoring experience while some others have substantial previous mentoring experience.
+Table 3 Faculty participants’ self-perception and perceptions of workshop effectiveness
+Variable                                                             Mean  (SD)      N
+-Pre-Workshop:
+Do you have  substantial previous experience in mentoring?         3.68 (1.02)     28
+-Post-Workshop:
+The workshop   is helpful.                                         4.77 (0.51)     26
+The workshop   is organized well.                                  4.88 (0.33)     26
+Will attend future mentoring workshops.                            4.77 (0.51)     26
+The length of the workshop is appropriate.                         4.50 (0.65)     26
+In addition, these faculty participants’ (n = 26, due to the exclusion of two incomplete post- workshop surveys from faculty) highly-rated perceptions of workshop effectiveness were reported here. Specifically, the majority expressed that the workshop was helpful (M = 4.77, SD = 0.51), that the workshop was organized well (M = 4.88, SD = 0.33), that they would attend future related

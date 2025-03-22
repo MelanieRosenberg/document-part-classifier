@@ -1,0 +1,17 @@
+TABLE   1
+Typical  Flue Liner Dimensions
+Nominal         Inside        Equivalent       Minimum
+Size      Perimeter,  P,   Diameter,  B       Area, Ap
+in.           ft               in.             sq ft
+8x12            27               E*              O42
+12 "12          3.0               10             0.56
+12%  16         3.6               12             O78
+16%  16         42                i4             1.08
+16% 20          48                16             1.38
+20) « 20        3.3               18             1.78
+20 « 24         59               20              246
+24 424          BS               22              264
+With the opening and flue sizes known, Equation 4 may be used to calculate the minimum chimney height to provide adequate draft in a properly designed, detailed and constructed assembly. The height calculated using Equation 4 is measured from the top of the fireplace opening, and is the minimum required to produce an adequate draft. Building code requirements previously discussed for minimum chimney heights are based solely on fire safety considerations and must always be met or exceeded.
+Step 1. From Table 1 in Technical Notes 19 Revised select fireplace opening dimensions A and B and the corresponding flue liner size, L and M. Using Equation 1 calculate the Fireplace Opening Area, A o. From Table 1 determine the Minimum Flue Area, A F, using L and M.
+Based on the size of the flue selected, a preliminary damper size must be assumed. At this point in the design process, it is only necessary to decide if the damper throat area to be used will be equal to or twice the flue area. Once this decision has been made the Inlet Loss Coefficient, K 2, may be determined. If the damper throat area is equal to the flue area, K 2 is equal to 2.5. If the damper throat is twice the flue area, K 2 is equal to 1.0.
+The Termination Coefficient, K 3, may be selected using this information. If no rain cap is used K 3 equals 0.0. If a rain cap is set at a distance of D/2 (see Table 1 for equivalent diameter, D) above the termination point of the flue liner, K 3 may vary from 0.0 to 4.0. This information may be obtained from the manufacturer.

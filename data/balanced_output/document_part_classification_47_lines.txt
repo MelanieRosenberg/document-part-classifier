@@ -1,0 +1,23 @@
+The methods of exposure assessment will be extracted and whether the method has been validated, the
+number of items in the questionnaires and the number of assessments.
+The duration of the exposure/intervention will be recorded as well as the time between exposure
+assessment/intervention and outcome assessment.
+During data extraction, interventions/exposures will be labelled using the exposure codes listed in
+the Guidelines for the search literature reviews of the 2007 WCRF/AICR expert Report1 .
+The interventions/exposures are allocated under the main headings and subheadings listed in Appendix
+4.
+For example, diet modifications –e.g.
+diets rich in fruit and vegetables and low in fats- will be coded under “Dietary patterns” and
+combinations of micronutrients in supplements will be coded under “Dietary Constituents”.
+An additional main heading for “Nutrition-related complementary and alternative Medicine” has been
+added for this review (code 9 in Appendix 4) with the following subheadings: Traditional medicine,
+Naturopathy, Phytotherapy, Homeopathy.
+Biomarkers of exposure will be extracted under the heading of the corresponding exposure, Biomarkers
+for which there is no evidence on appropriate validity and repeatability will not be included in the
+review (List of biomarkers is in Appendix 5).
+5.2 Timeframe   of exposure  assessment.
+The  timeframe of exposure  assessment  in observational studies will be recorded as follows:
+-Exposure  assessment  refers to a period before primary breast cancer diagnosis (childhood,
+adolescence, adulthood).
+-Exposure  assessment  refers to the period during therapy for primary breast cancer.
+-Exposure  assessment  refers to a period after primary breast cancer diagnosis.

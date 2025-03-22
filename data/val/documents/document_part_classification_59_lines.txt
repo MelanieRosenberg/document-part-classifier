@@ -1,0 +1,8 @@
+Credit Card Information
+Card Type:    ☐ MasterCard        ☐ VISA              ☐  Discover          ☐ AMEX
+☐ Other
+Cardholder Name   (as shown on card): Keith Fogarty
+Card Number:   5416300029979672
+Expiration Date (mm/yy):  12/2016
+Cardholder ZIP Code  (from credit card billing address): 66215
+I, Keith Fogarty           , authorize Sharla Becker               to charge my credit card

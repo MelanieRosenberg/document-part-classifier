@@ -1,0 +1,54 @@
+Publisher and journal                                                         Open  access (n)  Control articles (n) Open  access (%)
+American   Physiological Society (Jan.–Apr.  2007),  delayed access: 12 mo
+American  Journal of Physiology—Regulatory, Integrative and Comparative
+Physiology                                                                       34                 161                17
+American  Journal of Physiology—Endocrinology and  Metabolism                      21                 126                14
+American  Journal of Physiology—Renal  Physiology                                  18                 122                13
+American  Journal of Physiology-Heart and Circulatory Physiology                   32                 201                14
+American  Journal of Physiology—Lung  Cellular and Molecular Physiology            14                  95                13
+American  Journal of Physiology—Gastrointestinal and Liver Physiology              22                 112                16
+American  Journal of Physiology—Cell Physiology                                    36                 119                23
+Journal of Applied Physiology                                                      27                 174                13
+Journal of Neurophysiology                                                         39                 239                14
+Physiological Reviews                                                               2                  14                13
+Physiology                                                                          2                   9                18
+Total                                                                             247               1372                 15
+American   Heart  Association (June–Sep.   2007), delayed  access: 12 mo
+Arteriosclerosis, Thrombosis, and Vascular Biology                                 20                  85                19
+Circulation                                                                        20                  76                21
+Circulation Research                                                               19                  41                32
+Hypertension                                                                       20                  75                21
+Stroke                                                                             22                 110                17
+Total                                                                             101                 387                21
+Duke  University  Press (June–Dec.  2007),  delayed  access: never
+Journal of Health Politics, Policy and Law                                          7                  10                41
+American  Speech                                                                    3                   5                38
+Neuro-Oncology                                                                     12                  15                44
+Public Culture                                                                      6                   5                55
+Ethnohistory                                                                        5                   6                45
+GLQ:   A Journal of Lesbian and Gay Studies                                         6                   7                46
+Social Science History                                                              4                   6                40
+Total                                                                              45                  54                45
+SAGE   Publishers (June  2007–Feb.   2008), delayed  access: never
+Comparative  Political Studies                                                     11                  17                39
+Communication   Research                                                            8                  11                42
+New  Media  &  Society                                                              8                  22                27
+Social Studies of Science                                                           8                  17                32
+American  Behavioral Scientist                                                     10                  31                24
+Progress in Human   Geography                                                       8                  18                31
+Administration  &  Society                                                          9                  15                38
+Theory &   Psychology                                                              10                  23                30
+Applied Psychological Measurement                                                   7                  13                35
+Organization                                                                        8                  16                33
+Total                                                                              87                 183                32
+Federation  of American   Societies for Experimental   Biology (June–Oct.
+2007),  delayed  access: 12 mo
+FASEB   Journal                                                                    81                  84                49
+Genetics  Society of America  (June–Sep.   2007), delayed  access: 6 mo
+Genetics                                                                          103                 108                49
+American   Association  for the Advancement    of Science (June–Nov.
+2007),  delayed  access: 12 mo
+Science                                                                            48                 345                12
+Grand   total                                                                       712               2533                 22
+Approximately 1 in 5 articles received the open access treatment, with some journals receiving a higher allocation based on their size and frequency of publication (Table 1). The proportion of treatment articles was determined in consultation with the publisher in advance of the study and was set to avoid radical alteration of the appearance and performance of the journal. Based on prestudy analysis of citationvariation,oursamplesizeprovidesuswitha0.8power to detect a 25% difference in citations between treatment and control articles for all journals (P(cid:1)0.05, 2-sided).
+The randomization, selection, and manipulation of access status for treatment articles were controlled entirely by the researcher, who was provided with direct access to the admin- istration of the journal websites. Authors and editors were not alerted as to which articles received the open access treat- ment. For some journals, treatment articles were indicated on the journal websites by an open lock icon.

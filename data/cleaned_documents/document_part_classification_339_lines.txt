@@ -1,0 +1,53 @@
+Table   5: Analysis   of the responses    to the first open-ended    question
+f %                                                  f
+Category        Sub-category                             Experimental                                      Experimental
+Mathematical                        Humanities     Mathematical                        Humanities
+science                                           science
+1)Quality    No response                    23               25/9             32/8             55               49               39
+of           No Answer                      13               12/7             18/5             31               24               22
+examples     Yes Answer                     64               61/4             48/7             153              116              58
+Numbers
+Permutation,                  23/4              23/8              26              56               45               31
+Combination      and          4/2                3/7             1/7              10                7                2
+Probability                   6/3                4/2             0/8              15                8                1
+Trigonometry                  0/4                 0               0                1                0                0
+2)Subject
+variety      Linear Algebra                0/4                 0               0                1                0                0
+Integral                      1/7                5/3              0                4                1                0
+of           Equation                      8/4                2/6              0                2                5                0
+examples
+Statistics                    8/4                 1               0                2                2                0
+Matrices                      8/4                5/3              0                2                1                0
+Coordinates                   1/7                1/6              0                4                3                0
+Logarithm                     1/2                5/3              0                3                1                0
+Function
+Real life
+49/4              50/8             46/2             118              96               55
+Professional life              18               21/2             10/9             43               40               13
+3)Contex     School
+t of         Mathematics                   2/1                2/1             0/8               5                4                1
+1/2                2/1             0/8               3                4                1
+examples     Individual                     5                 5/3             0/8              12               10                1
+Game
+0                  0              0/8               0                0                1
+Table  6: Analysis   of the  responses   to the second   open-ended    question
+Experimental
+Category        Sub-category                Illustrative quote             Mathematical            science            Humanities
+f         f %        f       f %       f           f %
+No response                                                 101       42/2       80      42/3       54         45/3
+1)Quality   of
+examples         No Answer                                                    14        5/9       28      14/8       16         13/4
+Yes Answer                                                  124       51/9       81      42/9       49         41/2
+Make    our   life more    practical
+When      constructing     buildings
+Affecting scores in courses               50       20/9       33      17/5       33         27/7
+Real life                                                    13        5/4       6        3/2       4           3/4
+Professional life  Improving              mathematics        1         0/4       1        0/5       2           1/7
+2)Context of                        achievement
+examples         School             Mathematical     understanding    is      6         1/8       45      23/8       21         17/6
+Mathematics                                                  3         1/2       1        0/5       0            0
+Individual         important.                                28       11/7       4        2/1       7           5/9
+Providing    reasonable    thinking
+Increasing  motivation                    21        8/9       8        4/2       1           0/8
+The findings of Table 6 have shown that students of humanities strand have more frequency percent (45.3% for "no answer") than other strands in first category (quality of examples) for second open-ended question. It can conclude that students have demonstrated real-life category often in three strands.
+Mathematics is a main matter of the real-life that can cover all aspects of real world. Therefore educational systems have to create new circumferences for mathematics education. The results of this study have indicated that all students of this research have understood the importance and frequency of the relation of mathematics to real-life. But students of humanities strand believed that it is not considered the relation of mathematics to real-life in teaching mathematics and also students of experimental science strand believed that it cannot create the relation between taught mathematical subjects and real-life. In

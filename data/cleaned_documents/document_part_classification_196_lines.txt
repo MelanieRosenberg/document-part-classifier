@@ -1,0 +1,14 @@
+Last
+name:  Clarke
+First name: Michael
+Date of birth (MM/DD/YYYY):    06/14/1989                  SEVIS ID: 948615
+Job title: Computer Scientist
+Job start date: 12/4/2020                           Job end date (if applicable): present
+Employer  name:  Boston   Scientific
+Employer  address: 4238  Wilson Blvd, Arlington, VA 22203
+95-2549734                                             full
+Employer  EIN (tax ID #):                                  Full-time/part-time:    time
+Explanation  of how this job directly relates to your program of study (in your own words):
+No  comments
+Supervisor first name: Patricia
+Supervisor last name: White

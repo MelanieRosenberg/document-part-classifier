@@ -1,0 +1,22 @@
+Criteria                                  Measures                                             Sources
+Overall  clinical benefit              Efficacy – health impact based  on mortality,     Clinical Guidance Report  from relevant Clinical
+morbidity, and quality of life. Assessment of     Guidance  Panel.
+direction of effect, magnitude, and level of      Systemic literature reviews and registered
+uncertainty                                       clinician input.
+Safety – frequency  and severity of adverse
+events
+Burden  of Illness – incidence of disease in
+population
+Need  – current availability of effective
+alternatives
+Alignment   with patient  values       Measures  of social value (e.g., social desire for Patient group input
+cures for cancer)
+Cost-effectiveness                     Net efficacy compared   to other drugs —          Economic  Guidance   Report from  Economic
+costs, cost per QALY  or event avoided,           Guidance  Panel, review of pharmacoeconomic
+uncertainty about net health benefits             models
+Feasibility of adoption                Overall assessment  of budget impact              Provincial advisory group input and economic
+guidance reports
+Despite the well-delineated process for recommending drugs for coverage, Canada has the second highest drug spending in the world. Furthermore, because coverage decisions are ultimately made at the provincial level and by private insurers, the actual negotiated prices and discounts are kept confidential. Coverage for cancer drugs varies by province and insurer, both in terms of formulary decisions and out-of- pocket costs.
+Canada has a national stopgap to protect consumers from price gouging. The Patient Medicine Prices Review Board (PMPRB), a consumer protection agency, has the authority to impose sanctions and price reductions for patented products deemed excessively priced. However, the PMPRB is hobbled in its ability to keep Canada’s drug spending low.
+PMPRB allows companies to set prices for new patented drugs up to the highest amount paid for other medicines in the same therapeutic class (an internal reference price), which incentivizes manufacturers to avoid lowering prices for older patented drugs. Furthermore, the countries the PMPRB uses to compare drug prices are some of the highest-priced countries in the world, which raises the ceiling for Canadian prices.47
+In 2010 the German government passed the Pharmaceutical Market Restructuring Act, or Arzneimittelmarkt- Neuordnungsgesetz (AMNOG), to regulate drug prices. AMNOG went into effect in 2011, and the legal process attempts to balance paying for innovative drug development with making decisions based on clinical efficacy. Germany’s compulsory health insurance system is publicly financed from wage taxes. Tightly regulated, independent, competing, non-

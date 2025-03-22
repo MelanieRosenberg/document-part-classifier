@@ -1,0 +1,31 @@
+Group Total, # Stage 0, # Stage I, # Stage II, # Stage III, # Stage IV, # Stage ?, # Stage 0, %
+Stage I, % Stage II, % Stage III, % Stage IV, % Stage ?, % Stage I, % Stage II, % Stage III, % Stage
+IV, % NHW 91951 17315 36067 23185 7899 3304 4181 18.83 39.22 25.21 8.59 3.59 4.55 51.19 32.91 11.21
+4.69 Black 8804 1634 2548 2533 1073 549 467 18.56 28.94 28.77 12.19 6.24 5.3 38.01 37.79 16.01 8.19
+Hispanic 22856 4155 6887 6663 2915 988 1248 18.18 30.13 29.15 12.75 4.32 5.46 39.46 38.18 16.7 5.66
+Asian/PI 16251 3818 5515 4353 1359 525 681 23.49 33.94 26.79 8.36 3.23 4.19 46.93 37.04 11.56 4.47
+Age 20-44 16560 3071 4245 5466 2445 627 706 18.54 25.63 33.01 14.76 3.79 4.26 33.21 42.76 19.13 4.9
+Age 45-64 69521 15088 24218 18211 6812 2590 2602 21.7 34.84 26.19 9.8 3.73 3.74 46.72 35.14 13.14 5
+Age 65+ 55573 9185 23052 13406 4103 2198 3629 16.53 41.48 24.12 7.38 3.96 6.53 53.91 31.35 9.6 5.14
+Table 4.
+Incidence numbers (column 2 = total, columns 3-7 = stages 0-IV, column 8 = stage unknown or “?”, for
+each row columns 3 through 8 add up to column 2), incidence rates in % for stages 0-IV and stage
+unknown (columns 9-13 = stages 0-IV, column 14 = stage unknown, for each row columns 9 through 14
+add up to 100% up to rounding to 2 digits), and incidence rates for stages I-IV only with stage 0
+and stage unknown specifically excluded (columns 15-18 = stages I-IV, for each row columns 15
+through 18 add up to 100% up to rounding to 2 digits).
+The incidence numbers are based on the data for California women aged 20 and older diagnosed with
+Breast Cancer during 2005-2009 as reported in [Morris et al, 2013].
+The demographic groups are abbreviated as follows: NHW = Non-Hispanic White, PI = Pacific Islander.
+Cancer      Total, # Stage   Stage    Stage    Stage   Stage   Stage    Stage  Stage   Stage   Stage   Stage  Stage   Stage   Stage   Stage   Stage
+0, #    I, #     II, #    III, #  IV, #   ?, #     0, %   I, %    II, %   III, %  IV, %  ?, %    I, %    II, %   III, %  IV, %
+Breast      260590   49540   96601    67953    24317   10382   11797    19.01  37.07   26.08   9.33    3.98   4.53    48.48   34.1    12.2    5.21
+Colon       97947    8235    20085    23615    21597   17961   6454     8.41   20.51   24.11   22.05   18.34  6.59    24.12   28.36   25.94   21.57
+Rectum      30334    2814    7536     4794     6081    4242    4867     9.28   24.84   15.8    20.05   13.98  16.04   33.27   21.16   26.84   18.73
+Lung        155820   142     27008    7381     31097   69944   20248    0.09   17.33   4.74    19.96   44.89  12.99   19.94   5.45    22.96   51.65
+Prostate    198043   NA      16113    135698   14194   13359   18679    NA     8.14    68.52   7.17    6.75   9.43    8.98    75.66   7.91    7.45
+Table 5.  Incidence numbers and rates with the same conventions for columns 2-18 as in Table 4.
+The incidence numbers are based on the data for persons diagnosed with breast, colon, rectal, lung,
+and prostate cancer in California during 2004-2012 as reported in [Parikh-Patel et al, 2015].
+Some cancer sites in column 1 are abbreviated as follows: Breast = female breast, Rectum = rectum
+and rectosigmoid junction, Lung = lung and bronchus.

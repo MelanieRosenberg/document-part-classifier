@@ -1,0 +1,37 @@
+patterns = List of patterns for Semantic Network relationships
+synonyms = List of synonyms for extracted domain verb
+initialize  a HashMap  of  patternMatches
+for  each s  in synonyms  {
+patternMatches  =  longestStringMatch(s,patterns)
+}
+return patternMatches
+Figure 3: Relation Matcher algorithm
+The abstracts from 618 original scientific articles published in the Journal of Nuclear Cardiology
+(JNC) were used for this research and experiments.
+These abstracts summarize the knowledge of the entire scientific manuscripts published by JNC from
+1995 to 2004.
+We have used this resource to build the knowledgebase of relevant terms and relations.
+We extracted 10191 term (phrases) from these articles.
+These terms are noun phrases that have at least one mapping in the UMLS metathesaurus.
+We used an expert provided list of 42 relevant domain terms for the Myocardial Perfusion Imaging
+domain (a sub-domain of nuclear cardiology) to heuristically test the coverage of our ontology
+terms.
+Of these, we found 31 exactly matching terms, 2 morphological variants and 8 phrases that contained
+the terms from the expert list.
+Out of this 42 domain terms, 1 term, ‘dyperidamole’, was not found in our ontology (dyperidamole is
+a drug given during pregnancy).
+We found that this term didn’t exist in the 618 JNC abstracts we were using.
+Instead, another term, diperidamole (spelling variant) existed in our term list.
+To do away with noise in our data, we selected terms with greater than average frequency (2.9) of
+the 10191 retrieved terms and set that as our threshold.
+We pruned the list to.
+Many complicated and expensive techniques have been applied extensively in literature to extract
+relationships and dependencies from data.
+These techniques generally rely on a deep parse results that gives a rich representation which is
+used for applications in knowledge extraction and semantics.
+The problem with biomedical data parsing is that there is no exhaustive tagged training corpus
+available to build models for efficient parsing on test data.
+Also, deep parsing is computationally very expensive compared to shallow parsing that uses the
+finite state automaton techniques.
+UMLS graciously provides such a shallow parser[7] that is trained on entire Medline corpus and
+claims to achieve over 97% accuracy.

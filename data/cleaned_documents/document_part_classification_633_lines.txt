@@ -1,0 +1,14 @@
+Amount  to be charged to
+Credit Card                     $ 6551
+Type of Card                    Visa             Master Card                 American  Express
+Name  on Credit Card            Myesha   Orn
+Credit Card Number                     4485595211261495
+Expiration Date                         03-03-2022
+CVC Code                                    785
+Billing Address                       40902   Ingersoll Terrace  #205
+City                                          Fremont
+State and Zip Code                     CA,94538    USA
+e-mail address                  myesha.orn@gmail.com
+Phone Number                           1-316-330-2748  x278
+Signature of Cardholder
+Sub-Total         $ 500              4% Admin  Fee      $ 5500            Total Due         $6000

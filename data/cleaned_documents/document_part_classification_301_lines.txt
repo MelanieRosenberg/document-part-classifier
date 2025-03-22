@@ -1,0 +1,17 @@
+target word       CUI De(cid:2)nition ST De(cid:2)nition
+c1  c2   c3  c1 c2   c3
+adjustment        41   9   48  31 19   10
+blood pressure    26  18    0  20 31   22
+degree             0   0       15 23
+evaluation        54   0       33 17
+growth            91  91       20 19
+immunosuppression 130 41       30 20
+mosaic nutrition  152 0 38 152 0 0 10 10 10 31 23 30
+radiation         71  207      14 30
+repair             0  51       30 20
+scale              0  10   144 47 23   8
+sensitivity        0   0    0  25 50   22
+white              0  60       15 28
+This paper introduces an unsupervised vector ap- proach to disambiguate words in biomedical text us- ing contextual information from the UMLS. Our ap- proach makes disambiguation decisions for words that have the same ST unlike Humphrey et al. (2006). We believe that our approach shows promise and leads us to our goal of exploring the use of biomedical knowledge sources.
+In the future, we would also like to increase the size of our con(cid:3)ated dataset and possibly create a biomedical all-words disambiguation test set to test our approach. Unlike SenseClusters, our approach can be used to perform all-words disambiguation. For example, given the sentence: His weight has fluctuated during the past month. We (cid:2)rst create a instance vector containing fluctuated, past and months for the word weight and a concept vector for each of its possible concepts, (cid:147)C0005912: Body Weight(cid:148) and (cid:147)C0699807: Quantitative Concept(cid:148) us- ing their context descriptions. We then calculate the cosine between the instance vector and each of the two concept vectors. The concept whose vector has the smallest cosine score is assigned to weight. We then repeat this process for fluctuated, past and months. We also plan to explore using different contex- tual information to improve the accuracy of our approach. We are currently exploring using co- occurrence and relational information about the pos- sible CUIs in the UMLS. Our IDF stoplist exper-
+S.M. Humphrey, W.J. Rogers, H. Kilicoglu, D. Demner- Fushman, and T.C. Rind(cid:3)esch. 2006. Word sense dis- ambiguation by selecting the best semantic type based on journal descriptor indexing: Preliminary experi- ment. Journal ofthe American Society for Information Science and Technolology, 57(1):96(cid:150)113.

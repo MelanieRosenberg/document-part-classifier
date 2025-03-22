@@ -1,0 +1,3 @@
+CREDIT CARD NUMBER                            NAME  ON CARD
+EXPIRATION DATE          CVC CODE                BILLING ZIP CODE
+I hereby authorize All About Trucks to charge the credit card indicated in this authorization form according to the terms outlined here. This payment authorization is for the goods and or services described in the provided invoice, for the amount indicated on it. I certify that I am an authorized user of this credit card and that I will not dispute the payment with my credit card company; so long as the transaction corresponds to the terms indicated in this form and the invoice that I received.

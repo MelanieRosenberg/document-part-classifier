@@ -1,0 +1,37 @@
+Medical misdiagnosis, in the form of inaccurate, late, and delayed diagnoses, is an ongoing problem
+in the U.S.
+Not only do these diagnostic errors present an ongoing risk to the health and safety of patients,
+but they also cost the economy billions of dollars.
+This paper summarizes the key research findings on the frequency, human cost, and financial impact
+of these diagnostic errors, while providing new data on the value of second opinions.
+An extensive Institute of Medicine (IOM) report underscores the importance of this with its
+conclusion that most Americans will receive an inaccurate or late diagnosis at least once in their
+lives, often with life-threatening consequences.
+Misdiagnosis is the subject of a growing number of studies.
+The most recent one, Improving Diagnosis in Healthcare from the Institute of Medicine (IOM),
+explores the findings of many of these studies and notes that each year, approximately 12 million
+people in the U.S.
+who seek outpatient medical care experience some form of diagnostic error1.
+Another Johns Hopkins study found that out of 6,000 cases from medical institutions across the
+country, one out of every 71 cancer cases was misdiagnosed and up to one out of five cancers were
+misclassified, errors which can result in delayed or inappropriate treatment.2.
+10%  of patient deaths             Balogh, 20151
+10-20%  of cases                   Graber, 20123
+25%  of breast biopsies            Elmore, 20154
+29%  of malpractice claims         Newman-Toker, 20135
+Misdiagnosis too frequently results in serious harm to patients.
+In a survey of physicians, 64% said that up to 10% of the misdiagnoses they have experienced
+directly resulted in harm to the patient6.
+Another study found that 28% of 538 reported diagnostic errors were life-threatening or resulted in
+the patient’s death or permanent disability.7.
+Since effective treatment depends upon an accurate and effective diagnosis, misdiagnosis can also
+lead to inappropriate or unnecessary testing, such as biopsies and treatment that may cause harm.
+A study by the Rand Corporation discovered that 30% of common surgical procedures, including
+coronary artery bypass graft surgery, were provided for reasons that were not supported by clinical
+studies and/or evidence-based treatment guidelines and may have resulted in complications or harm to
+the patients.8.
+The IOM report supports these findings, stating that diagnostic errors contribute to 10% of patient
+deaths and 6-17% of hospital adverse events.
+Other researchers quantify the human cost of diagnostic errors at between 40,000 and 80,000 deaths
+per year.9 These troubling findings make developing effective methods to prevent diagnostic errors
+an urgent priority.

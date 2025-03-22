@@ -1,0 +1,10 @@
+The inclusion of SPX Weeklys in the VIX Index calculation means that the near-term options will
+always have more than 23 days to expiration and the next-term options always have less than 37 days
+to expiration, so the resulting VIX Index value will always reflect an interpolation of σ2 1 and σ2
+2 ; i.e., each individual weight is less than or equal to 1 and the sum of the weights equals 1.
+N T1 = number of minutes to settlement of the near-term options (35,924) N T2 = number of minutes to
+settlement of the next-term options (46,394) N 30 = number of minutes in 30 days (30 x 1,440 =
+43,200) N 365 = number of minutes in a 365-day year (365 x 1,440 = 525,600).
+VIX         =     100                                                                 46  , 394      43 , 200                                                 43  , 200      35  , 924          525   , 600
+0 . 0683486         0 . 0184629                                         +  0 . 0882686         0 . 018821
+46  , 394     35,924                                                    46,394         35  , 924           43  , 200

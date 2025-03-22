@@ -1,0 +1,25 @@
+African horse  sickness virus                                       Virus
+African swine  fever virus                                          Virus
+Akabane   virus                                                     Virus
+Avian  influenza virus (highly pathogenic)                          Virus
+Bluetongue   virus (exotic)                                         Virus
+Bovine  spongiform  encephalopathy    agent                         Prion
+Camel  pox  virus                                                   Virus
+Classical swine  fever virus                                        Virus
+Cowdria  ruminantium   (Heartwater)                                 Bacteria
+Foot-and-mouth   disease  virus                                     Virus
+Goat  pox virus                                                     Virus
+Japanese   encephalitis virus                                       Virus
+Lumpy   skin disease virus                                          Virus
+Malignant  catarrhal fever virus (exotic)                           Virus
+Menangle   virus                                                    Virus
+Mycoplasma    capricolum/M.  F38/M.  mycoides   capri (contagious
+caprine pleuropneumonia)                                            Bacteria
+Mycoplasma    mycoides   mycoides  (contagious  bovine
+pleuropneumonia)                                                    Bacteria
+Newcastle   disease virus (VVND)                                    Virus
+Peste  des petits ruminants  virus                                  Virus
+Rinderpest  virus                                                   Virus
+Sheep  pox  virus                                                   Virus
+Swine  vesicular disease  virus                                     Virus
+Vesicular stomatitis virus (exotic)                                 Virus

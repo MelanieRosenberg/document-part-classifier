@@ -1,0 +1,30 @@
+1) Instituição responsável pela internação:
+2) Médico  responsável  pela assistência:                                        CRMMG
+3) Nome  do  Paciente
+Unidade  do paciente:                                            Nº IPSM
+4) Data da internação        /        /         Data alta           /          /
+5) Diagnóstico da alta hospitalar e CID :
+6) Sumário  da evolução  do paciente desde sua entrada até a alta:
+7) Comorbidades   diagnosticadas:
+8) Tratamentos  realizados:
+9) Intercorrências durante o tratamento hospitalar :
+10) Apoio  familiar? ( ) Sim ( ) Não
+Observações:
+11) Medicamentos   prescritos na alta hospitalar (relacionar os fármacos e doses respectivas)
+12) Outras recomendações:
+Assinatura:
+1) Instituição responsável pela internação:
+2) Médico  responsável  pela assistência:                                        CRMMG
+3) Nome  do  Paciente
+Unidade  do paciente:                                            Nº IPSM
+4) Data da internação        /        /         Data alta           /          /
+5) Diagnóstico da alta hospitalar e CID :
+6) Sumário  da evolução  do paciente desde sua entrada até a alta:
+7) Comorbidades   diagnosticadas:
+8) Tratamentos  realizados:
+9) Intercorrências durante o tratamento hospitalar :
+10) Apoio  familiar? ( ) Sim ( ) Não
+Observações:
+11) Medicamentos   prescritos na alta hospitalar (relacionar os fármacos e doses respectivas)
+12) Outras recomendações:
+Assinatura:

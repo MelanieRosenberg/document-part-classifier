@@ -1,0 +1,21 @@
+Počet        Sazba za       Rozpočet  dle    Vyčerpáno  celkem    Odchylka       Odchylka
+Náklady                                             Jednotka    jednotek   jednotku (v €)      smlouvy               v €             (v €)          (v %)               Vysvětlete odchylky od schváleného  rozpočtu:
+5. Jiné   náklady,    služby
+5.1 Publikace**                                                                                                0               0                  0                  0             0      #DIV/0!
+5.2 Studie, výzkum**                                                                                           0               0                  0                  0             0      #DIV/0!
+5.3 Audit                                                                                                      0               0                  0                  0             0      #DIV/0!
+5.4 Evaluační náklady                                                                                          0               0                  0                  0             0      #DIV/0!
+5.5 Překlad, tlumočníci                                                                                        0               0                  0                  0             0      #DIV/0!
+5.6 Finanční služby (bankovní garance, atd.)                                                                   0               0                  0                  0             0      #DIV/0!
+5.7 Náklady na konferenci/semináře**                                                                           0               0                  0                  0             0      #DIV/0!
+Mezisoučet    jiných   nákladů   a služeb                                                                                                         0           0.00   €        0.00 €     #DIV/0!
+6. Jiné
+6.1. (…)                                                                                                       0               0                  0                  0             0      #DIV/0!
+6.2.                                                                                                           0               0                  0                  0             0      #DIV/0!
+6.3.                                                                                                           0               0                  0                  0             0      #DIV/0!
+6.4.                                                                                                           0               0                  0                  0             0      #DIV/0!
+Mezisoučet    jiných   nákladů                                                                                                                    0           0.00   €        0.00 €     #DIV/0!
+7.  Mezisoučet        přímých      nákladů     projektu     (1.  - 6.)                                                                     0.00   €           0.00   €
+8. Administrativní náklady (maximálně 7 % z 8., přímé způsobilé náklady projektu)                                    #DIV/0!                 0.00 €             0.00 €
+9.  Celkové     náklady     (7.  + 8.)                                                                                                     0.00   €           0.00   €
+***** Nehodící se škrtněte. Průběžná zpráva spolu se žádostí o druhou splátku se zasílá pouze v případě více než 12 měsíců trvajících projektů **** Koupě půdy nebo nákupy/výstavba budov jsou povoleny pouze v případě, kdy je to naprosto nezbytné pro implementaci projektu

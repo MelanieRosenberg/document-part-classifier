@@ -1,0 +1,33 @@
+MarketScan includes private sector health benefits claims and enrollment data from approximately 100
+payers.
+The dataset contains more than 35 million commercially insured lives.
+The dataset consists of person-specific clinical utilization, expenditures and enrollment across
+inpatient, outpatient, prescription drug, and carve-out services from a selection of large
+employers, health plans, and government and public organizations.
+The MarketScan databases link paid claims and encounter data to detailed patient demographic
+information across sites and types of providers over time.
+We used years 2010-2014 for this analysis.
+We identified patients with an initial cancer diagnosis in 2011.
+The date of service for the earliest identifying cancer claim in 2011 was designated the patient’s
+DIAGNOSIS DATE.
+Cancer patients were excluded from the study if they met any of the following conditions:.
+Cancer patients were identified as individuals with cancer ICD-9 codes in any position on qualified
+claims, which are described in the table below.
+Patients were required to have a cancer ICD-9 code on one inpatient, or one observation, or two or
+more non-acute inpatient, outpatient, emergency department, or evaluation and management services
+that occur within 90 days of each other, and where the first of the two services (but not
+necessarily both) was incurred in 2011.
+Qualified claims were identified by the Current Procedural Terminology (CPT) or Revenue codes
+below:.
+CLAIM  TYPE                     CPT  CODES                                        REVENUE    CODES
+OUTPATIENT                      99201-99205, 99211-99215, 99241-99245, 99341-99345, 051X, 0520-0523, 0526-0529, 057X-059X, 082X-
+99347-99350, 99384-99387, 99394-99397, 99401-99404, 085X, 088X, 0982, 0983
+99411, 99412, 99420, 99429, 99455, 99456
+NON-ACUTE    INPATIENT          99304-99310, 99315, 99316, 99318, 99324-99328,    0118, 0128, 0138, 0148, 0158, 019X, 0524,
+99334-99337                                       0525, 055X, 066X
+ACUTE  INPATIENT                                                                  010X, 0110-0114, 0119, 0120-0124, 0129, 0130-
+99221-99223, 99231-99233, 99238, 99239, 99251,
+99255, 99291                                      0134, 0139, 0140-0144, 0149, 0150-0154, 0159,
+016X, 020X, 021X, 072X, 080X, 0987
+OBSERVATION                     99217-99220, 99224-99226
+EMERGENCY     DEPARTMENT        99281-99285                                       0450-0452,0456,0459, 0981

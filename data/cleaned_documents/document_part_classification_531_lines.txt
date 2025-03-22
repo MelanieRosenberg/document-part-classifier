@@ -1,0 +1,38 @@
+Theprimaryreasonforincreasingdrugspendingisthehighpriceof brandedproductsprotectedbymarketexclusivityprovisionsgranted bytheUSPatentandTrademarkOfficeandtheFoodandDrugAd- ministration (FDA) (Table 2). Although brand-name drugs com- priseonly10%ofalldispensedprescriptionsintheUnitedStates, theyaccountfor72%ofdrugspending.15 Between2008and2015, prices for the most commonly used brand-name drugs increased 164%,farinexcessoftheconsumerpriceindex(12%).16,17 Thean- nual cost of a growing number of “specialty drugs”—high-cost, ofteninjectablebiologicmedicationssuchaseculizumab(Soliris), pralatrexate (Folotyn), and elosulfase alfa (Vimizim)—exceeds $250000perpatient.
+Table2.KeyTerminologyandExamplesofTherapeuticProducts
+Term           Definition                                      Examples
+Brand-name     Amedicationusuallysoldbytheoriginal             Nexium,
+drug           sponsoroftheapplicationforregulatory            Crestor,
+approval                                        Prilosec
+Generic        Aversionofabrand-namesmall-molecule             Omeprazole,
+drug           drugmanufacturedbyadifferentsupplier.           simvastatin
+Genericdrugscanbecertifiedasbioequivalent
+bytheFDAandsubstitutedforbrand-name
+drugsbyapharmacist.
+Biologic       Anoftenprotein-basedtherapeuticproduct          Filgrastim,
+drug           thatisdistinguishedbyitsmolecular               epoetinalfa
+complexity
+Specialty      Adrugdesignatedbyapayerforspecial               Sovaldi,
+drug           attention,oftenbecauseofitshighprice,but        Praluent,
+alsopotentiallybecauseoftheneedfor              Soliris
+distinctivehandlingorparticularpatient
+monitoring
+Abbreviation:FDA,FoodandDrugAdministration.
+Althoughbrand-namedrugsaccountforthegreatestincrease inprescriptiondrugexpenditures,anotherareathathascaptured theattentionofthepublicandofpolicymakershasbeenthesharp increase in the costs of some older generic drugs. In 2015, Turing Pharmaceuticals raised the price of pyrimethamine (Daraprim), a 63-year-oldtreatmentfortoxoplasmosis,by5500%,from$13.50 to$750apill.22 Thecompanywasabletosetthehighpricedespite theabsenceofanypatentprotectionbecausenoothercompeting manufacturerwaslicensedtomarketthedrugintheUnitedStates. Significantincreasesinthepricesofotherolderdrugsincludeiso- proterenol(2500%),nitroprusside(1700%),anddigoxin(637%). Even though the prices of most generic drug products have re- mained stable between 2008 and 2015, those of almost 400 (approximately2%ofthesampleinvestigated)increasedbymore than1000%.23
+DrugpricesarehigherintheUnitedStatesthanintherestofthein- dustrialized world because, unlike that in nearly every other ad- vancednation,theUShealthcaresystemallowsmanufacturersto settheirownpriceforagivenproduct.11 Incontrast,incountrieswith nationalhealthinsurancesystems,adelegatedbodynegotiatesdrug pricesorrejectscoverageofproductsifthepricedemandedbythe manufacturerisexcessiveinlightofthebenefitprovided(Table3); manufacturersmaythendecidetoofferthedrugatalowerprice.24 InEnglandandWales,forexample,theNationalInstituteforHealth andCareExcellenceconsiderswhetheranewdrugpassesacost- utilitythreshold—usuallybetween£20000and£30000($25000- $40000)perquality-adjustedlife-yearadded—beforerecommend- ingitforcoveragebytheNationalHealthService.25 Althoughprices canvarywidelyaroundtheworld26 andhavealsoincreasedfaster than member states’ gross domestic products in recent years in Europe,27 USdrugpricespercapitastillsubstantiallyoutpacethose inothersettings.10 Drug companies’ ability to maintain high prices in the United Statesisbasedon2marketforces:protectionfromcompetitionand negotiatingpower.
+Australia                                         Canada                          Germany                       UnitedKingdom
+National        PharmaceuticalBenefits     PatentedMedicinesPrices       CanadianAgencyfor        FederalJointCommitteeor       NationalInstitutefor
+organization    AdvisoryCommittee          ReviewBoard                   DrugsandTechnology       InstituteforQualityand        HealthandClinical
+inHealthcare             EfficiencyinHealthcare        Excellence
+Remit           Publicpayers               Allpayers                     Publicpayersexcept       Allinsurers                   NationalHealthService
+inQuebec(noncancer
+drugs)
+Review          Comparativeeffectiveness,  Therapeuticinnovation;        Comparative              Comparativebenefit            Clinicaleffectiveness
+criteria        safety,and                 comparativepricingwith        effectiveness,safety,                                  andcost-effectiveness
+cost-effectiveness;        respecttoFrance,Germany,      andcost-effectiveness;
+projectedusageand          Italy,Sweden,United           patientexperiences
+overallcoststothehealth    Kingdom,andUnitedStates
+caresystem
+Decision        Coverage(yes,no,limited)   Pricereductionsorrebates      Coverage                 Pricesettingafterfirstyear    Coverage
+onthemarket
+Binding         Yes                        Yes                           No                       Yes                           Yes

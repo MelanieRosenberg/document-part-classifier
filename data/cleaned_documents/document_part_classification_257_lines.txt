@@ -1,0 +1,3 @@
+ATIVO                       APOSENTADO                       PENSIONISTA
+SOLICITAÇÃO:
+CADASTRO DE EMAIL           ALTERAÇÃO DE EMAIL               DESBLOQUEIO

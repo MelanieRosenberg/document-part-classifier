@@ -1,0 +1,20 @@
+Stage at   # of patients 0-6 months      0-12 months      0-18 months      0-24 months
+diagnosis  at diagnosis  postdiagnosis   postdiagnosis    postdiagnosis    postdiagnosis
+0          2300          $48,477         $60,637          $67,450          $71,909
+I/II       4425          $61,621         $82,121          $91,109          $97,066
+III        1134          $84,481         $129,387         $147,470         $159,442
+IV         501           $89,463         $134,682         $162,086         $182,655
+All        8360          $62,774         $85,772          $96,499          $103,735
+Stage at    Total   Non-       Hispanic   Black   Chinese    Japanese   South    Other   Other
+diagnosis           Hispanic   White                                    Asian    Asian
+White
+I           48.0    50.8       40.1       37.0    50.1       56.1       40.4     45.2    43.6
+II          34.6    33.2       38.7       38.6    35.7       32.4       38.7     38.1    37.2
+III         12.4    11.4       15.9       16.6    10.7       8.5        15.3     12.4    13.5
+IV          5.0     4.6        5.3        7.8     3.5        3.0        5.6      4.3     5.7
+Table 2.
+Breast cancer incidence rates (in %) by stage at diagnosis from 2004 to 2011 for women who were
+identified in the Surveillance, Epidemiology, and End Results (SEER) 18 registries database, as
+reported in [Iqbal et al, 2015].
+Columns 3-10 correspond to the eight racial/ethnic groups identified therein.
+Column 2 corresponds to all racial/ethnic groups.

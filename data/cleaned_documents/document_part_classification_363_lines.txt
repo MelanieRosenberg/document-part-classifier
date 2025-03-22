@@ -1,0 +1,42 @@
+Primary   type
+Men                Hodgkin  lymphoma                                                                                   1.9*
+Oral cavity & pharynx                                                                               1.8*
+Lung  &  bronchus                                                              1.4*
+Testis                                                          1.4*
+Kidney &  renal pelvis                                                        1.3*
+Melanoma                                                            1.3*
+Esophagus                                                          1.3*
+Urinary bladder                                                        1.3*
+Non-Hodgkin   lymphoma                                                         1.2*
+Leukemia                                                      1.2*
+Brain & ONS                                                     1.2*
+Liver & intrahepatic bile duct                                               1.1
+Colon  & rectum                                              1.0*
+Myeloma                                           1.0
+Stomach                                          1.0
+Pancreas                                 0.8*
+Prostate                        0.6*
+0.0                  0.5                  1.0                  1.5                  2.0                  2.5                  3.0
+Women              Hodgkin  lymphoma                                                                                                  2.2*
+Oral cavity & pharynx                                                                                            2.1*
+Lung  &  bronchus                                                                        1.6*
+Esophagus                                                                         1.6*
+Kidney &  renal pelvis                                                            1.4*
+Urinary bladder                                                            1.4*
+Melanoma                                                            1.3*
+Non-Hodgkin   lymphoma                                                          1.2*
+Uterine cervix                                                     1.2*
+Leukemia                                                       1.2*
+Breast                                                    1.2*
+Colon  & rectum                                                  1.1*
+Thyroid                                                 1.1*
+Ovary                                               1.0*
+Brain & ONS                                                1.0
+Uterine corpus                                     0.9*
+Pancreas                                  0.9*
+0.0                  0.5                  1.0                  1.5                  2.0                  2.5                  3.0
+*The ratio of the number of subsequent cancers observed among cancer survivors to the number of cancers expected is statistically significant (p<0.05). Note: Observed-to-expected ratio is the number of cancers that were observed among cancer survivors in the SEER 9 areas, divided by the number of cancers expected in this population, calculated using the population-based age-specific incidence rates in the SEER 9 areas.
+Source:  Surveillance, Epidemiology, and End  Results (SEER) Program, 9 SEER registries, National Cancer Institute.96
+American  Cancer  Society, Surveillance and Health Services Research, 2016
+A second (or multiple) primary cancer is a new cancer that is biologically distinct from the original cancer. Whether a cancer is a new primary or a recurrence is important because it deter- mines prognosis and treatment. The risk of developing a second primary cancer varies by the type of cancer first diagnosed (referred to as the first primary), treatment received, age at diag- nosis, and other factors. Ratios of the observed-to-expected
+number of cancer cases (O/E) among cancer survivors in popu- lation-based cancer registries are used to describe the risk for a subsequent cancer diagnosis, with the number expected based on cancer occurrence in the general population. As a whole, can- cer survivors have a small increased risk of additional cancers, although risk is higher for those with a history of childhood can- cer (Figure 15, page 25), as well as for adult survivors of Hodgkin lymphoma and tobacco-related cancers (oral cavity and pharynx, lung and bronchus, kidney and renal pelvis, esophagus, and urinary bladder) (Figure 16). For example, female survivors of Hodgkin lymphoma treated with radiation to the chest are at

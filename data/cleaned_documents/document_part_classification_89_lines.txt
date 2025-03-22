@@ -1,0 +1,14 @@
+Student  Information
+Last Name                                                       First Name
+GWID                                                            GW   Email                                    @gwmail.gwu.edu
+SEAS  Major                                                     2nd Maj / Minor
+Instructions: All students in the BS program in Systems Engineering at the George Washington University must have an internship experience. As proof of their internship, they are asked to have their internship supervisor complete this form. Your help in this matter is greatly appreciated.
+Internship   Information
+Company   Name
+Company   Division or
+Department                                                            Supervisor Name
+Period of Internship                                                  Supervisor Title
+For Advising Office Use Only                                                                                                           Submit  forms  to:
+SEAS   Undergraduate   Student Services and Advising
+Science &  Engineering Hall, Suite 2500
+Approved   by  Faculty  Advisor:  Signature                                                                                      seasadvising@gwu.edu

@@ -1,0 +1,19 @@
+(Preencher somente  com  os dados  do titular)
+Nome    completo   do associado    / titular: Miguel  Pryor
+Plano: apólice de seguro de saúde 2019 Matrícula: 6797 / 4498                -          CPF:  046171124-99
+Telefones   de  contato:  +55-98-98400-1957     ou                          Ass.:
+Banco:    Banco   do  Brasil       Agência:                           Conta   Corrente:   614.925-0
+E-mail  de  contato:  michael.pryor@bunge.com
+OBS 1.: O reembolso será creditado somente na conta corrente do titular. Caso o mesmo não possua conta bancária, o reembolso será realizado através de Ordem de Pagamento no Banco do Brasil S.A . ( Ordem de pagamento com autorização do gerente financeiro)
+Usuário   do  procedimento:
+(  ) Titular  (  ) Dependente     (  ) Agregado
+Se  dependente    ou  agregado,   preencher   dados   abaixo:
+Nome    completo:    Miguel  Pryor
+CPF   (obrigatório   se maior   que  18  anos):  046171124-99
+CPF  / CNPJ do      Data de   Cód. do               Valor      Valor a ser
+Doc.   Cód. Benef. prestador de serviço  realização  serviço   Risco  apresentado   reembolsado
+1
+2
+3
+TOTAL                                                                                R$
+B Número do CPF ou CNPJ (para pessoa jurídica, é indispensável a apresentação da nota fiscal e a mesma deverá OBRIGATORIAMENTE, ter o carimbo da instituição com CNPJ e assinatura). O recibo é válido apenas para os atendimentos de pessoa física.
