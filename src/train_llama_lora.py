@@ -26,7 +26,7 @@ logger = logging.getLogger(__name__)
 class LlamaLoRATrainer:
     def __init__(
         self,
-        base_model_name: str = "llama_models/llama-3-2-3b",
+        base_model_name: str = "/home/azureuser/llama_models/llama-3-2-3b",
         train_data_dir: str = "data/train",
         val_data_dir: str = "data/val",
         output_dir: str = "models/llama_lora",
@@ -38,7 +38,7 @@ class LlamaLoRATrainer:
         Initialize Llama 3 LoRA trainer.
         
         Args:
-            base_model_name: Path to the local Llama 3 model
+            base_model_name: Absolute path to the local Llama 3 model
             train_data_dir: Directory containing training data
             val_data_dir: Directory containing validation data
             output_dir: Directory to save model outputs
@@ -383,8 +383,8 @@ def main():
     parser = argparse.ArgumentParser(description="Train Llama 3 with LoRA for document classification")
     
     # Model and data arguments
-    parser.add_argument("--base_model", type=str, default="llama_models/llama-3-2-3b",
-                      help="Path to the local Llama 3 model")
+    parser.add_argument("--base_model", type=str, default="/home/azureuser/llama_models/llama-3-2-3b",
+                      help="Absolute path to the local Llama 3 model")
     parser.add_argument("--train_data_dir", type=str, required=True,
                       help="Directory containing training data")
     parser.add_argument("--val_data_dir", type=str, required=True,
