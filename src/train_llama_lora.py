@@ -190,7 +190,10 @@ Classification: [/INST]"""
         logging_steps: int = 25,
         lora_r: int = 32,
         lora_alpha: int = 64,
-        lora_dropout: float = 0.1
+        lora_dropout: float = 0.1,
+        early_stopping_patience: int = 3,
+        early_stopping_threshold: float = 0.0,
+        save_total_limit: Optional[int] = None
     ) -> None:
         """Train the model."""
         logger.info("Starting training...")
@@ -239,7 +242,10 @@ Classification: [/INST]"""
             save_strategy="steps",
             load_best_model_at_end=True,
             fp16=True,  # Use mixed precision
-            remove_unused_columns=False
+            remove_unused_columns=False,
+            early_stopping_patience=early_stopping_patience,
+            early_stopping_threshold=early_stopping_threshold,
+            save_total_limit=save_total_limit
         )
         
         # Initialize trainer
@@ -369,6 +375,12 @@ def main():
                       help="Number of steps between model saves")
     parser.add_argument("--logging_steps", type=int, default=25,
                       help="Number of steps between logging")
+    parser.add_argument("--early_stopping_patience", type=int, default=3,
+                      help="Number of evaluations to wait before early stopping")
+    parser.add_argument("--early_stopping_threshold", type=float, default=0.0,
+                      help="Threshold for early stopping")
+    parser.add_argument("--save_total_limit", type=int, default=None,
+                      help="Limit the total number of checkpoints to save")
     
     # LoRA arguments
     parser.add_argument("--lora_r", type=int, default=32,
@@ -409,7 +421,10 @@ def main():
         logging_steps=args.logging_steps,
         lora_r=args.lora_r,
         lora_alpha=args.lora_alpha,
-        lora_dropout=args.lora_dropout
+        lora_dropout=args.lora_dropout,
+        early_stopping_patience=args.early_stopping_patience,
+        early_stopping_threshold=args.early_stopping_threshold,
+        save_total_limit=args.save_total_limit
     )
 
 if __name__ == "__main__":
