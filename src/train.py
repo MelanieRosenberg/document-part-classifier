@@ -13,7 +13,7 @@ from transformers import get_linear_schedule_with_warmup
 from sklearn.metrics import classification_report
 from tqdm import tqdm
 
-# Import our improved classifier
+# Import our classifier (now without CRF)
 from models.transformer_classifier import DocumentPartClassifier
 
 # Setup logging
@@ -48,15 +48,15 @@ def evaluate_model(
     encodings, labels = model.prepare_data(val_lines, val_tags)
     val_loader = model.create_data_loader(encodings, labels, shuffle=False)
     
-    # Evaluate - now returns F1 score and report directly
+    # Evaluate with the standard classifier
     val_f1, val_report = model.evaluate(val_loader, return_report=True)
     
     # Convert string report to dict if needed
     if isinstance(val_report, str):
-        report_dict = {}
         try:
-            # First try parsing with sklearn's structure (simpler)
+            # Parse the report string into a dictionary
             lines = val_report.strip().split('\n')
+            report_dict = {}
             
             # Parse the report string into a dictionary
             for line in lines[2:-3]:  # Skip header and footer lines
@@ -88,7 +88,7 @@ def evaluate_model(
             attention_mask = batch[1].to(device)
             labels = batch[2].to(device)
             
-            # For CRF, the forward pass returns loss when labels are provided
+            # For standard classification, forward pass returns loss when labels are provided
             loss = model.model(
                 input_ids=input_ids,
                 attention_mask=attention_mask,
@@ -309,7 +309,7 @@ def train(args):
             attention_mask = batch[1].to(device)
             labels = batch[2].to(device)
             
-            # Forward pass - CRF forward returns loss directly when labels provided
+            # Forward pass - standard classifier forward returns loss directly when labels provided
             loss = classifier.model(
                 input_ids=input_ids,
                 attention_mask=attention_mask,
