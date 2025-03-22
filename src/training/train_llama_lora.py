@@ -1,6 +1,6 @@
 import torch
 from transformers import (
-    AutoModelForCausalLM,
+    AutoModelForSequenceClassification,
     AutoTokenizer,
     TrainingArguments,
     Trainer,
@@ -156,8 +156,11 @@ class LlamaLoRATrainer:
             )
             logger.info("Loading model with 4-bit quantization...")
             
-            self.base_model = AutoModelForCausalLM.from_pretrained(
+            self.base_model = AutoModelForSequenceClassification.from_pretrained(
                 self.base_model_name,
+                num_labels=len(self.id2label),
+                id2label=self.id2label,
+                label2id=self.label2id,
                 quantization_config=bnb_config,
                 device_map="auto",
                 trust_remote_code=True
@@ -166,70 +169,32 @@ class LlamaLoRATrainer:
             self.base_model = prepare_model_for_kbit_training(self.base_model)
         else:
             logger.info("Loading model without quantization...")
-            self.base_model = AutoModelForCausalLM.from_pretrained(
+            self.base_model = AutoModelForSequenceClassification.from_pretrained(
                 self.base_model_name,
+                num_labels=len(self.id2label),
+                id2label=self.id2label,
+                label2id=self.label2id,
                 trust_remote_code=True
             )
             self.base_model = self.base_model.to(self.device)
         
         logger.info("Model loaded successfully")
     
-    def create_prompt(self, text: str) -> str:
-        """Create prompt for document classification."""
-        return f"""<s>[INST] Classify the following document segment into one of these categories: FORM, TABLE, or TEXT.
-The segment is delimited by triple backticks.
-```
-{text}
-```
-Classification: [/INST]"""
-    
     def preprocess_function(self, examples: Dict[str, List[Any]]) -> Dict[str, torch.Tensor]:
-        """Preprocess examples for causal LM training."""
-        # Create prompts
-        prompts = [self.create_prompt(text) for text in examples["text"]]
-        
-        # Tokenize prompts
+        """Preprocess examples for sequence classification."""
+        # Tokenize texts
         tokenized_inputs = self.tokenizer(
-            prompts,
+            examples["text"],
             padding="max_length",
             truncation=True,
             max_length=self.max_length,
             return_tensors="pt"
         )
         
-        # Prepare labels
-        labels = []
-        for label_id in examples["label"]:
-            label_text = f" {self.id2label[label_id]}</s>"
-            tokenized_label = self.tokenizer(label_text, return_tensors="pt")
-            labels.append(tokenized_label.input_ids[0])
+        # Add labels
+        tokenized_inputs["labels"] = examples["label"]
         
-        # Prepare final examples
-        tokenized_examples = {
-            "input_ids": [],
-            "attention_mask": [],
-            "labels": []
-        }
-        
-        for i, prompt_ids in enumerate(tokenized_inputs.input_ids):
-            prompt_length = len(prompt_ids)
-            label_ids = labels[i]
-            
-            # Combine prompt and label
-            input_ids = torch.cat([prompt_ids, label_ids])
-            attention_mask = torch.ones_like(input_ids)
-            
-            # Create labels with ignored prompt tokens
-            label_ids_with_ignore = torch.cat([
-                torch.ones(prompt_length, dtype=torch.long) * -100,
-                label_ids
-            ])
-            
-            tokenized_examples["input_ids"].append(input_ids)
-            tokenized_examples["attention_mask"].append(attention_mask)
-            tokenized_examples["labels"].append(label_ids_with_ignore)
-        
-        return tokenized_examples
+        return tokenized_inputs
     
     def train(
         self,
@@ -258,10 +223,11 @@ Classification: [/INST]"""
         lora_config = LoraConfig(
             r=lora_r,
             lora_alpha=lora_alpha,
-            target_modules=["q_proj", "k_proj", "v_proj", "o_proj", "gate_proj", "up_proj", "down_proj"],
+            target_modules=["q_proj", "k_proj", "v_proj", "o_proj", "gate_proj", "up_proj", "down_proj", "score"],
             lora_dropout=lora_dropout,
             bias="none",
-            task_type=TaskType.CAUSAL_LM
+            task_type=TaskType.SEQ_CLS,
+            inference_mode=False
         )
         
         # Apply LoRA config to model
@@ -283,13 +249,7 @@ Classification: [/INST]"""
         # Log processed validation dataset distribution
         processed_val_distribution = defaultdict(int)
         for example in val_processed:
-            label_tokens = [j for j, id in enumerate(example["labels"]) if id != -100]
-            if label_tokens:
-                label_text = self.tokenizer.decode([example["labels"][i] for i in label_tokens])
-                for label_id, label_name in self.id2label.items():
-                    if label_name in label_text:
-                        processed_val_distribution[label_name] += 1
-                        break
+            processed_val_distribution[self.id2label[example["labels"]]] += 1
         
         logger.info("\nProcessed Validation Set Distribution:")
         for label_name, count in processed_val_distribution.items():
@@ -303,14 +263,7 @@ Classification: [/INST]"""
             # Group examples by label
             examples_by_label = defaultdict(list)
             for i, example in enumerate(val_processed):
-                # Get the label from the example
-                label_tokens = [j for j, id in enumerate(example["labels"]) if id != -100]
-                if label_tokens:
-                    label_text = self.tokenizer.decode([example["labels"][i] for i in label_tokens])
-                    for label_id, label_name in self.id2label.items():
-                        if label_name in label_text:
-                            examples_by_label[label_id].append(i)
-                            break
+                examples_by_label[example["labels"]].append(i)
             
             # Calculate proportions from original dataset
             total = len(val_processed)
@@ -332,13 +285,7 @@ Classification: [/INST]"""
             # Log the distribution of the subset
             subset_distribution = defaultdict(int)
             for example in val_processed:
-                label_tokens = [j for j, id in enumerate(example["labels"]) if id != -100]
-                if label_tokens:
-                    label_text = self.tokenizer.decode([example["labels"][i] for i in label_tokens])
-                    for label_id, label_name in self.id2label.items():
-                        if label_name in label_text:
-                            subset_distribution[label_name] += 1
-                            break
+                subset_distribution[self.id2label[example["labels"]]] += 1
             
             logger.info("Validation subset distribution:")
             for label_name, count in subset_distribution.items():
@@ -349,7 +296,7 @@ Classification: [/INST]"""
             output_dir=str(self.run_dir),
             num_train_epochs=num_epochs,
             per_device_train_batch_size=batch_size,
-            per_device_eval_batch_size=eval_batch_size,  # Use separate eval batch size
+            per_device_eval_batch_size=eval_batch_size,
             gradient_accumulation_steps=gradient_accumulation_steps,
             learning_rate=learning_rate,
             warmup_steps=warmup_steps,
@@ -361,16 +308,16 @@ Classification: [/INST]"""
             save_steps=save_steps,
             save_strategy="steps",
             load_best_model_at_end=True,
-            metric_for_best_model="eval_eval_loss",
-            greater_is_better=False,
-            fp16=True,  # Use mixed precision
+            metric_for_best_model="eval_overall_f1",
+            greater_is_better=True,
+            fp16=True,
             remove_unused_columns=False,
             save_total_limit=save_total_limit,
-            report_to="none",  # Disable all reporting
-            logging_first_step=True,  # Log the first step
-            logging_nan_inf_filter=False,  # Show all logs including NaN/Inf
-            disable_tqdm=True,  # Disable progress bars
-            log_level="error"  # Only show errors
+            report_to="none",
+            logging_first_step=True,
+            logging_nan_inf_filter=False,
+            disable_tqdm=True,
+            log_level="error"
         )
         
         # Initialize trainer
@@ -379,7 +326,8 @@ Classification: [/INST]"""
             args=training_args,
             train_dataset=train_processed,
             eval_dataset=val_processed,
-            tokenizer=self.tokenizer
+            tokenizer=self.tokenizer,
+            compute_metrics=self.compute_metrics
         )
         
         # Train
@@ -401,6 +349,40 @@ Classification: [/INST]"""
             })
             json.dump(training_args_dict, f, indent=2)
         logger.info(f"Saved training arguments to {args_file}")
+    
+    def compute_metrics(self, eval_pred):
+        """Compute metrics for evaluation."""
+        predictions, labels = eval_pred
+        predictions = np.argmax(predictions, axis=1)
+        
+        # Calculate per-class metrics
+        precision, recall, f1, _ = precision_recall_fscore_support(
+            labels, predictions, average=None, labels=[0, 1, 2]
+        )
+        
+        # Calculate overall metrics
+        overall_precision, overall_recall, overall_f1, _ = precision_recall_fscore_support(
+            labels, predictions, average='weighted'
+        )
+        
+        # Calculate accuracy
+        accuracy = np.mean(predictions == labels)
+        
+        return {
+            "accuracy": accuracy,
+            "overall_f1": overall_f1,
+            "overall_precision": overall_precision,
+            "overall_recall": overall_recall,
+            "form_f1": f1[0],
+            "table_f1": f1[1],
+            "text_f1": f1[2],
+            "form_precision": precision[0],
+            "table_precision": precision[1],
+            "text_precision": precision[2],
+            "form_recall": recall[0],
+            "table_recall": recall[1],
+            "text_recall": recall[2]
+        }
 
 class DocumentClassificationTrainer(Trainer):
     def __init__(self, *args, **kwargs):
@@ -417,7 +399,7 @@ class DocumentClassificationTrainer(Trainer):
         """
         loss, outputs = super().compute_loss(model, inputs, return_outputs=True)
         
-        # Track loss for averaging (simplified without distributed check)
+        # Track loss for averaging
         self.current_step_losses.append(loss.item())
         
         # If this is the last batch of the step, log the average
@@ -428,92 +410,6 @@ class DocumentClassificationTrainer(Trainer):
             self.current_step_losses = []  # Reset for next step
         
         return (loss, outputs) if return_outputs else loss
-
-    def compute_metrics(self, eval_pred):
-        """
-        Compute metrics for evaluation.
-        """
-        logits, labels = eval_pred
-        
-        # Debug the shapes
-        logger.info(f"Logits shape: {logits.shape}, Labels shape: {labels.shape}")
-        
-        # For now, just return empty metrics since F1 is not calculated correctly
-        return {
-            "overall_f1": 0.0,
-            "form_f1": 0.0,
-            "table_f1": 0.0,
-            "text_f1": 0.0,
-            "overall_precision": 0.0,
-            "overall_recall": 0.0
-        }
-
-    def predict(self, test_dataset, ignore_keys=None, metric_key_prefix="test"):
-        """
-        Run prediction and return predictions and potential metrics.
-        """
-        # Set model to eval mode
-        self.model.eval()
-        
-        # Process in smaller chunks to avoid OOM
-        chunk_size = self.args.per_device_eval_batch_size
-        all_predictions = []
-        all_labels = []
-        
-        for i in range(0, len(test_dataset), chunk_size):
-            chunk = test_dataset.select(range(i, min(i + chunk_size, len(test_dataset))))
-            chunk_inputs = self.data_collator(chunk)
-            
-            # Move inputs to device
-            chunk_inputs = self._prepare_inputs(chunk_inputs)
-            
-            # Get predictions
-            with torch.no_grad():
-                outputs = self.model(**chunk_inputs)
-            
-            # Get logits and labels
-            logits = outputs.logits.cpu().numpy()
-            labels = chunk_inputs["labels"].cpu().numpy()
-            
-            all_predictions.append(logits)
-            all_labels.append(labels)
-            
-            # Clear GPU memory
-            torch.cuda.empty_cache()
-        
-        # Concatenate chunks
-        predictions = np.concatenate(all_predictions, axis=0)
-        labels = np.concatenate(all_labels, axis=0)
-        
-        return predictions, labels
-
-    def evaluate(self, eval_dataset=None, ignore_keys=None, metric_key_prefix="eval"):
-        """
-        Run evaluation and return metrics.
-        """
-        # Temporarily disable all logging
-        root_logger = logging.getLogger()
-        original_level = root_logger.level
-        root_logger.setLevel(logging.ERROR)
-        
-        # Run standard evaluation
-        output = super().evaluate(eval_dataset, ignore_keys, metric_key_prefix)
-        
-        # Restore logging level
-        root_logger.setLevel(original_level)
-        
-        # Only log once at the end of evaluation
-        logger.info(f"Step {self.state.global_step}: evaluation complete")
-        
-        # Calculate and show average loss over all evaluation batches
-        if 'eval_loss' in output:
-            avg_loss = output['eval_loss']
-            logger.info(f"  Average eval loss: {avg_loss:.4f}")
-        
-        # Add prefix to metrics
-        metrics = {f"{metric_key_prefix}_{k}": v for k, v in output.items()}
-        
-        return metrics
 
 def main():
     """Run training from command line."""
