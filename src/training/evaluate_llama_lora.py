@@ -111,6 +111,21 @@ test_dataset = load_data()
 # Preprocess test dataset
 test_dataset = test_dataset.map(preprocess_function, batched=True)
 
+# Function to clean up generated text
+def clean_generated_text(text):
+    # Remove special tokens
+    special_tokens = ["<|begin_of_text|>", "<|end_of_text|>", "<s>", "</s>"]
+    for token in special_tokens:
+        text = text.replace(token, "")
+    
+    # Remove prompt if it was repeated
+    if "Classify the following document segment" in text:
+        text = text.split("Classify the following document segment")[0].strip()
+    
+    # Clean up any remaining whitespace
+    text = text.strip()
+    return text
+
 # Function to evaluate the model
 def evaluate_model(model, dataset):
     model.eval()
@@ -163,9 +178,6 @@ def evaluate_model(model, dataset):
         if "[/INST]" in generated_text:
             try:
                 response = generated_text.split("[/INST]")[1].strip()
-                # Remove any repeated prompt text
-                if "Classify the following document segment" in response:
-                    response = response.split("Classify the following document segment")[0].strip()
             except IndexError:
                 response = generated_text
                 unexpected_outputs.append({
@@ -182,6 +194,9 @@ def evaluate_model(model, dataset):
                 "generated": generated_text,
                 "reason": "no_inst_marker"
             })
+        
+        # Clean up the response
+        response = clean_generated_text(response)
         
         # Extract the predicted class
         predicted_label = None
