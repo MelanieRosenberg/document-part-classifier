@@ -365,9 +365,11 @@ Classification: [/INST]"""
             fp16=True,  # Use mixed precision
             remove_unused_columns=False,
             save_total_limit=save_total_limit,
-            report_to="tensorboard",  # Add tensorboard logging
+            report_to="none",  # Disable all reporting
             logging_first_step=True,  # Log the first step
-            logging_nan_inf_filter=False  # Show all logs including NaN/Inf
+            logging_nan_inf_filter=False,  # Show all logs including NaN/Inf
+            disable_tqdm=True,  # Disable progress bars
+            log_level="error"  # Only show errors
         )
         
         # Initialize trainer
@@ -526,18 +528,23 @@ class DocumentClassificationTrainer(Trainer):
         """
         Run evaluation and return metrics.
         """
-        # Temporarily disable ALL logging
-        logging.getLogger().setLevel(logging.ERROR)
+        # Temporarily disable transformers logging
+        transformers_logger = logging.getLogger("transformers")
+        transformers_logger.setLevel(logging.ERROR)
         
         # Run standard evaluation
         output = super().evaluate(eval_dataset, ignore_keys, metric_key_prefix)
         
-        # Restore logging
-        logging.getLogger().setLevel(logging.INFO)
+        # Restore transformers logging
+        transformers_logger.setLevel(logging.INFO)
         
-        # Only log the average evaluation loss
-        if self.state.global_step % self.args.logging_steps == 0:
-            logger.info(f"Step {self.state.global_step}: eval_loss = {output['eval_loss']:.4f}")
+        # Only log once at the end of evaluation, not for every batch
+        logger.info(f"Step {self.state.global_step}: evaluation complete")
+        logger.info(f"  Eval loss: {output['eval_loss']:.4f}")
+        logger.info(f"  Overall F1: {output['eval_overall_f1']:.4f}")
+        logger.info(f"  TABLE F1: {output['eval_table_f1']:.4f}")
+        logger.info(f"  FORM F1: {output['eval_form_f1']:.4f}")
+        logger.info(f"  TEXT F1: {output['eval_text_f1']:.4f}")
         
         # Add prefix to metrics
         metrics = {f"{metric_key_prefix}_{k}": v for k, v in output.items()}
