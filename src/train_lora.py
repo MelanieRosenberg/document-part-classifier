@@ -280,28 +280,28 @@ def main():
     parser.add_argument("--output_dir", type=str, default="models/lora",
                       help="Directory to save model outputs")
     
-    # Training arguments
-    parser.add_argument("--num_epochs", type=int, default=10,
+    # Training arguments - optimized for H100
+    parser.add_argument("--num_epochs", type=int, default=20,  # Increased from 10
                       help="Number of training epochs")
-    parser.add_argument("--batch_size", type=int, default=8,
+    parser.add_argument("--batch_size", type=int, default=32,  # Set to 32 for H100
                       help="Training batch size")
-    parser.add_argument("--learning_rate", type=float, default=2e-5,
+    parser.add_argument("--learning_rate", type=float, default=3e-5,  # Adjusted for batch size 32
                       help="Learning rate")
-    parser.add_argument("--warmup_steps", type=int, default=500,
+    parser.add_argument("--warmup_steps", type=int, default=300,  # Adjusted for batch size
                       help="Number of warmup steps")
     parser.add_argument("--weight_decay", type=float, default=0.01,
                       help="Weight decay")
-    parser.add_argument("--eval_steps", type=int, default=100,
+    parser.add_argument("--eval_steps", type=int, default=50,  # Frequent evaluation
                       help="Number of steps between evaluations")
-    parser.add_argument("--save_steps", type=int, default=500,
+    parser.add_argument("--save_steps", type=int, default=200,  # Regular checkpoints
                       help="Number of steps between model saves")
-    parser.add_argument("--logging_steps", type=int, default=50,
+    parser.add_argument("--logging_steps", type=int, default=25,  # Frequent logging
                       help="Number of steps between logging")
     
-    # LoRA arguments
-    parser.add_argument("--lora_r", type=int, default=16,
+    # LoRA arguments - slightly adjusted for better performance
+    parser.add_argument("--lora_r", type=int, default=32,  # Increased from 16 for more capacity
                       help="LoRA attention dimension")
-    parser.add_argument("--lora_alpha", type=int, default=32,
+    parser.add_argument("--lora_alpha", type=int, default=64,  # Increased from 32
                       help="LoRA alpha scaling")
     parser.add_argument("--lora_dropout", type=float, default=0.1,
                       help="LoRA dropout probability")
