@@ -27,26 +27,37 @@ class RobertaWithCRF(nn.Module):
         input_ids: torch.Tensor,
         attention_mask: torch.Tensor,
         labels: Optional[torch.Tensor] = None
-    ) -> Union[torch.Tensor, torch.Tensor]:
+    ) -> Union[torch.Tensor, List[List[int]]]:
         outputs = self.roberta(input_ids=input_ids, attention_mask=attention_mask)
         sequence_output = outputs[0]
         sequence_output = self.dropout(sequence_output)
-        logits = self.classifier(sequence_output)
+        emissions = self.classifier(sequence_output)
         
         if labels is not None:
             # During training
             # Create mask for padding tokens
             mask = attention_mask.bool()
+            
+            # Filter out -100 from labels (ignored positions)
+            # TorchCRF cannot handle -100 values
+            valid_labels = labels.clone()
+            valid_labels = torch.where(
+                valid_labels == -100, 
+                torch.zeros_like(valid_labels), 
+                valid_labels
+            )
+            
             # CRF loss (negative log likelihood)
-            loss = self.crf(logits, labels, mask=mask, reduction='mean')
+            # Note: torchcrf uses negative log likelihood, so no need for the minus sign
+            loss = -1 * self.crf(emissions, valid_labels, mask=mask, reduction='mean')
             return loss
         else:
             # During inference
             # Create mask for padding tokens
             mask = attention_mask.bool()
             # CRF decoding
-            predictions = self.crf.decode(logits, mask=mask)
-            return predictions[0]  # Return the most likely sequence
+            predictions = self.crf.decode(emissions, mask=mask)
+            return predictions
 
 class DocumentPartClassifier:
     def __init__(
@@ -129,9 +140,9 @@ class DocumentPartClassifier:
             context_text = " [SEP] ".join(context_before)
             if context_before:
                 context_text += " [SEP] "
-            context_text += f" [TARGET_START] {target_line} [TARGET_END] "
+            context_text += f"[TARGET_START] {target_line} [TARGET_END]"
             if context_after:
-                context_text += "[SEP] " + " [SEP] ".join(context_after)
+                context_text += " [SEP] " + " [SEP] ".join(context_after)
             
             contextualized_lines.append(context_text)
         
@@ -147,10 +158,40 @@ class DocumentPartClassifier:
         if labels is not None:
             # Convert string labels to tensor
             label_ids = torch.tensor([self.label_map[label] for label in labels])
-            # Create sequence labels (same label for all tokens in sequence)
-            expanded_labels = label_ids.unsqueeze(1).expand(-1, encodings['input_ids'].size(1))
-            # Set padding tokens to -100 (ignore index)
-            expanded_labels[~encodings['attention_mask'].bool()] = -100
+            
+            # For CRF, we need a label for each token
+            # But we'll handle this differently - we'll only use the target line label
+            # Create sequence labels where:
+            # - Target line tokens get the actual label
+            # - Context tokens get a -100 (will be ignored in loss calculation)
+            
+            # First, create a tensor filled with -100 (ignore index)
+            expanded_labels = torch.full(
+                (len(lines), encodings['input_ids'].size(1)),
+                -100,
+                dtype=torch.long
+            )
+            
+            # Then, for each sequence, find target tokens and set their labels
+            for i in range(len(lines)):
+                # Get input_ids for this sequence
+                input_ids = encodings['input_ids'][i]
+                
+                # Find target start and end token indices
+                target_start_idx = (input_ids == self.tokenizer.convert_tokens_to_ids('[TARGET_START]')).nonzero(as_tuple=True)[0]
+                target_end_idx = (input_ids == self.tokenizer.convert_tokens_to_ids('[TARGET_END]')).nonzero(as_tuple=True)[0]
+                
+                # If both tokens are found, set labels for tokens between them
+                if len(target_start_idx) > 0 and len(target_end_idx) > 0:
+                    start_idx = target_start_idx[0].item() + 1  # +1 to skip [TARGET_START]
+                    end_idx = target_end_idx[0].item()  # Don't include [TARGET_END]
+                    
+                    # Set all tokens in the target span to the label
+                    expanded_labels[i, start_idx:end_idx] = label_ids[i]
+                else:
+                    # Fallback to using first token if target markers not found
+                    expanded_labels[i, 1] = label_ids[i]  # Use first non-special token
+            
             return encodings, expanded_labels
         
         return encodings, None
@@ -328,62 +369,74 @@ class DocumentPartClassifier:
         return history
 
     def evaluate(
-        self,
+        self, 
         val_loader: DataLoader,
         return_report: bool = False
-    ) -> Union[float, Tuple[float, Dict]]:
+    ) -> Union[float, Tuple[float, str]]:
         """
         Evaluate the model on validation data.
         
         Args:
-            val_loader: DataLoader for validation data
-            return_report: Whether to return the full classification report
+            val_loader: DataLoader with validation data
+            return_report: Whether to return classification report
             
         Returns:
-            F1 score if return_report is False, else (F1 score, classification report)
+            F1 score or tuple of (F1 score, classification report)
         """
         self.model.eval()
-        all_predictions = []
-        all_labels = []
-        total_loss = 0
+        all_preds = []
+        all_true_labels = []
         
         with torch.no_grad():
             for batch in val_loader:
+                # Move to device
                 input_ids = batch[0].to(self.device)
                 attention_mask = batch[1].to(self.device)
-                labels = batch[2].to(self.device)
                 
-                # Forward pass
-                loss = self.model(
-                    input_ids=input_ids,
-                    attention_mask=attention_mask,
-                    labels=labels
-                )
+                if len(batch) > 2:
+                    labels = batch[2].to(self.device)
+                    # Get true labels - we'll use the first target token for each sequence
+                    for i in range(labels.size(0)):
+                        # Find first non-ignored position
+                        non_ignored = (labels[i] != -100).nonzero(as_tuple=True)[0]
+                        if len(non_ignored) > 0:
+                            # Get the label at this position
+                            all_true_labels.append(labels[i, non_ignored[0]].item())
+                        else:
+                            # If all positions are ignored, skip this example
+                            logger.warning(f"Sequence {i} has all positions ignored in evaluation")
+                            all_true_labels.append(0)  # Default to first class
                 
                 # Get predictions
-                predictions = self.model(input_ids=input_ids, attention_mask=attention_mask)
+                predictions = self.model(
+                    input_ids=input_ids,
+                    attention_mask=attention_mask
+                )
                 
-                # Convert to lists
-                batch_pred = predictions.cpu().tolist()
-                batch_true = labels.cpu().tolist()
-                
-                all_predictions.extend(batch_pred)
-                all_labels.extend(batch_true)
-                total_loss += loss.item()
-        
-        # Convert numeric predictions back to labels
-        pred_tags = [self.reverse_label_map[p] for p in all_predictions]
-        true_tags = [self.reverse_label_map[t] for t in all_labels]
+                # Extract predictions - each batch prediction is a list of label indices
+                # For each sequence in the batch, get the majority predicted class
+                for pred_sequence in predictions:
+                    # Filter out padding (-100)
+                    filtered_preds = [p for p in pred_sequence if p >= 0 and p < len(self.label_map)]
+                    if filtered_preds:
+                        # Get most common prediction (majority vote)
+                        counts = {}
+                        for p in filtered_preds:
+                            counts[p] = counts.get(p, 0) + 1
+                        majority_class = max(counts.items(), key=lambda x: x[1])[0]
+                        all_preds.append(majority_class)
+                    else:
+                        # Default to first class if all predictions were filtered
+                        all_preds.append(0)
         
         # Calculate metrics
-        f1 = f1_score(true_tags, pred_tags, average='weighted')
+        labels = [self.reverse_label_map[i] for i in all_true_labels]
+        preds = [self.reverse_label_map[i] for i in all_preds]
+        
+        f1 = f1_score(labels, preds, average='weighted')
         
         if return_report:
-            report = classification_report(
-                true_tags,
-                pred_tags,
-                output_dict=True
-            )
+            report = classification_report(labels, preds)
             return f1, report
         
         return f1
@@ -410,22 +463,37 @@ class DocumentPartClassifier:
         # Create data loader
         data_loader = self.create_data_loader(encodings, shuffle=False)
         
-        predictions = []
+        all_preds = []
         with torch.no_grad():
             for batch in data_loader:
+                # Move to device
                 input_ids = batch[0].to(self.device)
                 attention_mask = batch[1].to(self.device)
                 
-                batch_predictions = self.model(
+                # Get predictions
+                predictions = self.model(
                     input_ids=input_ids,
                     attention_mask=attention_mask
                 )
                 
-                # Get predictions for the first non-special token (position 1)
-                predictions.extend([pred[1] for pred in batch_predictions])  # Changed from [0] to [1]
+                # Extract predictions - each batch prediction is a list of label indices
+                # For each sequence in the batch, get the majority predicted class
+                for pred_sequence in predictions:
+                    # Filter out padding (-100)
+                    filtered_preds = [p for p in pred_sequence if p >= 0 and p < len(self.label_map)]
+                    if filtered_preds:
+                        # Get most common prediction (majority vote)
+                        counts = {}
+                        for p in filtered_preds:
+                            counts[p] = counts.get(p, 0) + 1
+                        majority_class = max(counts.items(), key=lambda x: x[1])[0]
+                        all_preds.append(majority_class)
+                    else:
+                        # Default to first class if all predictions were filtered
+                        all_preds.append(0)
         
-        # Convert predictions to labels
-        predicted_labels = [self.reverse_label_map[pred] for pred in predictions]
+        # Convert numeric predictions to label strings
+        predicted_labels = [self.reverse_label_map[pred] for pred in all_preds]
         inference_time = time.time() - start_time
         
         return predicted_labels, inference_time
@@ -490,10 +558,21 @@ class DocumentPartClassifier:
             if tokenizer_name != self.model_name:
                 logger.info(f"Updating tokenizer from {self.model_name} to {tokenizer_name}")
                 self.tokenizer = RobertaTokenizer.from_pretrained(tokenizer_name)
+                
+                # Add special tokens if loading an older model that didn't have them
+                special_tokens = {
+                    'additional_special_tokens': ['[TARGET_START]', '[TARGET_END]']
+                }
+                num_added = self.tokenizer.add_special_tokens(special_tokens)
+                logger.info(f"Added {num_added} special tokens to tokenizer")
+                
                 self.model_name = tokenizer_name
             
             # Initialize model with correct number of labels
             self.model = RobertaWithCRF(num_labels=len(self.label_map))
+            
+            # Resize token embeddings if needed
+            self.model.roberta.resize_token_embeddings(len(self.tokenizer))
             
             # Load state dict
             self.model.load_state_dict(checkpoint['model_state_dict'])
