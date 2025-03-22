@@ -360,8 +360,8 @@ Classification: [/INST]"""
             save_steps=save_steps,
             save_strategy="steps",
             load_best_model_at_end=True,
-            metric_for_best_model="eval_overall_f1",
-            greater_is_better=True,
+            metric_for_best_model="eval_loss",
+            greater_is_better=False,
             fp16=True,  # Use mixed precision
             remove_unused_columns=False,
             save_total_limit=save_total_limit,
