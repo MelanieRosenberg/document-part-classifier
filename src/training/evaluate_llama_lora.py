@@ -116,8 +116,10 @@ def evaluate_model(model, dataset):
     model.eval()
     all_predictions = []
     all_labels = []
+    total_examples = len(dataset)
+    report_interval = max(1, total_examples // 10)  # Report every 10%
     
-    for example in tqdm(dataset, desc="Evaluating"):
+    for idx, example in enumerate(tqdm(dataset, desc="Evaluating")):
         # Get actual label
         label_tokens = [id for id in example["labels"] if id != -100]
         if label_tokens:
@@ -146,7 +148,16 @@ def evaluate_model(model, dataset):
         
         # Decode the generated output
         generated_text = tokenizer.decode(outputs[0], skip_special_tokens=False)
-        response = generated_text.split("[/INST]")[1].strip()
+        
+        # Extract response more robustly
+        response = ""
+        if "[/INST]" in generated_text:
+            try:
+                response = generated_text.split("[/INST]")[1].strip()
+            except IndexError:
+                response = generated_text
+        else:
+            response = generated_text
         
         # Extract the predicted class
         predicted_label = None
@@ -160,8 +171,24 @@ def evaluate_model(model, dataset):
             predicted_label = 2
             
         all_predictions.append(predicted_label)
+        
+        # Report intermediate results every 10%
+        if (idx + 1) % report_interval == 0:
+            # Calculate current metrics
+            current_precision, current_recall, current_f1, _ = precision_recall_fscore_support(
+                all_labels, all_predictions, average=None, labels=[0, 1, 2]
+            )
+            current_overall_f1 = precision_recall_fscore_support(
+                all_labels, all_predictions, average='weighted'
+            )[2]
+            
+            print(f"\nIntermediate Results at {(idx + 1) / total_examples * 100:.1f}%:")
+            print(f"Overall F1: {current_overall_f1:.4f}")
+            print(f"FORM F1: {current_f1[0]:.4f}")
+            print(f"TABLE F1: {current_f1[1]:.4f}")
+            print(f"TEXT F1: {current_f1[2]:.4f}")
     
-    # Calculate metrics
+    # Calculate final metrics
     precision, recall, f1, _ = precision_recall_fscore_support(
         all_labels, all_predictions, average=None, labels=[0, 1, 2]
     )
