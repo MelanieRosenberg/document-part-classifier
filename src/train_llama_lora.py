@@ -541,11 +541,24 @@ class DocumentClassificationTrainer(Trainer):
         
         # Only log once at the end of evaluation
         logger.info(f"Step {self.state.global_step}: evaluation complete")
-        logger.info(f"  Eval loss: {output['eval_loss']:.4f}")
-        logger.info(f"  Overall F1: {output['eval_overall_f1']:.4f}")
-        logger.info(f"  TABLE F1: {output['eval_table_f1']:.4f}")
-        logger.info(f"  FORM F1: {output['eval_form_f1']:.4f}")
-        logger.info(f"  TEXT F1: {output['eval_text_f1']:.4f}")
+        
+        # Safely log metrics if they exist
+        if 'eval_loss' in output:
+            logger.info(f"  Eval loss: {output['eval_loss']:.4f}")
+        
+        # Log F1 scores if they exist
+        metrics_to_log = {
+            'eval_overall_f1': 'Overall F1',
+            'eval_table_f1': 'TABLE F1',
+            'eval_form_f1': 'FORM F1',
+            'eval_text_f1': 'TEXT F1'
+        }
+        
+        for metric_key, display_name in metrics_to_log.items():
+            if metric_key in output:
+                logger.info(f"  {display_name}: {output[metric_key]:.4f}")
+            else:
+                logger.warning(f"  {display_name}: Not available")
         
         # Add prefix to metrics
         metrics = {f"{metric_key_prefix}_{k}": v for k, v in output.items()}
