@@ -32,11 +32,9 @@ ENV/
 *.swo
 
 # Project specific
-models/
-*.pt
-*.pth
-*.ckpt
-data/
+models/*.pt
+models/*.pth
+models/*.ckpt
 *.log
 logs/
 wandb/ 

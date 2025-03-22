@@ -184,10 +184,15 @@ def train(args):
     # Load training and validation data
     logger.info("Loading datasets...")
     
-    train_lines_file = os.path.join(args.data_dir, "lines.txt")
-    train_tags_file = os.path.join(args.data_dir, "tags.txt")
-    val_lines_file = os.path.join(args.data_dir, "lines.txt")  # Using same data for validation during testing
-    val_tags_file = os.path.join(args.data_dir, "tags.txt")    # Using same data for validation during testing
+    train_lines_file = os.path.join(args.train_data_dir, "lines.txt")
+    train_tags_file = os.path.join(args.train_data_dir, "tags.txt")
+    val_lines_file = os.path.join(args.val_data_dir, "lines.txt")
+    val_tags_file = os.path.join(args.val_data_dir, "tags.txt")
+    
+    # Validate files exist
+    for file_path in [train_lines_file, train_tags_file, val_lines_file, val_tags_file]:
+        if not os.path.exists(file_path):
+            raise FileNotFoundError(f"Required file not found: {file_path}")
     
     train_lines, train_tags = load_data_from_files(train_lines_file, train_tags_file)
     val_lines, val_tags = load_data_from_files(val_lines_file, val_tags_file)
@@ -456,7 +461,8 @@ def main():
     parser = argparse.ArgumentParser(description="Train document part classifier")
     
     # Data arguments
-    parser.add_argument("--data_dir", type=str, required=True, help="Directory containing train/val/test data")
+    parser.add_argument("--train_data_dir", type=str, required=True, help="Directory containing training data")
+    parser.add_argument("--val_data_dir", type=str, required=True, help="Directory containing validation data")
     parser.add_argument("--output_dir", type=str, required=True, help="Directory to save model and results")
     
     # Model arguments
@@ -481,6 +487,18 @@ def main():
     parser.add_argument("--create_plots", action="store_true", help="Create and save training plots")
     
     args = parser.parse_args()
+    
+    # Load training and validation data
+    train_lines_file = os.path.join(args.train_data_dir, "lines.txt")
+    train_tags_file = os.path.join(args.train_data_dir, "tags.txt")
+    val_lines_file = os.path.join(args.val_data_dir, "lines.txt")
+    val_tags_file = os.path.join(args.val_data_dir, "tags.txt")
+    
+    # Validate files exist
+    for file_path in [train_lines_file, train_tags_file, val_lines_file, val_tags_file]:
+        if not os.path.exists(file_path):
+            raise FileNotFoundError(f"Required file not found: {file_path}")
+    
     train(args)
 
 if __name__ == "__main__":
