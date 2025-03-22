@@ -35,23 +35,27 @@ class RobertaWithCRF(nn.Module):
         
         if labels is not None:
             # During training
+            # Create mask for padding tokens
+            mask = attention_mask.bool()
             # CRF loss
-            loss = -self.crf(logits, labels, reduction='mean')
+            loss = -self.crf(logits, labels, mask=mask, reduction='mean')
             return loss
         else:
             # During inference
+            # Create mask for padding tokens
+            mask = attention_mask.bool()
             # CRF decoding
-            predictions = self.crf.decode(logits)
+            predictions = self.crf.decode(logits, mask=mask)
             return predictions[0]  # Return the most likely sequence
 
 class DocumentPartClassifier:
     def __init__(
         self,
-        model_name: str = 'roberta-base',
-        max_length: int = 256,  # Increased from 128 to 256
-        batch_size: int = 16,
-        learning_rate: float = 2e-5,
-        num_epochs: int = 3,
+        model_name: str = 'roberta-large',
+        max_length: int = 512,
+        batch_size: int = 32,
+        learning_rate: float = 1e-5,
+        num_epochs: int = 20,
         context_window: int = 2,
         warmup_ratio: float = 0.1
     ):
@@ -141,9 +145,11 @@ class DocumentPartClassifier:
         )
         
         if labels is not None:
-            # Convert string labels to tensor
+            # Convert string labels to tensor and expand to match sequence length
             label_ids = torch.tensor([self.label_map[label] for label in labels])
-            return encodings, label_ids
+            # Expand labels to match sequence length
+            expanded_labels = label_ids.unsqueeze(1).expand(-1, encodings['input_ids'].size(1))
+            return encodings, expanded_labels
         
         return encodings, None
 
