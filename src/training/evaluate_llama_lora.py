@@ -13,7 +13,7 @@ id2label = {0: "FORM", 1: "TABLE", 2: "TEXT"}
 label2id = {"FORM": 0, "TABLE": 1, "TEXT": 2}
 
 # Model configuration
-model_name = "meta-llama/Llama-2-7b-hf"  # or another size/variant
+model_name = "/llama_models/llama-3-2-1b"  # Local model path
 use_4bit = True  # Use 4-bit quantization to save memory
 
 # Load tokenizer
@@ -35,10 +35,14 @@ if use_4bit:
         model_name,
         quantization_config=bnb_config,
         device_map="auto",
+        local_files_only=True  # Only use local files
     )
     model = prepare_model_for_kbit_training(model)
 else:
-    model = AutoModelForCausalLM.from_pretrained(model_name)
+    model = AutoModelForCausalLM.from_pretrained(
+        model_name,
+        local_files_only=True  # Only use local files
+    )
 
 # Configure LoRA
 lora_config = LoraConfig(
