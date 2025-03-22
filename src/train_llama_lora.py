@@ -416,17 +416,15 @@ class DocumentClassificationTrainer(Trainer):
         """
         loss, outputs = super().compute_loss(model, inputs, return_outputs=True)
         
-        # Only track and log loss during training, not during evaluation
-        if not self.state.is_local_process_not_main or self.args.local_rank == -1:
-            # Track loss for averaging
-            self.current_step_losses.append(loss.item())
-            
-            # If this is the last batch of the step, log the average
-            if len(self.current_step_losses) == self.args.gradient_accumulation_steps:
-                avg_loss = sum(self.current_step_losses) / len(self.current_step_losses)
-                if self.state.global_step % self.args.logging_steps == 0:
-                    logger.info(f"Step {self.state.global_step}: average loss = {avg_loss:.4f}")
-                self.current_step_losses = []  # Reset for next step
+        # Track loss for averaging (simplified without distributed check)
+        self.current_step_losses.append(loss.item())
+        
+        # If this is the last batch of the step, log the average
+        if len(self.current_step_losses) >= self.args.gradient_accumulation_steps:
+            avg_loss = sum(self.current_step_losses) / len(self.current_step_losses)
+            if self.state.global_step % self.args.logging_steps == 0:
+                logger.info(f"Step {self.state.global_step}: average loss = {avg_loss:.4f}")
+            self.current_step_losses = []  # Reset for next step
         
         return (loss, outputs) if return_outputs else loss
 
