@@ -13,7 +13,7 @@ label2id = {"FORM": 0, "TABLE": 1, "TEXT": 2}
 
 # Model configuration
 model_name = "/home/azureuser/llama_models/llama-3-2-1b"  # Base model path
-adapter_path = "llama_lora_document_classifier"  # Path to your trained LoRA adapter
+adapter_path = "models/llama_1b_lora/run_20250322_202241/final_model"  # Path to your trained LoRA adapter
 
 # Load tokenizer
 tokenizer = AutoTokenizer.from_pretrained(model_name)
