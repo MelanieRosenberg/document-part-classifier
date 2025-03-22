@@ -281,7 +281,10 @@ Classification: [/INST]"""
             greater_is_better=True,
             fp16=True,  # Use mixed precision
             remove_unused_columns=False,
-            save_total_limit=save_total_limit
+            save_total_limit=save_total_limit,
+            report_to="tensorboard",  # Add tensorboard logging
+            logging_first_step=True,  # Log the first step
+            logging_nan_inf_filter=False  # Show all logs including NaN/Inf
         )
         
         # Initialize trainer
