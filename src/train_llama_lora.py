@@ -26,7 +26,7 @@ logger = logging.getLogger(__name__)
 class LlamaLoRATrainer:
     def __init__(
         self,
-        base_model_name: str = "meta-llama/Llama-2-7b-hf",
+        base_model_name: str = "meta-llama/Llama-3.2-7b",
         train_data_dir: str = "data/train",
         val_data_dir: str = "data/val",
         output_dir: str = "models/llama_lora",
@@ -35,10 +35,10 @@ class LlamaLoRATrainer:
         device: Optional[str] = None
     ):
         """
-        Initialize LLaMA LoRA trainer.
+        Initialize Llama 3 LoRA trainer.
         
         Args:
-            base_model_name: Name or path of the base LLaMA model
+            base_model_name: Name or path of the base Llama 3 model
             train_data_dir: Directory containing training data
             val_data_dir: Directory containing validation data
             output_dir: Directory to save model outputs
@@ -125,7 +125,10 @@ class LlamaLoRATrainer:
         logger.info(f"Loading base model and tokenizer from {self.base_model_name}")
         
         # Load tokenizer
-        self.tokenizer = AutoTokenizer.from_pretrained(self.base_model_name)
+        self.tokenizer = AutoTokenizer.from_pretrained(
+            self.base_model_name,
+            trust_remote_code=True
+        )
         self.tokenizer.pad_token = self.tokenizer.eos_token
         
         # Load model with quantization if enabled
@@ -140,11 +143,15 @@ class LlamaLoRATrainer:
             self.base_model = AutoModelForCausalLM.from_pretrained(
                 self.base_model_name,
                 quantization_config=bnb_config,
-                device_map="auto"
+                device_map="auto",
+                trust_remote_code=True
             )
             self.base_model = prepare_model_for_kbit_training(self.base_model)
         else:
-            self.base_model = AutoModelForCausalLM.from_pretrained(self.base_model_name)
+            self.base_model = AutoModelForCausalLM.from_pretrained(
+                self.base_model_name,
+                trust_remote_code=True
+            )
             self.base_model = self.base_model.to(self.device)
         
         logger.info("Model loaded successfully")
@@ -231,7 +238,7 @@ Classification: [/INST]"""
         lora_config = LoraConfig(
             r=lora_r,
             lora_alpha=lora_alpha,
-            target_modules=["q_proj", "v_proj", "k_proj", "o_proj"],
+            target_modules=["q_proj", "k_proj", "v_proj", "o_proj", "gate_proj", "up_proj", "down_proj"],
             lora_dropout=lora_dropout,
             bias="none",
             task_type=TaskType.CAUSAL_LM
@@ -373,10 +380,10 @@ class DocumentClassificationTrainer(Trainer):
 
 def main():
     """Run training from command line."""
-    parser = argparse.ArgumentParser(description="Train LLaMA with LoRA for document classification")
+    parser = argparse.ArgumentParser(description="Train Llama 3 with LoRA for document classification")
     
     # Model and data arguments
-    parser.add_argument("--base_model", type=str, default="meta-llama/Llama-2-7b-hf",
+    parser.add_argument("--base_model", type=str, default="meta-llama/Llama-3.2-7b",
                       help="Base model to use")
     parser.add_argument("--train_data_dir", type=str, required=True,
                       help="Directory containing training data")
