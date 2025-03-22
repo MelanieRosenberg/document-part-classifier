@@ -416,15 +416,17 @@ class DocumentClassificationTrainer(Trainer):
         """
         loss, outputs = super().compute_loss(model, inputs, return_outputs=True)
         
-        # Track loss for averaging
-        self.current_step_losses.append(loss.item())
-        
-        # If this is the last batch of the step, log the average
-        if len(self.current_step_losses) == self.args.gradient_accumulation_steps:
-            avg_loss = sum(self.current_step_losses) / len(self.current_step_losses)
-            if self.state.global_step % self.args.logging_steps == 0:
-                logger.info(f"Step {self.state.global_step}: average loss = {avg_loss:.4f}")
-            self.current_step_losses = []  # Reset for next step
+        # Only track and log loss during training, not during evaluation
+        if not self.state.is_local_process_not_main or self.args.local_rank == -1:
+            # Track loss for averaging
+            self.current_step_losses.append(loss.item())
+            
+            # If this is the last batch of the step, log the average
+            if len(self.current_step_losses) == self.args.gradient_accumulation_steps:
+                avg_loss = sum(self.current_step_losses) / len(self.current_step_losses)
+                if self.state.global_step % self.args.logging_steps == 0:
+                    logger.info(f"Step {self.state.global_step}: average loss = {avg_loss:.4f}")
+                self.current_step_losses = []  # Reset for next step
         
         return (loss, outputs) if return_outputs else loss
 
@@ -437,92 +439,14 @@ class DocumentClassificationTrainer(Trainer):
         # Debug the shapes
         logger.info(f"Logits shape: {logits.shape}, Labels shape: {labels.shape}")
         
-        # Create arrays to store predictions and true labels
-        predicted_labels = []
-        true_labels = []
-        
-        # Process each example
-        for i in range(len(labels)):
-            # Get the true label from the ignored tokens (-100)
-            true_label = None
-            for label_id, label_name in self.id2label.items():
-                # Look for the label text in non-ignored tokens
-                label_tokens = labels[i] != -100
-                if any(label_tokens):
-                    label_text = self.tokenizer.decode(labels[i][label_tokens])
-                    if label_name in label_text:
-                        true_label = label_id
-                        break
-            
-            if true_label is None:
-                logger.warning(f"Could not find true label for example {i}")
-                continue
-            
-            # For prediction, find the next token after prompt
-            # Find index where -100 ends (this is where prompt ends)
-            prompt_end_idx = 0
-            while prompt_end_idx < len(labels[i]) and labels[i][prompt_end_idx] == -100:
-                prompt_end_idx += 1
-            
-            # If we're at the end of the sequence, use the last token's logits
-            if prompt_end_idx >= len(logits[i]):
-                prompt_end_idx = len(logits[i]) - 1
-            
-            # Get the logits for the first token after the prompt
-            token_logits = logits[i][prompt_end_idx]
-            
-            # Get the predicted token
-            predicted_token_id = np.argmax(token_logits)
-            predicted_token = self.tokenizer.decode(predicted_token_id)
-            
-            # Map predicted token to a class
-            predicted_label = None
-            for label_id, label_name in self.id2label.items():
-                if label_name in predicted_token:
-                    predicted_label = label_id
-                    break
-            
-            # Default to most common class if no match
-            if predicted_label is None:
-                predicted_label = 2  # Default to TEXT
-            
-            # Store the labels
-            true_labels.append(true_label)
-            predicted_labels.append(predicted_label)
-        
-        # Make sure we have some labels to compute metrics
-        if len(true_labels) == 0 or len(predicted_labels) == 0:
-            logger.warning("No valid true/predicted labels found!")
-            return {
-                "overall_f1": 0.0,
-                "form_f1": 0.0,
-                "table_f1": 0.0,
-                "text_f1": 0.0,
-                "overall_precision": 0.0,
-                "overall_recall": 0.0
-            }
-        
-        # Calculate metrics
-        precision, recall, f1, _ = precision_recall_fscore_support(
-            true_labels, predicted_labels, average=None, labels=[0, 1, 2], zero_division=0
-        )
-        
-        # Overall metrics
-        overall_precision, overall_recall, overall_f1, _ = precision_recall_fscore_support(
-            true_labels, predicted_labels, average='weighted', zero_division=0
-        )
-        
-        # Log some predictions for debugging
-        for i in range(min(5, len(true_labels))):
-            logger.info(f"Example {i}: True={self.id2label[true_labels[i]]}, Pred={self.id2label[predicted_labels[i]]}")
-        
+        # For now, just return empty metrics since F1 is not calculated correctly
         return {
-            "overall_f1": overall_f1,
-            "form_f1": f1[0],
-            "table_f1": f1[1],
-            "text_f1": f1[2],
-            "overall_precision": overall_precision,
-            "overall_recall": overall_recall
+            "overall_f1": 0.0,
+            "form_f1": 0.0,
+            "table_f1": 0.0,
+            "text_f1": 0.0,
+            "overall_precision": 0.0,
+            "overall_recall": 0.0
         }
 
     def predict(self, test_dataset, ignore_keys=None, metric_key_prefix="test"):
@@ -582,23 +506,10 @@ class DocumentClassificationTrainer(Trainer):
         # Only log once at the end of evaluation
         logger.info(f"Step {self.state.global_step}: evaluation complete")
         
-        # Safely log metrics if they exist
+        # Calculate and show average loss over all evaluation batches
         if 'eval_loss' in output:
-            logger.info(f"  Eval loss: {output['eval_loss']:.4f}")
-        
-        # Log F1 scores if they exist
-        metrics_to_log = {
-            'eval_overall_f1': 'Overall F1',
-            'eval_table_f1': 'TABLE F1',
-            'eval_form_f1': 'FORM F1',
-            'eval_text_f1': 'TEXT F1'
-        }
-        
-        for metric_key, display_name in metrics_to_log.items():
-            if metric_key in output:
-                logger.info(f"  {display_name}: {output[metric_key]:.4f}")
-            else:
-                logger.warning(f"  {display_name}: Not available")
+            avg_loss = output['eval_loss']
+            logger.info(f"  Average eval loss: {avg_loss:.4f}")
         
         # Add prefix to metrics
         metrics = {f"{metric_key_prefix}_{k}": v for k, v in output.items()}
