@@ -13,7 +13,7 @@ id2label = {0: "FORM", 1: "TABLE", 2: "TEXT"}
 label2id = {"FORM": 0, "TABLE": 1, "TEXT": 2}
 
 # Model configuration
-model_name = "/llama_models/llama-3-2-1b"  # Local model path
+model_name = "/home/azureuser/llama_models/llama-3-2-1b"  # Full path to the directory containing model.safetensors
 use_4bit = True  # Use 4-bit quantization to save memory
 
 # Load tokenizer
