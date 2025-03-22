@@ -317,6 +317,18 @@ Classification: [/INST]"""
         logger.info(f"Saved training arguments to {args_file}")
 
 class DocumentClassificationTrainer(Trainer):
+    def compute_loss(self, model, inputs, return_outputs=False):
+        """
+        Compute the training loss and log it.
+        """
+        loss, outputs = super().compute_loss(model, inputs, return_outputs=True)
+        
+        # Log the loss if we're at a logging step
+        if self.state.global_step % self.args.logging_steps == 0:
+            logger.info(f"Step {self.state.global_step}: loss = {loss.item():.4f}")
+        
+        return (loss, outputs) if return_outputs else loss
+
     def evaluate(self, eval_dataset=None, ignore_keys=None, metric_key_prefix="eval"):
         # Run standard evaluation
         output = super().evaluate(eval_dataset, ignore_keys, metric_key_prefix)
