@@ -436,14 +436,14 @@ def main():
     parser.add_argument("--output_dir", type=str, required=True, help="Directory to save model and results")
     
     # Model arguments
-    parser.add_argument("--model_name", type=str, default="roberta-large", help="Name of pretrained model")
+    parser.add_argument("--model_name", type=str, default="microsoft/deberta-v3-large", help="Name of pretrained model")
     parser.add_argument("--max_length", type=int, default=512, help="Maximum sequence length")
     parser.add_argument("--context_window", type=int, default=2, help="Number of lines before/after to use as context")
     
     # Training arguments
-    parser.add_argument("--batch_size", type=int, default=32, help="Batch size")
+    parser.add_argument("--batch_size", type=int, default=16, help="Batch size")
     parser.add_argument("--num_epochs", type=int, default=20, help="Number of epochs")
-    parser.add_argument("--learning_rate", type=float, default=5e-6, help="Learning rate")
+    parser.add_argument("--learning_rate", type=float, default=1e-5, help="Learning rate")
     parser.add_argument("--weight_decay", type=float, default=0.01, help="Weight decay")
     parser.add_argument("--warmup_ratio", type=float, default=0.1, help="Ratio of warmup steps")
     parser.add_argument("--patience", type=int, default=3, help="Number of epochs to wait before early stopping")
