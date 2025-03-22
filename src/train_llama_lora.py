@@ -277,10 +277,10 @@ Classification: [/INST]"""
             save_steps=save_steps,
             save_strategy="steps",
             load_best_model_at_end=True,
+            metric_for_best_model="eval_overall_f1",
+            greater_is_better=True,
             fp16=True,  # Use mixed precision
             remove_unused_columns=False,
-            early_stopping_patience=early_stopping_patience,
-            early_stopping_threshold=early_stopping_threshold,
             save_total_limit=save_total_limit
         )
         
