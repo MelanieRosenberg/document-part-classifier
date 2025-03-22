@@ -21,28 +21,29 @@ class RobertaClassifier:
         self.device = device
         logger.info("Loading model and tokenizer...")
         
-        # Initialize model and tokenizer with the correct version
-        self.model = AutoModelForSequenceClassification.from_pretrained(
-            "roberta-base",
-            num_labels=3,  # FORM, TABLE, TEXT
-            ignore_mismatched_sizes=True,  # Allow size mismatches
-            vocab_size=50267  # Match the vocabulary size from the trained model
-        )
-        self.tokenizer = AutoTokenizer.from_pretrained("roberta-base")
-        
-        # Load trained weights
+        # Load trained weights first to get label mapping
         logger.info(f"Loading trained weights from {model_path}")
         state_dict = torch.load(model_path, map_location=self.device)
-        # Extract model state dict and metadata
-        model_state_dict = state_dict['model_state_dict']
+        # Extract metadata
         self.tokenizer_name = state_dict['tokenizer_name']
         self.label_map = state_dict['label_map']
         self.reverse_label_map = state_dict['reverse_label_map']
         self.context_window = state_dict['context_window']
         self.max_length = state_dict['max_length']
         
+        # Initialize model and tokenizer with the correct version
+        self.model = AutoModelForSequenceClassification.from_pretrained(
+            "roberta-base",
+            num_labels=len(self.label_map),  # Number of labels from label map
+            id2label=self.reverse_label_map,  # Use the reverse label map
+            label2id=self.label_map,  # Use the label map
+            ignore_mismatched_sizes=True,  # Allow size mismatches
+            vocab_size=50267  # Match the vocabulary size from the trained model
+        )
+        self.tokenizer = AutoTokenizer.from_pretrained("roberta-base")
+        
         # Load the model state dict
-        self.model.load_state_dict(model_state_dict, strict=False)
+        self.model.load_state_dict(state_dict['model_state_dict'], strict=False)
         
         # Move model to device and set to eval mode
         self.model.to(self.device)
@@ -66,7 +67,7 @@ class RobertaClassifier:
     def extract_text_from_xml(self, xml_content: str) -> List[str]:
         """Extract text content from XML or plain text."""
         try:
-            # First try to parse as XML
+            # Try to parse as XML first
             root = ET.fromstring(xml_content)
             # Extract text from all elements
             texts = []
@@ -75,9 +76,27 @@ class RobertaClassifier:
                     texts.append(elem.text.strip())
             return texts
         except ET.ParseError:
-            # If not valid XML, treat as plain text
+            # If XML parsing fails, try to extract text content directly
             # Split into lines and filter out empty ones
-            lines = [line.strip() for line in xml_content.split('\n') if line.strip()]
+            lines = []
+            # Remove XML declaration if present
+            content = xml_content.replace('<?xml version="1.0" encoding="UTF-8"?>', '')
+            # Split by line breaks and remove XML tags
+            for line in content.split('\n'):
+                # Remove XML tags
+                text = ''
+                in_tag = False
+                for char in line:
+                    if char == '<':
+                        in_tag = True
+                    elif char == '>':
+                        in_tag = False
+                    elif not in_tag:
+                        text += char
+                # Clean and add non-empty lines
+                text = text.strip()
+                if text:
+                    lines.append(text)
             return lines
     
     def predict(self, xml_file) -> Dict[str, List[str]]:
@@ -93,7 +112,9 @@ class RobertaClassifier:
             if hasattr(xml_file, 'read'):
                 xml_content = xml_file.read().decode('utf-8')
             else:
-                xml_content = xml_file
+                # If it's a file path, read the file
+                with open(xml_file, 'r', encoding='utf-8') as f:
+                    xml_content = f.read()
             
             # Extract text from XML
             lines = self.extract_text_from_xml(xml_content)
@@ -125,8 +146,8 @@ class RobertaClassifier:
                 logits = outputs.logits
                 predictions = torch.argmax(logits, dim=-1)
             
-            # Convert predictions to labels
-            pred_labels = [self.label_map[pred.item()] for pred in predictions]
+            # Convert predictions to labels using the reverse label map
+            pred_labels = [self.reverse_label_map[pred.item()] for pred in predictions]
             inference_time = time.time() - start_time
             
             # Format results
@@ -139,9 +160,11 @@ class RobertaClassifier:
                 "inference_time": f"{inference_time:.2f} seconds"
             }
         except Exception as e:
-            logger.error(f"Error processing file: {e}")
+            import traceback
+            error_msg = f"Error processing file: {str(e)}\n{traceback.format_exc()}"
+            logger.error(error_msg)
             return {
-                "predictions": [f"Error processing file: {str(e)}"],
+                "predictions": [error_msg],
                 "inference_time": "0.00 seconds"
             }
 
