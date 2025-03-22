@@ -528,17 +528,18 @@ class DocumentClassificationTrainer(Trainer):
         """
         Run evaluation and return metrics.
         """
-        # Temporarily disable transformers logging
-        transformers_logger = logging.getLogger("transformers")
-        transformers_logger.setLevel(logging.ERROR)
+        # Temporarily disable all logging
+        root_logger = logging.getLogger()
+        original_level = root_logger.level
+        root_logger.setLevel(logging.ERROR)
         
         # Run standard evaluation
         output = super().evaluate(eval_dataset, ignore_keys, metric_key_prefix)
         
-        # Restore transformers logging
-        transformers_logger.setLevel(logging.INFO)
+        # Restore logging level
+        root_logger.setLevel(original_level)
         
-        # Only log once at the end of evaluation, not for every batch
+        # Only log once at the end of evaluation
         logger.info(f"Step {self.state.global_step}: evaluation complete")
         logger.info(f"  Eval loss: {output['eval_loss']:.4f}")
         logger.info(f"  Overall F1: {output['eval_overall_f1']:.4f}")
