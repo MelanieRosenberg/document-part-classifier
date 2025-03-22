@@ -32,9 +32,16 @@ ENV/
 *.swo
 
 # Project specific
-models/*.pt
-models/*.pth
-models/*.ckpt
+models/
+models/*
+!models/.gitkeep
 *.log
 logs/
-wandb/ 
+wandb/
+*.pt
+*.pth
+*.ckpt
+*.bin
+training_log.txt
+val_metrics.json
+args.json 
