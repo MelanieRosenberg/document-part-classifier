@@ -120,11 +120,19 @@ def preprocess_function(examples):
 
 # Load and prepare your datasets
 def load_data():
-    # This is a placeholder - implement based on your actual data structure
-    train_data = {"text": [...], "label": [...]}  # Your training data
-    val_data = {"text": [...], "label": [...]}    # Your validation data
-    test_data = {"text": [...], "label": [...]}   # Your test data
+    def load_split(split_dir):
+        with open(os.path.join(split_dir, "lines.txt"), "r") as f:
+            texts = [line.strip() for line in f.readlines()]
+        with open(os.path.join(split_dir, "tags.txt"), "r") as f:
+            labels = [label2id[tag.strip()] for tag in f.readlines()]
+        return {"text": texts, "label": labels}
     
+    # Load data from the appropriate directories
+    train_data = load_split("data/train")
+    val_data = load_split("data/val")
+    test_data = load_split("data/test")
+    
+    # Convert to datasets
     train_dataset = Dataset.from_dict(train_data)
     val_dataset = Dataset.from_dict(val_data)
     test_dataset = Dataset.from_dict(test_data)
