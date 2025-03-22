@@ -223,7 +223,7 @@ class LlamaLoRATrainer:
         lora_config = LoraConfig(
             r=lora_r,
             lora_alpha=lora_alpha,
-            target_modules=["q_proj", "k_proj", "v_proj", "o_proj", "gate_proj", "up_proj", "down_proj", "score"],
+            target_modules=["q_proj", "k_proj", "v_proj", "o_proj", "gate_proj", "up_proj", "down_proj"],
             lora_dropout=lora_dropout,
             bias="none",
             task_type=TaskType.SEQ_CLS,
