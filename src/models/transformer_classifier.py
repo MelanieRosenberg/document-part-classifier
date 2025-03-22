@@ -17,9 +17,10 @@ logger = logging.getLogger(__name__)
 class RobertaWithCRF(nn.Module):
     def __init__(self, num_labels: int):
         super().__init__()
-        self.roberta = RobertaModel.from_pretrained('roberta-base')
+        self.roberta = RobertaModel.from_pretrained('roberta-large')
         self.dropout = nn.Dropout(0.1)
         self.classifier = nn.Linear(self.roberta.config.hidden_size, num_labels)
+        self.crf = CRF(num_labels, batch_first=True)
         
     def forward(
         self,
@@ -29,17 +30,19 @@ class RobertaWithCRF(nn.Module):
     ) -> Union[torch.Tensor, torch.Tensor]:
         outputs = self.roberta(input_ids=input_ids, attention_mask=attention_mask)
         sequence_output = outputs[0]
-        sequence_output = self.dropout(sequence_output[:, 0, :])  # Take [CLS] token
+        sequence_output = self.dropout(sequence_output)
         logits = self.classifier(sequence_output)
         
         if labels is not None:
             # During training
-            loss_fct = nn.CrossEntropyLoss()
-            loss = loss_fct(logits, labels)
+            # CRF loss
+            loss = -self.crf(logits, labels, reduction='mean')
             return loss
         else:
             # During inference
-            return logits
+            # CRF decoding
+            predictions = self.crf.decode(logits)
+            return predictions[0]  # Return the most likely sequence
 
 class DocumentPartClassifier:
     def __init__(
@@ -350,8 +353,7 @@ class DocumentPartClassifier:
                 )
                 
                 # Get predictions
-                logits = self.model(input_ids=input_ids, attention_mask=attention_mask)
-                predictions = torch.argmax(logits, dim=1)
+                predictions = self.model(input_ids=input_ids, attention_mask=attention_mask)
                 
                 # Convert to lists
                 batch_pred = predictions.cpu().tolist()
