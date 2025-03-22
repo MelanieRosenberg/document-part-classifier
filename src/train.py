@@ -173,7 +173,35 @@ def load_data_from_files(lines_file: str, tags_file: str) -> Tuple[List[str], Li
     
     return lines, tags
 
+def create_training_plots(training_metrics: Dict[str, List[float]], output_dir: str) -> None:
+    """
+    Create and save training plots.
+    
+    Args:
+        training_metrics: Dictionary containing training metrics
+        output_dir: Directory to save the plots
+    """
+    try:
+        import matplotlib.pyplot as plt
+        
+        # Plot loss and F1 curves
+        plt.figure(figsize=(10, 6))
+        plt.plot(training_metrics['epochs'], training_metrics['train_loss'], label='Train Loss')
+        plt.plot(training_metrics['epochs'], training_metrics['val_f1'], label='Validation F1')
+        plt.xlabel('Epoch')
+        plt.ylabel('Score')
+        plt.title('Training Loss and Validation F1')
+        plt.legend()
+        plt.grid(True)
+        plt.savefig(os.path.join(output_dir, "training_curves.png"))
+        plt.close()
+        
+        logger.info(f"Training plots saved to {output_dir}")
+    except ImportError:
+        logger.warning("matplotlib not installed, skipping plot creation")
+
 def train(args):
+    """Train the model with the given arguments."""
     # Set device
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     logger.info(f"Using device: {device}")
@@ -193,25 +221,6 @@ def train(args):
     with open(os.path.join(output_dir, "args.json"), "w") as f:
         json.dump(vars(args), f, indent=2)
     
-    # Load training and validation data
-    logger.info("Loading datasets...")
-    
-    train_lines_file = os.path.join(args.train_data_dir, "lines.txt")
-    train_tags_file = os.path.join(args.train_data_dir, "tags.txt")
-    val_lines_file = os.path.join(args.val_data_dir, "lines.txt")
-    val_tags_file = os.path.join(args.val_data_dir, "tags.txt")
-    
-    # Validate files exist
-    for file_path in [train_lines_file, train_tags_file, val_lines_file, val_tags_file]:
-        if not os.path.exists(file_path):
-            raise FileNotFoundError(f"Required file not found: {file_path}")
-    
-    train_lines, train_tags = load_data_from_files(train_lines_file, train_tags_file)
-    val_lines, val_tags = load_data_from_files(val_lines_file, val_tags_file)
-    
-    logger.info(f"Number of training examples: {len(train_lines)}")
-    logger.info(f"Number of validation examples: {len(val_lines)}")
-    
     # Initialize classifier
     classifier = DocumentPartClassifier(
         model_name=args.model_name,
@@ -219,213 +228,90 @@ def train(args):
         batch_size=args.batch_size,
         learning_rate=args.learning_rate,
         num_epochs=args.num_epochs,
-        context_window=args.context_window,
-        warmup_ratio=args.warmup_ratio
+        context_window=args.context_window
     )
     
-    # Update label map if needed
-    unique_tags = set(train_tags + val_tags)
-    if not all(tag in classifier.label_map for tag in unique_tags):
-        logger.warning("Updating label map for custom tags...")
-        custom_label_map = {tag: i for i, tag in enumerate(sorted(unique_tags))}
-        classifier.label_map = custom_label_map
-        classifier.reverse_label_map = {v: k for k, v in custom_label_map.items()}
-        
-        # Recreate model with the right number of labels
-        classifier.model = type(classifier.model)(num_labels=len(custom_label_map))
-        
-        # Resize token embeddings to account for special tokens
-        classifier.model.deberta.resize_token_embeddings(len(classifier.tokenizer))
-        
-        classifier.model.to(device)
-    
-    # Compute class weights
-    class_weights = compute_class_weights(
-        train_tags,
-        classifier.label_map,
-        primary_weight_multiplier=args.primary_weight_multiplier
-    ).to(device)
-    
-    logger.info("\nClass weights:")
-    for tag, weight in zip(classifier.label_map.keys(), class_weights.cpu().numpy()):
-        logger.info(f"{tag}: {weight:.4f}")
-        if tag in TARGET_TAGS:
-            logger.info(f"  ^ Primary tag, weight multiplied by {args.primary_weight_multiplier}")
-    
-    # Prepare data
-    train_encodings, train_labels = classifier.prepare_data(train_lines, train_tags)
-    
-    # Create dataloader
-    train_loader = classifier.create_data_loader(train_encodings, train_labels, shuffle=True)
-    
-    # Initialize optimizer with weight decay
-    optimizer = torch.optim.AdamW(
-        classifier.model.parameters(),
-        lr=args.learning_rate,
-        weight_decay=args.weight_decay,
-        betas=(0.9, 0.999),
-        eps=1e-8
-    )
-    
-    # Calculate training steps
-    num_training_steps = len(train_loader) * args.num_epochs
-    num_warmup_steps = int(num_training_steps * args.warmup_ratio)
-    
-    # Create scheduler
-    scheduler = get_linear_schedule_with_warmup(
-        optimizer,
-        num_warmup_steps=num_warmup_steps,
-        num_training_steps=num_training_steps
-    )
-    
-    logger.info(f"Total training steps: {num_training_steps}")
-    logger.info(f"Warmup steps: {num_warmup_steps}")
-    
-    # Training loop
-    best_f1_scores = {tag: 0.0 for tag in TARGET_TAGS}  # Track best F1 for each tag
-    no_improvement_count = 0
-    best_model_state = None
-    
-    # Track metrics over time
+    # Training metrics
     training_metrics = {
         'epochs': [],
         'train_loss': [],
-        'val_loss': [],
-        'target_f1_scores': []
+        'val_f1': []
     }
     
-    for epoch in range(args.num_epochs):
-        # Training phase
-        classifier.model.train()
-        train_loss = 0
-        
-        for batch in train_loader:
-            optimizer.zero_grad()
-            
-            input_ids = batch[0].to(device)
-            attention_mask = batch[1].to(device)
-            labels = batch[2].to(device)
-            
-            loss = classifier.model(
-                input_ids=input_ids,
-                attention_mask=attention_mask,
-                labels=labels
-            )
-            
-            loss.backward()
-            # Gradient clipping to prevent exploding gradients
-            torch.nn.utils.clip_grad_norm_(classifier.model.parameters(), max_norm=1.0)
-            optimizer.step()
-            scheduler.step()
-            
-            train_loss += loss.item()
-        
-        avg_train_loss = train_loss / len(train_loader)
-        training_metrics['train_loss'].append(avg_train_loss)
-        
-        # Validation phase
-        val_loss, val_metrics = evaluate_model(classifier, val_lines, val_tags, device)
-        training_metrics['val_loss'].append(val_loss)
-        
-        logger.info(
-            f"Epoch {epoch+1}/{args.num_epochs} - "
-            f"Training Loss: {avg_train_loss:.4f}, "
-            f"Validation Loss: {val_loss:.4f}"
-        )
-        
-        # Track target tag F1 scores
-        target_f1 = {tag: val_metrics.get(tag, {}).get('f1-score', 0.0) for tag in TARGET_TAGS}
-        training_metrics['target_f1_scores'].append(target_f1)
-        
-        # Log per-class metrics
-        for tag in classifier.label_map.keys():
-            tag_metrics = val_metrics.get(tag, {})
-            precision = tag_metrics.get('precision', 0.0)
-            recall = tag_metrics.get('recall', 0.0)
-            f1 = tag_metrics.get('f1-score', 0.0)
-            
-            logger.info(f"{tag}: "
-                       f"Precision: {precision:.4f}, "
-                       f"Recall: {recall:.4f}, "
-                       f"F1: {f1:.4f}")
-        
-        # Early stopping check - continue if any target tag improves
-        improvement_found = False
-        for tag in TARGET_TAGS:
-            current_f1 = target_f1[tag]
-            if current_f1 > best_f1_scores[tag]:
-                best_f1_scores[tag] = current_f1
-                no_improvement_count = 0
-                best_model_state = classifier.model.state_dict().copy()
-                logger.info(f"New best F1 score for {tag}: {current_f1:.4f}")
-                improvement_found = True
-                break
-        
-        if not improvement_found:
-            no_improvement_count += 1
-            logger.info(f"No improvement in any target F1 score for {no_improvement_count} epochs")
-            
-            if no_improvement_count >= args.patience:
-                logger.info(f"Early stopping after {epoch+1} epochs")
-                break
-        
-        # Update metrics
-        training_metrics['epochs'].append(epoch + 1)
+    # Train the model
+    history = classifier.train(
+        train_lines_file=os.path.join(args.train_data_dir, 'lines.txt'),
+        train_tags_file=os.path.join(args.train_data_dir, 'tags.txt'),
+        val_lines_file=os.path.join(args.val_data_dir, 'lines.txt'),
+        val_tags_file=os.path.join(args.val_data_dir, 'tags.txt'),
+        model_save_dir=output_dir,
+        early_stopping_patience=args.patience
+    )
     
-    # Save final model if target not achieved
-    if no_improvement_count >= args.patience:
-        logger.info("\nTraining completed without achieving target F1 scores")
-        model_save_path = os.path.join(output_dir, "model.pt")
-        
-        # Save complete model state
-        torch.save({
-            'model_state_dict': best_model_state,
-            'tokenizer_name': classifier.model_name,
-            'label_map': classifier.label_map,
-            'reverse_label_map': classifier.reverse_label_map,
-            'context_window': classifier.context_window,
-            'max_length': classifier.max_length
-        }, model_save_path)
-        
-        with open(os.path.join(output_dir, "val_metrics.json"), "w") as f:
-            json.dump(val_metrics, f, indent=2)
+    # Record metrics - ensure consistent lengths
+    num_epochs = len(history['train_loss'])
+    training_metrics['epochs'] = list(range(1, num_epochs + 1))
+    training_metrics['train_loss'] = history['train_loss']
+    training_metrics['val_f1'] = history['val_f1']
     
     # Save training metrics
-    with open(os.path.join(output_dir, "training_metrics.json"), "w") as f:
+    metrics_path = os.path.join(output_dir, 'training_metrics.json')
+    with open(metrics_path, 'w') as f:
         json.dump(training_metrics, f, indent=2)
     
-    # Create simple plots
+    # Create plots if requested
     if args.create_plots:
-        try:
-            import matplotlib.pyplot as plt
-            
-            # Plot loss curves
-            plt.figure(figsize=(10, 6))
-            plt.plot(training_metrics['epochs'], training_metrics['train_loss'], label='Train Loss')
-            plt.plot(training_metrics['epochs'], training_metrics['val_loss'], label='Validation Loss')
-            plt.xlabel('Epoch')
-            plt.ylabel('Loss')
-            plt.title('Training and Validation Loss')
-            plt.legend()
-            plt.grid(True)
-            plt.savefig(os.path.join(output_dir, "loss_curves.png"))
-            
-            # Plot F1 scores for target tags
-            plt.figure(figsize=(10, 6))
-            for tag in TARGET_TAGS:
-                f1_scores = [epoch_f1[tag] for epoch_f1 in training_metrics['target_f1_scores']]
-                plt.plot(training_metrics['epochs'], f1_scores, label=f'{tag} F1')
-            plt.axhline(y=0.9, color='r', linestyle='--', label='Target F1 (0.9)')
-            plt.xlabel('Epoch')
-            plt.ylabel('F1 Score')
-            plt.title('F1 Scores for Target Tags')
-            plt.legend()
-            plt.grid(True)
-            plt.savefig(os.path.join(output_dir, "f1_scores.png"))
-            
-            logger.info(f"Training plots saved to {output_dir}")
-        except ImportError:
-            logger.warning("matplotlib not installed, skipping plot creation")
+        create_training_plots(training_metrics, output_dir)
+    
+    # Check if target F1 scores were achieved
+    target_f1_scores = {
+        'FORM': 0.85,
+        'TABLE': 0.85,
+        'TEXT': 0.85
+    }
+    
+    # Get final validation metrics
+    val_loader = classifier.create_data_loader(
+        classifier.prepare_data(
+            classifier.load_data(
+                os.path.join(args.val_data_dir, 'lines.txt'),
+                os.path.join(args.val_data_dir, 'tags.txt')
+            )[0]
+        )[0],
+        shuffle=False
+    )
+    _, val_report = classifier.evaluate(val_loader, return_report=True)
+    
+    # Parse the classification report to get F1 scores
+    report_lines = val_report.split('\n')
+    f1_scores = {}
+    for line in report_lines:
+        if any(tag in line for tag in target_f1_scores.keys()):
+            parts = line.split()
+            if len(parts) >= 5:
+                tag = parts[0]
+                f1 = float(parts[4])
+                f1_scores[tag] = f1
+    
+    # Check if all target scores were achieved
+    all_targets_achieved = all(
+        f1_scores.get(tag, 0) >= target
+        for tag, target in target_f1_scores.items()
+    )
+    
+    if not all_targets_achieved:
+        logger.info("\nTraining completed without achieving target F1 scores")
+        logger.info("Final F1 scores:")
+        for tag, target in target_f1_scores.items():
+            current = f1_scores.get(tag, 0)
+            logger.info(f"{tag}: {current:.4f} (target: {target:.4f})")
+    else:
+        logger.info("\nTraining completed successfully with all target F1 scores achieved!")
+        logger.info("Final F1 scores:")
+        for tag, score in f1_scores.items():
+            logger.info(f"{tag}: {score:.4f}")
+    
+    return all_targets_achieved
 
 def main():
     parser = argparse.ArgumentParser(description="Train document part classifier")
