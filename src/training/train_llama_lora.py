@@ -166,7 +166,8 @@ class LlamaLoRATrainer:
                 label2id=self.label2id,
                 quantization_config=bnb_config,
                 device_map="auto",
-                trust_remote_code=True
+                trust_remote_code=True,
+                pad_token_id=self.tokenizer.pad_token_id
             )
             logger.info("Preparing model for k-bit training...")
             self.base_model = prepare_model_for_kbit_training(self.base_model)
@@ -177,9 +178,13 @@ class LlamaLoRATrainer:
                 num_labels=len(self.id2label),
                 id2label=self.id2label,
                 label2id=self.label2id,
-                trust_remote_code=True
+                trust_remote_code=True,
+                pad_token_id=self.tokenizer.pad_token_id
             )
             self.base_model = self.base_model.to(self.device)
+        
+        # Ensure model's padding token is set
+        self.base_model.config.pad_token_id = self.tokenizer.pad_token_id
         
         logger.info("Model loaded successfully")
     
