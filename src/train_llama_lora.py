@@ -324,8 +324,7 @@ Classification: [/INST]"""
             
             # Log the distribution of the subset
             subset_distribution = defaultdict(int)
-            for idx in sampled_indices:
-                example = val_processed[idx]
+            for example in val_processed:
                 label_tokens = [j for j, id in enumerate(example["labels"]) if id != -100]
                 if label_tokens:
                     label_text = self.tokenizer.decode([example["labels"][i] for i in label_tokens])
