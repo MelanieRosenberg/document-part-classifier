@@ -434,6 +434,10 @@ class DocumentClassificationTrainer(Trainer):
         """
         predictions, labels = eval_pred
         
+        # Debug logging for shapes
+        logger.debug(f"Predictions shape: {predictions.shape}")
+        logger.debug(f"Labels shape: {labels.shape}")
+        
         # Process predictions to extract class labels
         predicted_labels = []
         true_labels = []
@@ -442,7 +446,10 @@ class DocumentClassificationTrainer(Trainer):
             # Get actual label
             label_tokens = [j for j, id in enumerate(label) if id != -100]
             if label_tokens:
-                true_label_text = self.tokenizer.decode([label[i] for i in label_tokens])
+                # Fixed: Use j instead of i for token indexing
+                true_label_text = self.tokenizer.decode([label[j] for j in label_tokens])
+                logger.debug(f"True label text: {true_label_text}")
+                
                 for label_id, label_name in self.id2label.items():
                     if label_name in true_label_text:
                         true_labels.append(label_id)
@@ -450,21 +457,31 @@ class DocumentClassificationTrainer(Trainer):
             
             # Get predicted label
             prompt_length = sum(1 for id in label if id == -100)
-            next_token_logits = pred[prompt_length - 1]
-            predicted_token_id = np.argmax(next_token_logits)
-            predicted_token = self.tokenizer.decode(predicted_token_id)
-            
-            # Map to class
-            predicted_label = None
-            for label_id, label_name in self.id2label.items():
-                if label_name in predicted_token or predicted_token in label_name:
-                    predicted_label = label_id
-                    break
-            
-            if predicted_label is None:
-                predicted_label = 2  # Default to TEXT
-            
-            predicted_labels.append(predicted_label)
+            # Fixed: Ensure we're accessing the correct position in the logits
+            if prompt_length < len(pred):
+                next_token_logits = pred[prompt_length]
+                predicted_token_id = np.argmax(next_token_logits)
+                predicted_token = self.tokenizer.decode(predicted_token_id)
+                logger.debug(f"Predicted token: {predicted_token}")
+                
+                # Map to class
+                predicted_label = None
+                for label_id, label_name in self.id2label.items():
+                    if label_name in predicted_token or predicted_token in label_name:
+                        predicted_label = label_id
+                        break
+                
+                if predicted_label is None:
+                    predicted_label = 2  # Default to TEXT
+                
+                predicted_labels.append(predicted_label)
+            else:
+                logger.warning(f"Prompt length {prompt_length} exceeds prediction length {len(pred)}")
+                predicted_labels.append(2)  # Default to TEXT
+        
+        # Debug logging for extracted labels
+        logger.debug(f"True labels: {true_labels}")
+        logger.debug(f"Predicted labels: {predicted_labels}")
         
         # Calculate metrics
         precision, recall, f1, _ = precision_recall_fscore_support(
