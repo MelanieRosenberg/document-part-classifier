@@ -72,6 +72,16 @@ class LlamaLoRATrainer:
         self.train_dataset = self.load_data(self.train_data_dir)
         self.val_dataset = self.load_data(self.val_data_dir)
         
+        # Log validation dataset distribution
+        val_distribution = defaultdict(int)
+        for example in self.val_dataset:
+            val_distribution[self.id2label[example["label"]]] += 1
+        
+        logger.info("\nValidation Set Distribution:")
+        for label_name, count in val_distribution.items():
+            logger.info(f"{label_name}: {count} lines")
+        logger.info("")
+        
         # Initialize model components
         self.setup_model_components()
     
@@ -262,6 +272,22 @@ Classification: [/INST]"""
             batched=True,
             remove_columns=self.val_dataset.column_names
         )
+        
+        # Log processed validation dataset distribution
+        processed_val_distribution = defaultdict(int)
+        for example in val_processed:
+            label_tokens = [j for j, id in enumerate(example["labels"]) if id != -100]
+            if label_tokens:
+                label_text = self.tokenizer.decode(example["labels"][label_tokens])
+                for label_id, label_name in self.id2label.items():
+                    if label_name in label_text:
+                        processed_val_distribution[label_name] += 1
+                        break
+        
+        logger.info("\nProcessed Validation Set Distribution:")
+        for label_name, count in processed_val_distribution.items():
+            logger.info(f"{label_name}: {count} lines")
+        logger.info("")
         
         # Subset validation dataset if needed, maintaining class proportions
         if max_eval_samples and len(val_processed) > max_eval_samples:
