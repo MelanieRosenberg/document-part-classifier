@@ -136,20 +136,24 @@ class LlamaLoRATrainer:
         logger.info(f"Loading base model and tokenizer from {self.base_model_name}")
         
         # Load tokenizer
+        logger.info("Loading tokenizer...")
         self.tokenizer = AutoTokenizer.from_pretrained(
             self.base_model_name,
             trust_remote_code=True
         )
         self.tokenizer.pad_token = self.tokenizer.eos_token
+        logger.info("Tokenizer loaded successfully")
         
         # Load model with quantization if enabled
         if self.use_4bit:
+            logger.info("Setting up 4-bit quantization config...")
             bnb_config = BitsAndBytesConfig(
                 load_in_4bit=True,
                 bnb_4bit_use_double_quant=True,
                 bnb_4bit_quant_type="nf4",
                 bnb_4bit_compute_dtype=torch.float16
             )
+            logger.info("Loading model with 4-bit quantization...")
             
             self.base_model = AutoModelForCausalLM.from_pretrained(
                 self.base_model_name,
@@ -157,8 +161,10 @@ class LlamaLoRATrainer:
                 device_map="auto",
                 trust_remote_code=True
             )
+            logger.info("Preparing model for k-bit training...")
             self.base_model = prepare_model_for_kbit_training(self.base_model)
         else:
+            logger.info("Loading model without quantization...")
             self.base_model = AutoModelForCausalLM.from_pretrained(
                 self.base_model_name,
                 trust_remote_code=True
@@ -394,6 +400,12 @@ Classification: [/INST]"""
         logger.info(f"Saved training arguments to {args_file}")
 
 class DocumentClassificationTrainer(Trainer):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        # Add label mappings
+        self.id2label = {0: "FORM", 1: "TABLE", 2: "TEXT"}
+        self.label2id = {"FORM": 0, "TABLE": 1, "TEXT": 2}
+
     def compute_loss(self, model, inputs, return_outputs=False):
         """
         Compute the training loss and log it.
@@ -406,41 +418,35 @@ class DocumentClassificationTrainer(Trainer):
         
         return (loss, outputs) if return_outputs else loss
 
-    def evaluate(self, eval_dataset=None, ignore_keys=None, metric_key_prefix="eval"):
-        # Run standard evaluation
-        output = super().evaluate(eval_dataset, ignore_keys, metric_key_prefix)
-        
-        # Custom evaluation focusing on class predictions
-        if eval_dataset is None:
-            eval_dataset = self.eval_dataset
-        
-        # Get predictions
-        predictions = self.predict(eval_dataset)
+    def compute_metrics(self, eval_pred):
+        """
+        Compute metrics for evaluation.
+        """
+        predictions, labels = eval_pred
         
         # Process predictions to extract class labels
         predicted_labels = []
         true_labels = []
         
-        for i, example in enumerate(eval_dataset):
+        for i, (pred, label) in enumerate(zip(predictions, labels)):
             # Get actual label
-            label_tokens = [j for j, id in enumerate(example["labels"]) if id != -100]
+            label_tokens = [j for j, id in enumerate(label) if id != -100]
             if label_tokens:
-                true_label_text = self.tokenizer.decode([example["labels"][i] for i in label_tokens])
-                for label_id, label_name in self.model.config.id2label.items():
+                true_label_text = self.tokenizer.decode([label[i] for i in label_tokens])
+                for label_id, label_name in self.id2label.items():
                     if label_name in true_label_text:
                         true_labels.append(label_id)
                         break
             
             # Get predicted label
-            logits = predictions.predictions[i]
-            prompt_length = sum(1 for id in example["labels"] if id == -100)
-            next_token_logits = logits[prompt_length - 1]
+            prompt_length = sum(1 for id in label if id == -100)
+            next_token_logits = pred[prompt_length - 1]
             predicted_token_id = np.argmax(next_token_logits)
             predicted_token = self.tokenizer.decode(predicted_token_id)
             
             # Map to class
             predicted_label = None
-            for label_id, label_name in self.model.config.id2label.items():
+            for label_id, label_name in self.id2label.items():
                 if label_name in predicted_token or predicted_token in label_name:
                     predicted_label = label_id
                     break
@@ -460,15 +466,65 @@ class DocumentClassificationTrainer(Trainer):
             true_labels, predicted_labels, average='weighted'
         )
         
-        # Add metrics to output
-        output.update({
-            f"{metric_key_prefix}_overall_f1": overall_f1,
-            f"{metric_key_prefix}_form_f1": f1[0],
-            f"{metric_key_prefix}_table_f1": f1[1],
-            f"{metric_key_prefix}_text_f1": f1[2],
-        })
+        return {
+            "overall_f1": overall_f1,
+            "form_f1": f1[0],
+            "table_f1": f1[1],
+            "text_f1": f1[2],
+            "overall_precision": overall_precision,
+            "overall_recall": overall_recall
+        }
+
+    def predict(self, test_dataset, ignore_keys=None, metric_key_prefix="test"):
+        """
+        Run prediction and return predictions and potential metrics.
+        """
+        # Set model to eval mode
+        self.model.eval()
         
-        return output
+        # Process in smaller chunks to avoid OOM
+        chunk_size = self.args.per_device_eval_batch_size
+        all_predictions = []
+        all_labels = []
+        
+        for i in range(0, len(test_dataset), chunk_size):
+            chunk = test_dataset.select(range(i, min(i + chunk_size, len(test_dataset))))
+            chunk_inputs = self.data_collator(chunk)
+            
+            # Move inputs to device
+            chunk_inputs = self._prepare_inputs(chunk_inputs)
+            
+            # Get predictions
+            with torch.no_grad():
+                outputs = self.model(**chunk_inputs)
+            
+            # Get logits and labels
+            logits = outputs.logits.cpu().numpy()
+            labels = chunk_inputs["labels"].cpu().numpy()
+            
+            all_predictions.append(logits)
+            all_labels.append(labels)
+            
+            # Clear GPU memory
+            torch.cuda.empty_cache()
+        
+        # Concatenate chunks
+        predictions = np.concatenate(all_predictions, axis=0)
+        labels = np.concatenate(all_labels, axis=0)
+        
+        return predictions, labels
+
+    def evaluate(self, eval_dataset=None, ignore_keys=None, metric_key_prefix="eval"):
+        """
+        Run evaluation and return metrics.
+        """
+        # Run standard evaluation
+        output = super().evaluate(eval_dataset, ignore_keys, metric_key_prefix)
+        
+        # Add prefix to metrics
+        metrics = {f"{metric_key_prefix}_{k}": v for k, v in output.items()}
+        
+        return metrics
 
 def main():
     """Run training from command line."""
