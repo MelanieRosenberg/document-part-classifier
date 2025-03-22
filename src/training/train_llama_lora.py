@@ -309,6 +309,7 @@ class LlamaLoRATrainer:
             learning_rate=learning_rate,
             warmup_steps=warmup_steps,
             weight_decay=weight_decay,
+            max_grad_norm=1.0,
             logging_dir=str(self.run_dir / "logs"),
             logging_steps=logging_steps,
             eval_steps=eval_steps,
