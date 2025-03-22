@@ -328,7 +328,7 @@ Classification: [/INST]"""
                 example = val_processed[idx]
                 label_tokens = [j for j, id in enumerate(example["labels"]) if id != -100]
                 if label_tokens:
-                    label_text = self.tokenizer.decode(example["labels"][label_tokens])
+                    label_text = self.tokenizer.decode([example["labels"][i] for i in label_tokens])
                     for label_id, label_name in self.id2label.items():
                         if label_name in label_text:
                             subset_distribution[label_name] += 1
