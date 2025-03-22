@@ -145,12 +145,14 @@ def evaluate_model(model, dataset):
             outputs = model.generate(
                 **inputs,
                 max_new_tokens=10,
-                temperature=0.1,
                 num_return_sequences=1,
                 pad_token_id=tokenizer.pad_token_id,
                 eos_token_id=tokenizer.eos_token_id,
-                do_sample=False,  # Use greedy decoding
-                early_stopping=True
+                do_sample=True,  # Enable sampling
+                temperature=0.1,  # Low temperature for more deterministic output
+                top_p=0.9,  # Nucleus sampling
+                num_beams=1,  # No beam search
+                early_stopping=False  # Disable early stopping since we're not using beam search
             )
         
         # Decode the generated output
@@ -161,19 +163,24 @@ def evaluate_model(model, dataset):
         if "[/INST]" in generated_text:
             try:
                 response = generated_text.split("[/INST]")[1].strip()
+                # Remove any repeated prompt text
+                if "Classify the following document segment" in response:
+                    response = response.split("Classify the following document segment")[0].strip()
             except IndexError:
                 response = generated_text
                 unexpected_outputs.append({
                     "idx": idx,
                     "text": example["text"][:100],
-                    "generated": generated_text
+                    "generated": generated_text,
+                    "reason": "split_error"
                 })
         else:
             response = generated_text
             unexpected_outputs.append({
                 "idx": idx,
                 "text": example["text"][:100],
-                "generated": generated_text
+                "generated": generated_text,
+                "reason": "no_inst_marker"
             })
         
         # Extract the predicted class
