@@ -128,9 +128,12 @@ def evaluate_model(model, dataset):
                     break
         
         # Get prediction
+        input_ids = torch.tensor(example["input_ids"])
+        attention_mask = torch.tensor(example["attention_mask"])
+        
         inputs = {
-            "input_ids": example["input_ids"].unsqueeze(0).to(model.device),
-            "attention_mask": example["attention_mask"].unsqueeze(0).to(model.device)
+            "input_ids": input_ids.unsqueeze(0).to(model.device),
+            "attention_mask": attention_mask.unsqueeze(0).to(model.device)
         }
         
         with torch.no_grad():
