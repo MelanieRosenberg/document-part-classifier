@@ -6,22 +6,22 @@ from typing import List, Tuple, Dict, Optional, Union
 import torch
 import torch.nn as nn
 from torch.utils.data import DataLoader, TensorDataset
-from transformers import RobertaTokenizer, RobertaModel, AdamW, get_linear_schedule_with_warmup
+from transformers import DebertaTokenizer, DebertaModel, AdamW, get_linear_schedule_with_warmup
 from sklearn.metrics import classification_report, f1_score
 
 # Setup logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-class RobertaForSequenceClassification(nn.Module):
+class DebertaForSequenceClassification(nn.Module):
     """
     Standard classification model without CRF
     """
     def __init__(self, num_labels: int):
         super().__init__()
-        self.roberta = RobertaModel.from_pretrained('roberta-large')
+        self.deberta = DebertaModel.from_pretrained('microsoft/deberta-v3-large')
         self.dropout = nn.Dropout(0.1)
-        self.classifier = nn.Linear(self.roberta.config.hidden_size, num_labels)
+        self.classifier = nn.Linear(self.deberta.config.hidden_size, num_labels)
         
     def forward(
         self,
@@ -29,7 +29,7 @@ class RobertaForSequenceClassification(nn.Module):
         attention_mask: torch.Tensor,
         labels: Optional[torch.Tensor] = None
     ) -> Union[torch.Tensor, torch.Tensor]:
-        outputs = self.roberta(input_ids=input_ids, attention_mask=attention_mask)
+        outputs = self.deberta(input_ids=input_ids, attention_mask=attention_mask)
         pooled_output = outputs[1]  # [CLS] token representation
         pooled_output = self.dropout(pooled_output)
         logits = self.classifier(pooled_output)
@@ -47,10 +47,10 @@ class RobertaForSequenceClassification(nn.Module):
 class DocumentPartClassifier:
     def __init__(
         self,
-        model_name: str = 'roberta-large',
+        model_name: str = 'microsoft/deberta-v3-large',
         max_length: int = 512,
         batch_size: int = 16,
-        learning_rate: float = 2e-5,
+        learning_rate: float = 1e-5,
         num_epochs: int = 10,
         context_window: int = 2,
         warmup_ratio: float = 0.1
@@ -68,7 +68,7 @@ class DocumentPartClassifier:
         self.reverse_label_map = {v: k for k, v in self.label_map.items()}
         
         # Initialize tokenizer and add special tokens
-        self.tokenizer = RobertaTokenizer.from_pretrained(model_name)
+        self.tokenizer = DebertaTokenizer.from_pretrained(model_name)
         special_tokens = {
             'additional_special_tokens': ['[TARGET_START]', '[TARGET_END]']
         }
@@ -80,10 +80,10 @@ class DocumentPartClassifier:
         
         # Initialize model
         try:
-            self.model = RobertaForSequenceClassification(num_labels=len(self.label_map))
+            self.model = DebertaForSequenceClassification(num_labels=len(self.label_map))
                 
             # Resize token embeddings to account for new special tokens
-            self.model.roberta.resize_token_embeddings(len(self.tokenizer))
+            self.model.deberta.resize_token_embeddings(len(self.tokenizer))
             self.model.to(self.device)
             logger.info(f"Initialized standard classifier with {model_name} on {self.device}")
         except Exception as e:
@@ -477,7 +477,7 @@ class DocumentPartClassifier:
             tokenizer_name = checkpoint.get('tokenizer_name', self.model_name)
             if tokenizer_name != self.model_name:
                 logger.info(f"Updating tokenizer from {self.model_name} to {tokenizer_name}")
-                self.tokenizer = RobertaTokenizer.from_pretrained(tokenizer_name)
+                self.tokenizer = DebertaTokenizer.from_pretrained(tokenizer_name)
                 
                 # Add special tokens if loading an older model that didn't have them
                 special_tokens = {
@@ -489,10 +489,10 @@ class DocumentPartClassifier:
                 self.model_name = tokenizer_name
             
             # Initialize model with correct number of labels
-            self.model = RobertaForSequenceClassification(num_labels=len(self.label_map))
+            self.model = DebertaForSequenceClassification(num_labels=len(self.label_map))
             
             # Resize token embeddings if needed
-            self.model.roberta.resize_token_embeddings(len(self.tokenizer))
+            self.model.deberta.resize_token_embeddings(len(self.tokenizer))
             
             # Load state dict
             self.model.load_state_dict(checkpoint['model_state_dict'])
