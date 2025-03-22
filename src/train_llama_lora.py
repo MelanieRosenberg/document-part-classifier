@@ -405,16 +405,24 @@ class DocumentClassificationTrainer(Trainer):
         # Add label mappings
         self.id2label = {0: "FORM", 1: "TABLE", 2: "TEXT"}
         self.label2id = {"FORM": 0, "TABLE": 1, "TEXT": 2}
+        # Initialize loss tracking
+        self.current_step_losses = []
 
     def compute_loss(self, model, inputs, return_outputs=False):
         """
-        Compute the training loss and log it.
+        Compute the training loss and track it for averaging.
         """
         loss, outputs = super().compute_loss(model, inputs, return_outputs=True)
         
-        # Log the loss if we're at a logging step
-        if self.state.global_step % self.args.logging_steps == 0:
-            logger.info(f"Step {self.state.global_step}: loss = {loss.item():.4f}")
+        # Track loss for averaging
+        self.current_step_losses.append(loss.item())
+        
+        # If this is the last batch of the step, log the average
+        if len(self.current_step_losses) == self.args.gradient_accumulation_steps:
+            avg_loss = sum(self.current_step_losses) / len(self.current_step_losses)
+            if self.state.global_step % self.args.logging_steps == 0:
+                logger.info(f"Step {self.state.global_step}: average loss = {avg_loss:.4f}")
+            self.current_step_losses = []  # Reset for next step
         
         return (loss, outputs) if return_outputs else loss
 
