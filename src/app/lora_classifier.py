@@ -1,6 +1,6 @@
 import gradio as gr
 import torch
-from transformers import AutoModelForCausalLM, AutoTokenizer
+from transformers import AutoModelForSequenceClassification, AutoTokenizer
 from peft import PeftModel
 import time
 from typing import List, Dict
@@ -14,8 +14,8 @@ logger = logging.getLogger(__name__)
 class LlamaClassifier:
     def __init__(
         self,
-        base_model_path: str = "/home/azureuser/llama_models/llama-3-2-3b",
-        lora_weights_path: str = "models/llama_lora/run_20240321_123456/final_model",
+        base_model_path: str = "/home/azureuser/llama_models/llama-3-2-1b",
+        lora_weights_path: str = "models/llama_1b_lora/run_20250322_202241/final_model",
         context_window: int = 3,
         max_length: int = 512,
         device: str = None
@@ -38,8 +38,11 @@ class LlamaClassifier:
         self.tokenizer.pad_token = self.tokenizer.eos_token
         
         # Load base model
-        self.base_model = AutoModelForCausalLM.from_pretrained(
+        self.base_model = AutoModelForSequenceClassification.from_pretrained(
             base_model_path,
+            num_labels=len(self.id2label),
+            id2label=self.id2label,
+            label2id=self.label2id,
             trust_remote_code=True
         )
         
@@ -56,15 +59,6 @@ class LlamaClassifier:
         self.model = self.model.to(self.device)
         self.model.eval()
         logger.info(f"Model loaded and ready for inference on {self.device}")
-    
-    def create_prompt(self, text: str) -> str:
-        """Create prompt for document classification."""
-        return f"""<s>[INST] Classify the following document segment into one of these categories: FORM, TABLE, or TEXT.
-The segment is delimited by triple backticks.
-```
-{text}
-```
-Classification: [/INST]"""
     
     def preprocess_text(self, texts: List[str]) -> List[str]:
         """Preprocess texts with context window."""
@@ -106,56 +100,63 @@ Classification: [/INST]"""
                 "inference_time": "0.00 seconds"
             }
         
-        # Read XML content
-        xml_content = xml_file.decode('utf-8')
-        
-        # Extract text from XML
-        lines = self.extract_text_from_xml(xml_content)
-        if not lines:
+        try:
+            # Read XML content
+            if hasattr(xml_file, 'read'):
+                xml_content = xml_file.read().decode('utf-8')
+            else:
+                xml_content = xml_file
+            
+            # Extract text from XML
+            lines = self.extract_text_from_xml(xml_content)
+            if not lines:
+                return {
+                    "predictions": ["Error: No text content found in XML"],
+                    "inference_time": "0.00 seconds"
+                }
+            
+            # Process texts with context window
+            processed_texts = self.preprocess_text(lines)
+            
+            # Tokenize inputs
+            inputs = self.tokenizer(
+                processed_texts,
+                padding="max_length",
+                truncation=True,
+                max_length=self.max_length,
+                return_tensors="pt"
+            )
+            
+            # Move inputs to device
+            inputs = {k: v.to(self.device) for k, v in inputs.items()}
+            
+            # Make predictions
+            start_time = time.time()
+            with torch.no_grad():
+                outputs = self.model(**inputs)
+                logits = outputs.logits
+                predictions = torch.argmax(logits, dim=-1)
+            
+            # Convert predictions to labels
+            pred_labels = [self.id2label[pred.item()] for pred in predictions]
+            inference_time = time.time() - start_time
+            
+            # Format results
+            results = []
+            for line, label in zip(lines, pred_labels):
+                results.append(f"{label}: {line}")
+            
             return {
-                "predictions": ["Error: No text content found in XML"],
+                "predictions": results,
+                "inference_time": f"{inference_time:.2f} seconds"
+            }
+            
+        except Exception as e:
+            logger.error(f"Error during prediction: {e}")
+            return {
+                "predictions": [f"Error during prediction: {str(e)}"],
                 "inference_time": "0.00 seconds"
             }
-        
-        # Process texts with context window
-        processed_texts = self.preprocess_text(lines)
-        
-        # Create prompts
-        prompts = [self.create_prompt(text) for text in processed_texts]
-        
-        # Tokenize inputs
-        inputs = self.tokenizer(
-            prompts,
-            padding="max_length",
-            truncation=True,
-            max_length=self.max_length,
-            return_tensors="pt"
-        )
-        
-        # Move inputs to device
-        inputs = {k: v.to(self.device) for k, v in inputs.items()}
-        
-        # Make predictions
-        start_time = time.time()
-        with torch.no_grad():
-            outputs = self.model(**inputs)
-            logits = outputs.logits
-            probs = torch.nn.functional.softmax(logits, dim=-1)
-            predictions = torch.argmax(logits, dim=-1)
-        
-        # Convert predictions to labels
-        pred_labels = [self.id2label[pred.item()] for pred in predictions]
-        inference_time = time.time() - start_time
-        
-        # Format results
-        results = []
-        for line, label in zip(lines, pred_labels):
-            results.append(f"{label}: {line}")
-        
-        return {
-            "predictions": results,
-            "inference_time": f"{inference_time:.2f} seconds"
-        }
 
 def create_gradio_interface():
     """Create Gradio interface for document classification."""
