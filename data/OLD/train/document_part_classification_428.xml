@@ -1,0 +1,51 @@
+<TEXT>
+industry for anti-infectives overall, and significantly better than for other therapeutic areas, such as neurol- ogy and oncology. One difficulty with such an analysis is that new chemotypes have an inherently higher risk than additional members of established chemical classes, other than the risks of failure due to resistance (which are higher for drugs that have been used for many years). For this review’s new analysis (Table 8), new chemotypes are separated from life-cycle management projects. The overall success rates have not changed significantly in the last 3 years, either for MMV or for the CMR benchmark, which is reassuring. The data shows that a new molecule in formal preclinical evaluation has an 8% chance of becoming part of a product.
+</TEXT>
+<TEXT>
+The naïve interpretation of this is that no more than 13 candidate compounds would be needed for a reasonable chance of launching one new medicine, and 25 for a com- bination with two NCEs (new chemical entities). How- ever, if one aims for a 90% overall chance of success (P), the number of candidates n, each with a success probabil- ity s (8%) is described by the negative binomial distribu- tion in Eq. 1.
+</TEXT>
+<TEXT>
+medicine when following up n candidate molecules. The numerical solutions for this equation show that at least 48 molecules are to be evaluated for this probability to exceed 90%. The MMV discovery portfolio was built and funded to deliver two new preclinical candidates per year, and allowing for a third molecule coming from else- where, then this would still require some 16 years’ invest- ment per combination, except if there is a considerable increase in success rates going forwards (and a justifica- tion for this), or significantly increased investment. The hope on the horizon is that many of the new molecules are first-in-class, and so should they fail in clinical devel- opment there will be scope for well-defined back-up pro- jects, and these are normally much more cost-effective programmes. The definition of new molecular targets also opens up new possibilities for engaging the wider research community, allowing access to resources such as the EU’s European Lead Factory, which considers molec- ular targets but not phenotypic approaches.
+</TEXT>
+<TEXT>
+The factors underlying these metrics merit closer atten- tion. The increased stringency of review of projects at the lead and preclinical candidate stages means that the quality of compounds is theoretically improving, so future success rates may be underestimated [112]. Of the 16 molecules entering preclinical development from the MMV portfolio since 2009, only four have been aban- doned, with six moving successfully to phase I, and a fur- ther seven working their way through safety studies, with four new phase I starts expected in 2017. As Fig. 3 with plots for Eq. 1 shows, doubling the success rate for indi- vidual candidate molecules (from 8 to 16%) more than halves the number that need to be evaluated. One area for possible improvement is the success rate in phase III,
+</TEXT>
+<TEXT>
+This equation represents the relationship between P, or the overall probability of discovering two or more suc- cessful medicines, the number n of candidate molecules pursued, and success probability s for each candidate. In this expression the left term denotes the overall fail- ure to discover at least two successful medicines from a set of n candidate molecules. The terms on the right add the probabilities of finding zero, or exactly one successful
+</TEXT>
+<TABLE>
+Table 8  Success rates (%) in development   2009–2014   for MMV  compared    to benchmark   data, by phase
+               MMV                                                       CMRa                         PBFb
+               Excluding LCMc               Including LCM
+               Per phase    Cumu-lative     Per phase    Cumu-lative     Per phase    Cumu-lative     Per phase    Cumu-lative
+Preclinical     50             8             50           14              60           5               40           3
+Phase I         70            16             70           27              56           9               54           7
+Phase IIa       75            23             78           39              36          16               34          13
+Phase IIb       60d           30             75           50              60d         45               60d         38
+Phase III       50            50             67           67              84          75               70          64
+Registration   100          100             100          100              89          89               91          91
+</TABLE>
+<SECTION_HEADER>
+b Pharmaceutical Benchmarking Forum; CMR data 2013
+</SECTION_HEADER>
+<SECTION_HEADER>
+c PBF data 2010
+</SECTION_HEADER>
+<TEXT>
+d Stage success rate of 60% for combining two medicines has been added into reflect the potential for unfavourable drug–drug interactions that prevents further development of a combination. However, as discussed in the text, this may be an underestimate, since it does not include additional risk because of the change in endpoints between parasite reduction in phase IIa (APCR on day 14 or 28) and ACPR day 28 in phase IIb. No additional allowance has been made for the risk that a medicine may fail because it is not possible to produce a pediatric presentation
+</TEXT>
+<UNSPECIFIED>
+(1 − P) = (1 − s)n + (cid:31) (1 − s)n−1 ∗ s(cid:30) ∗ n 1
+</UNSPECIFIED>
+<PAGE_HEADER>
+Burrows et al. Malar J (2017) 16:26
+</PAGE_HEADER>
+<PAGE_HEADER>
+Page 22 of 29
+</PAGE_HEADER>
+<UNSPECIFIED>
+                                                              (cid:29) (cid:28)
+a LCM: Life cycle management;   these are the medicines that were brought  into the MMV  portfolio when it was already clear that they are well tolerated and effective,
+but the task was to generate new  formulations or co-formulations
+</UNSPECIFIED>
+<PAGE_BREAK>

@@ -1,0 +1,54 @@
+<TABLE>
+Journal                             Avg. Coverage
+JAMA   Internal Medicine                      21.2
+JAMA:   Journal of the American               16.9
+Medical Association
+Pediatrics                                    16.5
+Current Biology                               16.1
+JAMA   Pediatrics                             15.0
+MMWR:    Morbidity  & Mortality               14.9
+Weekly  Report
+Circulation                                   14.7
+New  England  Journal of Medicine             14.4
+Nature Geoscience                             13.0
+Nature Climate Change                         13.0
+</TABLE>
+<TEXT>
+We use the first 39 weeks (276 days) of 2016 as our train- ing set and evaluate on weeks 40-52 (days 277-365). There are 72,540 scientific articles in the training set. Their cov- erage ranges from 0 to 368 news mentions, with the scien- tific articles in the 50th and 90th percentiles receiving 1 and 9 news articles of coverage, respectively. There are 19,457 scientific articles in the test set. Their coverage ranges from 0 to 303, with the scientific articles in the 50th and 90th per- centilesreceiving1and11newsarticlesofcoverage,respec- tively.
+</TEXT>
+<SECTION_HEADER>
+4.1 Model
+</SECTION_HEADER>
+<TEXT>
+We use the learning-to-rank algorithm, lambdaMART (Burges 2010). LambdaMART directly optimizes ranking quality measures such as Normalized Discounted Cumu- lative Gain (NDCG) and Mean Average Precision (MAP) using gradient boosted decision trees. We use Microsoft’s LightGBM to train the model, training it to optimize NDCG. For the daily problem, we optimize and evaluate on NDCG@10 since it is a usual search engine metric and we found 10 to be the upper limit on the number of scientific ar- ticles a real news outlet would cover in a day. For the weekly problem, we optimize and evaluate on a range of ranks 7, 35, and 70, corresponding to outlets which publish on 1, 5, or 10 scientific articles each day. We use DART (Dropouts meet Multiple Additive Regression Trees) as the boosting type, as previous research has shown that DART overcomes MART’s issue of over-specialization to a considerable ex- tent and improves performance on ranking tasks (Rashmi and Gilad-Bachrach 2015).
+</TEXT>
+<SECTION_HEADER>
+4.2 Features
+</SECTION_HEADER>
+<TEXT>
+We extract and treat as binary features the earlier mentioned bibliographic features: Journal, Publisher. Table 1 displays the top 10 journals with at least 100 articles by average news coverage (all journals, however, are included as features). As expected, top journals such as JAMA, Pediatrics, New
+</TEXT>
+<TABLE>
+Subject                                  Avg. Coverage
+health information management                       15.4
+health, toxicology and mutagenesis                  10.7
+pediatrics, perinatology, and child                 10.5
+health
+environmental  science, miscellaneous               10.1
+agricultural and biological sciences,                9.7
+miscellaneous
+internal medicine                                    9.5
+general earth planetary sciences                     8.9
+epidemiology                                         8.8
+archaeology                                          8.7
+social sciences, miscellaneous                       8.4
+</TABLE>
+<TEXT>
+the top 10. We also extract and treat as binary features four different types of subjects from Altmetric and CrossRef: Medline subject codes for journal (Altmetric), subjects as indexed by SCOPUS (Altmetric), publisher subjects (Altmetric), and CrossRef subjects. Subjects are mostly at the granularity of the journal or higher. Similar journals have subjects in com- mon, with, for instance, the journals Nature Conservation, Conservation Biology, Ecology and Evolution, and many more sharing the CrossRef subject “nature and landscape conservation.”Multidisciplinaryjournals,suchasPNASand Nature, are often tagged with more general subjects such as “science” or “multidisciplinary.” Table 2 displays the top 10 CrossRef subjects describing at least 100 articles by aver- age news coverage. As expected, health related subjects top the list, along with those related to the environment. Unfor- tunately, but as expected, “general computer science” and “computational mathematics” secured the last places, at 0.5 and 0.3 news articles on average, respectively. We also extract textual features, when available, for each document: Title, Abstract, Press Release. For scientific ar- ticles with more than one press release, we randomly select one. For each type of text document, we preprocess using a standard English stop word list, extracting counts of un- igrams and bigrams, keeping tokens which appear in more than one document and no more than 80% of documents of the same type in the training set. We keep the 30,000 most frequently occurring features in the training set. We then scale the vectors of counts by tfidf weights fit on the training set. Finally, we create a boolean feature hasPR indicating whether the scientific article received coverage on one of the two prominent press release aggregation websites, Eu- rekAlert! or Science Daily. We hypothesize that mention on one of these would expose the scientific article to more jour- nalists and thus garner more coverage.
+</TEXT>
+<UNSPECIFIED>
+task), to indicate that a mis-rank of a relevance 2 below a
+relevance 0 is worse than below a relevance 1.
+                                                                England  Journal of Medicine, and Nature, make up most of
+</UNSPECIFIED>
+<PAGE_BREAK>

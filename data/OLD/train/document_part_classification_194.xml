@@ -1,0 +1,31 @@
+<TITLE>
+Credit Card Payment Authorization Form
+</TITLE>
+<FORM>
+Credit Card Information:
+             Visa                 Master Card                Discover        Amex
+Account Number:      01 2320  105 1 006
+Expiration Date:     03-03-2018
+Cardholder's Name:  (please print)  Michael Gordon
+Cardholder's
+Signature
+Date:                03-03-2020
+</FORM>
+<SECTION_HEADER>
+Additional information REQUIRED since this is a "card not present"
+</SECTION_HEADER>
+<FORM>
+Zip Code:       20170
+V-code:                        (On the back side of the card, in the signature block, there
+               786             are some  numbers.  The  “last three digits” are the v-code.
+</FORM>
+<UNSPECIFIED>
+Richmond           Raceway         / 600    E  Laburnum           Ave.,     Richmond,          VA      23222      / 804.228.7512           / FAX:      804.228.7526           / Email—livey@richmondraceway.com
+</UNSPECIFIED>
+<UNSPECIFIED>
+         5584449
+                                                                                transaction.
+Credit  card  billing information:   (This info pertains to the address   the credit card bill is sent to.)
+Street  Address:           585  Grove  St Herndon   VA  USA
+</UNSPECIFIED>
+<PAGE_BREAK>

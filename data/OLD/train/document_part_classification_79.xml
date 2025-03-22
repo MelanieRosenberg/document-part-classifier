@@ -1,0 +1,42 @@
+<FORM>
+1.  CERTIFICATE       ACCEPTED        BY
+a. NAME    (Typed  or printed) (Last, First, Middle Initial)                     b.  UNIQUE    IDENTIFICATION     (e.g., EDIPI, UID)
+c. ORGANIZATION                         d. TELEPHONE      NUMBER      (Include   e. E-MAIL   ADDRESS
+                                           Area  Code)
+</FORM>
+<TEXT>
+You have been authorized to receive one or more private and public key pairs and associated certificates. A private key enables you to digitally sign documents and messages and identify yourself to gain access to systems. You may have another private key to decrypt data such as encrypted messages. People and electronic systems inside and outside the DoD will use public keys associated with your private keys to verify your digital signature, or to verify your identity when you attempt to authenticate to systems, or to encrypt data sent to you. The certificates and private keys will be issued on a token, for example a Common Access Card (CAC), another hardware token, or a floppy disk. The certificates and private keys on your token are government property and may be used for official purposes only.
+</TEXT>
+<TEXT>
+Liability: I will have no claim against the DoD arising from use of the Subscriber's certificates, the key recovery process, or a Certification Authority's (CA's) determination to terminate or revoke a certificate. The DoD is not liable for any losses, including direct or indirect, incidental, consequential, special, or punitive damages, arising out of or relating to any certificate issued by a DoD CA.
+</TEXT>
+<FORM>
+f. IDENTIFICATION       1                                                              g.  IDENTIFICATION       2
+(1) TYPE   (DoD  ID, Passport,  etc.)    (2) NUMBER                                    (1) TYPE   (DoD  ID, Passport, etc.)     (2) NUMBER
+</FORM>
+<PAGE_FOOTER>
+A copy of this form shall be provided to the Subscriber.
+</PAGE_FOOTER>
+<UNSPECIFIED>
+SUBSCRIBER                                                                                                 DEPARTMENT          OF   DEFENSE      (DOD)    PUBLIC     KEY   INFRASTRUCTURE            (PKI)
+                                                                                                     CERTIFICATE       OF   ACCEPTANCE          AND   ACKNOWLEDGEMENT                OF  RESPONSIBILITIES
+                                                                                                                         PRIVACY    ACT   STATEMENT
+                                                                  Acknowledgement       of Responsibilities:    I acknowledge    receiving my  PKI  private keys  and  will comply with the following
+                                                                  obligations:
+                                                                   - I will use my  certificates and private keys  only for official purposes;
+                                                                   - I will comply with the  instructions described  to me  today  for selecting a Personal  Identification Number   (PIN) or other
+                                                                     required  method   for controlling access  to my private  keys and  will not disclose same   to anyone,  leave it where  it might
+                                                                     be  observed,  nor write it on the token  itself;
+                                                                   - I understand   that if I receive key management    (encryption/decryption)   key pairs on  my  token, copies  of the private
+                                                                     decryption  keys  have  been  provided  to the key  recovery  database   in case they  need  to be recovered;  and
+                                                                   - I will report any compromise    (e.g., loss, suspected  or known  unauthorized   use,  misplacement,   etc.) of my PIN  or token  to
+                                                                     my  supervisor,  security officer, Certification Authority (CA), Registration  Authority (RA), Local  Registration  Authority
+                                                                     (LRA),  Trusted  Agent  (TA), or Verifying  Official (VO), immediately.
+                                                                                                                                                                     States of America.
+                                                                 h. SUBSCRIBER'S     SIGNATURE     (The  signature provided may be a digital signature if a good fingerprint i. DATE   SIGNED   (YYYYMMMDD)
+                                                                 2. REGISTRATION        OFFICIAL    PER  CPS
+                                                                 a. NAME   (Typed or printed) (Last, First, Middle Initial)                b. ORGANIZATION
+                                                                 e. REGISTRATION     OFFICIAL'S   SIGNATURE                                                                   f. DATE  SIGNED   (YYYYMMMDD)
+                                                                 DD   FORM    2842,   AUG    2009                          PREVIOUS  EDITION  IS OBSOLETE.
+</UNSPECIFIED>
+<PAGE_BREAK>

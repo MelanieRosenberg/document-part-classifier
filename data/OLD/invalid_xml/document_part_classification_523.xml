@@ -1,0 +1,45 @@
+<FORM>
+Drug  Name  (Brand  Name)                    Biomarker(s)                     Indication(s)
+Gastroenterology
+24      Dexlansoprazole  (Dexilant®)                 CYP2C19                          Heartburn, gastroesophageal
+                                                                                      reflux disease, and esophageal
+                                                                                      damage
+25      Esomeprazole   (Nexium®)                     CYP2C19                          Acid indigestion, peptic ulcer
+                                                                                      disease, and gastroesophageal
+                                                                                      reflux disease
+26      Lansoprazole  (Prevacid®)                    CYP2C19                          Peptic ulcer disease,
+                                                                                      gastroesophageal  reflux disease
+27      PEG-3350,   sodium  sulfate, sodium chlo-    G6PD                             Laxative
+        ride, potassium chloride, sodium ascorbate,
+        and  ascorbic acid (Moviprep®)
+28      Rabeprazole  (Aciphex®)                      CYP2C19                          Gastroesophageal  reflux disease
+Hematology
+29      Eltrombopag   (Promacta®)                    F5; SERPINC1                     Thrombocytopenia,   aplastic
+                                                                                      anemia
+30      Methylene  blue (Provayblue)                 G6PD                             Methemoglobinemia
+Immunology
+31      Indacaterol (Arcapta®)                       UGT1A1                           COPD
+Infectious Disease
+32      Abacavir (Ziagen®)                           HLA-B*57:01                      HIV
+33      Atazanavir (Reyataz®)                        UGT1A1                           HIV
+34      Boceprevir  (Victrelis®)                     IFNL3                            Hepatitis C
+35      Chloroquine  (Aralen®)                       G6PD                             Malaria
+36      Dapsone                                      G6PD                             Leprosy
+37      Isoniazid (Nydrazid®)                        NAT1;  NAT2                      Tuberculosis
+38      Mafenide  (Sulfamylon®)                      G6PD                             Burns
+39      Maraviroc  (Selzentry®)                      CCR5   receptor                  HIV
+40      Nitrofurantoin (Furadantin®)                 G6PD                             Urinary tract infections
+41      Peginterferon  alfa-2b (Pegasys®)            IL28B                            Hepatitis B, hepatitis C
+42      Primaquine                                   G6PD                             Malaria
+43      Pyrazinamide  (Rifater®)                     NAT1;  NAT2                      Tuberculosis
+44      Quinine  sulfate                             G6PD;   CYP2D6;  CYP3A4          Malaria
+45      Rifampin  (Rifadin®)                         NAT1;  NAT2                      Tuberculosis
+46      Sulfamethox-azole  and trimethoprim          G6PD                             Bacterial infections
+        (Bactrim®)
+47      Telaprevir (Incivek®)                        IFNL3                            Hepatitis C
+48      Voriconazole  (Vfend®)                       CYP2C19                          Fungal infections
+</FORM>
+<PAGE_HEADER>
+Appendix 58
+</PAGE_HEADER>
+<PAGE_BREAK>

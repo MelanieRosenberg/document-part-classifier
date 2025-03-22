@@ -1,0 +1,35 @@
+<TABLE>
+Nutrient               Biologic       Val./reproduc     Coef      Details
+                       tissue
+Vitamin  D: D25        Plasma         Validity          0.35      Correlation between  FFQ  estimate of vit D intake (including supplements) with
+(OH)D                                                             plasma  D25 (OH)D   (n=139). Correlation excluding supplement  users: r=0.25
+                                                                  (Willett, p 199)
+                                                        0.18      Cross-sectional correlation between dietary intake of nutrients and biochemical
+                                                                  markers in UK  pre-school child study in females (n=350). In males (n=365)
+                                                                  r=0.06 (Margetts, table 7.9b).
+                       Serum          Validity          0.24      Correlation between  estimated vit D intake from food and supplements (based
+                                                                  on 24 h recall) and serum D25 (OH)D   (n=373  healthy women).  Food  only:
+                                                                  r=0.11 (Willett, p 199).
+Vitamin  C             Plasma         Validity          0.43      Unadjusted  correlation between questionnaire-derived dietary ascorbic acid
+                                                                  intake and plasma ascorbic acid concentration in a heterogeneous population.
+                                                                  Diet only: r=38 (Table 9.1). Correlation is 0.31 for leukocyte ascorbic acid
+                                                                  concentration.(Willett, p 200)
+                                      Reproducibility   0.28      Repeated  measures in men  obtained 6 years apart (Willett, p 201)
+                                      Validity          0.43      Cross-sectional correlation between dietary intake of nutrients and biochemical
+                                                                  markers in UK  pre-school child study in males (n=369). In females (n=354)
+                                                                  r=0.39 (Margetts, table 7.9b).
+                       Serum          Validity          0.55      Correlation between  food-frequency questionnaire estimate of vit C intake and
+                                                                  serum  vit C values (in smokers) in 196 men in Scotland (adjusted for total
+                                                                  energy intake, BMI  and serum  cholesterol level). Non-smokers: 0.58 (Willett, p
+                                                                  200/201)
+                       Leukocyte      Validity          0.49      Correlation between  one week  of intake data and a single leukocyte ascorbate
+                                                                  measurement   for men. For women:  r=0.36. Nutrition survey of elderly in UK
+                                                                  (Margetts, p 211)
+Vitamin  B6            Plasma         Validity          0.37      Correlation between  B6 and plasma  pyridoxal phosphate levels in 280 healthy
+                       Urinary        Validity          -         men  =0.37 (Willett p203)
+Folacin                Serum          Validity          0.56      Correlation of 0.56 in Framington Heart study 385 subjects (serum)
+                       Erythrocyte                      0.51      Correlation in 19 elderly subjects (erythrocyte) (Willet p204)
+Magnesium              Serum          Validity          0.27      Correlation between  intake with supplements 0.27 in 139 men  and 0.15 without
+                                                                  supplements  (Willett p211)
+</TABLE>
+<PAGE_BREAK>

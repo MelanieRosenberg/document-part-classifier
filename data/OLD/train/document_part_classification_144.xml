@@ -1,0 +1,50 @@
+<FORM>
+EMPLOYEE  ID                   LAST NAME                     FIRST NAME                 MIDDLE NAME
+  HIRING DEPARTMENT/I.D.                    SUPERVISOR’S NAME                      SUPERVISOR’S EXT
+       LEVEL (A,B, C)                        HOURLY  RATE                           MAX HOURS/WEEK
+</FORM>
+<FORM>
+/
+EFFECTIVE START DATE               REC #           PS POSITION NUMBER    /   JOB CODE                        END DATE
+  STUDENT    ASSISTANT    (NON-WORK      STUDY)
+                                                                         /
+ EFFECTIVE START DATE              REC #           PS POSITION NUMBER     /  JOB CODE                        END DATE
+                                                                         /
+ EFFECTIVE START DATE              REC #           PS POSITION NUMBER     /  JOB CODE                        END DATE
+ APPROPRIATE ADMINISTRATOR/APPROVAL NAME          APPROPRIATE ADMINISTRATOR/APPROVAL SIGNATURE               DATE
+</FORM>
+<PAGE_FOOTER>
+STUDENT EMPLOYEE SIGNATURE
+</PAGE_FOOTER>
+<PAGE_FOOTER>
+STUDENT EMPLOYEE PRINT NAME
+</PAGE_FOOTER>
+<PAGE_FOOTER>
+DATE
+</PAGE_FOOTER>
+<PAGE_HEADER>
+STUDENT EMPLOYMENT PAYROLL TRANSACTION FORM (SEPTF)
+</PAGE_HEADER>
+<UNSPECIFIED>
+SECTION     1: TYPE   OF  ACTION
+         New  Appointment               Prior Employee                  Concurrent   Appointment
+         Position Change:  Transfer  to another  Department   and/or  change  PeopleSoft   Position Number
+         Hourly Rate  Change:  *Note:  No  retroactive  pay/changes    accepted.
+                 Merit  Salary Increase  (5% Max)  (must  include  Student  Performance   Report)
+                 Other:  Change  in job responsibilities (must include  letter with change  of job duties)
+         Separation:  Student  is no longer a CSULB  employee   or no longer  working  for the department.
+SECTION     2: APPOINTMENT        INFORMATION        (to  be completed     by the  Hiring  Department)
+                                FEDERAL     WORK    STUDY    JOB  #:
+    WORK-STUDY
+      1)  Are you currently working for another department or position (not including this position)?
+          YES      NO      If yes, which            -     -     -    -     -         many        -    -     -         box  Work-Study
+                                        department?                             How        hours?               Check    if
+      2)  Are you currently on a visa or work authorization? YES       NO       If yes, enter visa type:
+ In accepting this employment, I agree to abide by all CSULB system policies including being enrolled in at least 6 units for
+ undergrad/graduates   per semester and may  not be employed  more than  20 hours per week during academic  term.
+ International students on a visa are required by the Immigration and Naturalization Service to maintain a specific amount of units for
+ undergrad/graduate.  For more  information regarding this requirement, please contact Center for International Education Office. I am a
+ student at CSU, Long Beach and  all statements made are true and complete to the best of my knowledge. I understand that any false
+ statement  on this form may be grounds fortermination.
+</UNSPECIFIED>
+<PAGE_BREAK>

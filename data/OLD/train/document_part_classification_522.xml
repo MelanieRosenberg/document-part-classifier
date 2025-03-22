@@ -1,0 +1,40 @@
+<TABLE>
+Drug  Name  (Brand Name)                     Biomarker(s)                    Indication(s)
+Metabolic
+49      Allopurinol                                  HLA-B*58:01                     High blood  uric acid levels, gout
+Neurology
+50      Carbamazepine   (Tegretol®)                  HLA-B*15:02;  HLA-A*31:01       Epilepsy, bipolar disorder
+51      Carisoprodol  (Soma®)                        CYP2C19                         Musculoskeletal pain
+52      Clobazam  (Onfi®)                            CYP2C19                         Lennox-Gastaut  syndrome
+53      Dextrometorphan    and quinidine             CYP2D6                          Pseudobulbar  affect
+        (Nuedexta®)
+54      Divalproex (Depakote®)                       UCD  (NAGS;  CPS;  ASS; OTC;    Bipolar disorder (antiepileptic
+                                                     ASL; ARG)                       drug)
+55      Phenytoin  (Dilantin®)                       HLA-B;  CYP2C9                  Prevention of seizures
+56      Tetrabenazine (Xenazine®)                    CYP2D6                          Huntington’s disease
+57      Valproic acid (Depakene®)                    OTC;  POLG;  NAGS;  CPS1;       Epilepsy
+                                                     ASS1; ASL; ABL2
+58      Vortioxetine (TrintellixTM)                  CYP2D6                          Depression
+Oncology
+59      Ado-trastuzumab   emtansine (Kadcyla®)       ERBB2                           Breast cancer
+60      Afatinib (Gilotrif®)                         EGFR                            Metastatic non-small cell lung
+                                                                                     cancer
+61      Anastrozole (Arimidex®)                      ESR1; PGR                       Breast cancer
+62      Arsenic trioxide (Trisenox®)                 PML-RARA                        Acute  promyelocytic leukemia
+63      Busulfan (Busulfex® & Myleran®)              BCR-ABL1                        Leukemia
+64      Bosutinib (Bosulif®)                         BCR-ABL1                        Leukemia
+65      Brentuximab  vedotin (AdcetrisTM)            CD30                            Hodgkin’s lymphoma,   anaplastic
+                                                                                     large cell lymphoma
+66      Capecitabine  (Xeloda®)                      DPYD                            Multiple cancers
+67      Cetuximab  (Erbitux®)                        EGFR;  KRAS                     Colon  cancer
+68      Crizotinib (Xalkori®)                        ALK                             Lung  cancer
+69      Dabrafenib  (Tafinlar®)                      BRAF;  G6PD                     Melanoma
+70      Dasatinib (Sprycel®)                         BCR-ABL                         Leukemia
+71      Denileukin diftitox (Ontak®)                 IL2RA                           Lymphoma
+72      Erlotinib (Tarceva®)                         EGFR                            Non-small  cell lung cancer
+73      Everolimus  (Afinitor®)                      ERBB2;  ESR1                    Breast cancer
+</TABLE>
+<PAGE_HEADER>
+The Personalized Medicine Report 59
+</PAGE_HEADER>
+<PAGE_BREAK>

@@ -1,0 +1,49 @@
+<TITLE>
+Appendix 8: Procedures to calculate missing information for meta-analysis14
+</TITLE>
+<TABLE>
+Type  of data      Problem                         Assumptions
+Dose-response      Serving size is not quantified  Use  serving size recommended    in SLR  1
+data               or ranges are missing, but      for consistency  in the analyses (Appendix
+                   group descriptions are given    4)
+                   Standard error missing          The  p value (either exact or the upper
+                                                   bound)  is used to estimate the standard
+                                                   error
+Quantile-based     Numbers   of controls (or the   Group  sizes are assumed  to be
+data               denominator  in cohort          approximately   equal
+                   studies) are missing
+                   Odds  ratio is missing          Unadjusted   odds ratios are calculated by
+                                                   using numbers   of cases and controls in
+                                                   each  group
+                   Confidence  interval is         Standard  error and hence  confidence
+                   missing                         interval were calculated from  raw
+                                                   numbers   (although doing  so may  result in
+                                                   a somewhat   smaller standard  error than
+                                                   would  be obtained  in an adjusted
+                                                   analysis)
+                   Group  mean  or median  are     The  mid-point  of closed-ended
+                   missing                         categories will be assigned  as
+                                                   exposure  to the group.  The median
+                                                   exposure  for open ended-categories
+                                                   will be estimated by  using the
+                                                   method   of Chene  and Thompson11
+                                                   assuming   a normal or lognormal
+                                                   distribution. However,  if the
+                                                   number   of groups is too small to
+                                                   calculate a distribution, the
+                                                   midpoint  will be assigned to the
+                                                   lowest  category. The upper  bound
+                                                   plus the mid-range  of the precedent
+                                                   category  will be assigned to the
+                                                   highest category.
+Category  data     Numbers   of cases and          These  numbers   may  be inferred
+                   controls (or the denominator    based  on numbers  of cases and  the
+                   in cohort studies) is missing   reported odds  ratio (proportions will
+                                                   be correct unless adjustment  for
+                                                   confounding   factors considerably
+                                                   alter the crude odds ratios)
+</TABLE>
+<PAGE_FOOTER>
+"!
+</PAGE_FOOTER>
+<PAGE_BREAK>

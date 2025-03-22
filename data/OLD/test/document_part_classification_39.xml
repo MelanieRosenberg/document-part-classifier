@@ -1,0 +1,25 @@
+<CAPTION>
+BayviewPhysicians.com
+</CAPTION>
+<SECTION_HEADER>
+Blood Pressure Record
+</SECTION_HEADER>
+<FORM>
+What  do blood  pressure  numbers      The higher (systolic) number is the pressure while the heart is beating.
+             indicate?                 The lower (diastolic) number is the pressure when the heart is resting between beats.
+ What  is a "normal"  adult blood      Less than 140 over 90
+        pressure  reading?
+</FORM>
+<TEXT>
+A systolic pressure of 130 to 139 or a diastolic pressure of 85 to 89 should be watched carefully. Let your doctor know if your blood pressure is equal to or more than 140 over 90. When should you call your doctor?
+</TEXT>
+<TABLE>
+Date         Time            Blood Pressure            Pulse Rate                             Comments
+25/1/2005   08:30am       120/70                     75                  Normal
+26/1/2005   10:30am       155/82                     85                  High  Blood   Presssure
+27/1/2005   7:00pm        90/60                      58                  Low   Blood   Pressure
+</TABLE>
+<PAGE_HEADER>
+Name: Michael Gordon
+</PAGE_HEADER>
+<PAGE_BREAK>

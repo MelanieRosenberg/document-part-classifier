@@ -1,0 +1,50 @@
+<FORM>
+Table  1 Student participants’ self-perception and perceptions of workshop  effectiveness
+Variable                                                                Mean   (SD)      N
+-Pre-Workshop:
+  I am able to get good grades in most of the courses I take.           4.12 (0.76)      138
+  I am aware  of my own  needs, interests, goals, and strengths         4.28 (0.77)      138
+  and weaknesses.
+-Post-Workshop:
+  I would like to build good habits to be a successful scientist.       4.59 (0.76)      133
+  The workshop   is helpful.                                            4.65 (0.70)      133
+  The workshop   is organized well.                                     4.73 (0.62)      133
+  Will attend future related workshops.                                 4.63 (0.70)      133
+  The length of the workshop  is appropriate.                           4.48 (0.87)      133
+</FORM>
+<TEXT>
+Among those participants who provided suggestions and feedback in an open-ended question, 20 % suggested that the college offer more workshops and 40 % suggested offer multiple times as well. In terms of topics that student participants suggested, they included mentors’ research activities on campus (41.7%) and career choices and opportunities (33.3%) and other topics.
+</TEXT>
+<SECTION_HEADER>
+4.1.2 Pre- and Post- Comparisons
+</SECTION_HEADER>
+<SECTION_HEADER>
+Table 2 Student mentoring workshop effectiveness and effect sizes
+</SECTION_HEADER>
+<FORM>
+Variable                         Mean   (SD)   Mean   (SD)  Mean     t (df)     P       Cohen’s
+                                 Pre-          Post-        Diff.                       d
+                                 Workshop      Workshop     (SE)
+More  knowledge   and  skills to 3.56 (0.92)   4.39 (0.69)  0.827    9.72***    <.001   1.02
+be a successful scientist                                   (0.98)   (132)
+Able  to use  good  habits  and  3.62 (0.97)   4.35 (0.78)  0.729    8.47***    <.001   0.83
+strategies to help with scientific                          (0.99)   (132)
+research
+Aware  of mentorship  support/   3.69 (1.10)   4.08 (1.02)  0.389    5.05***    <.001   0.37
+resources/  services/  facilities                           (0.88)   (130)
+etc.
+Overall confidence in becoming   3.13 (0.95)   4.20 (0.93)  1.070    11.61***   <.001   1.14
+a successful scientist                                      (0.98)   (113)
+Believe      mentoring      for  4.65 (0.75)   4.80 (0.57)  0.158    2.37*      .019    0.22
+undergraduate     students    is                            (0.77)   (132)
+important to their success
+Would  like to be a scientist    3.58 (1.29)   4.08 (1.08)  0.504    4.90***    <.001   0.42
+                                                            (1.19)   (132)
+</FORM>
+<PAGE_FOOTER>
+64
+</PAGE_FOOTER>
+<UNSPECIFIED>
+N.B., N = 133 (incomplete data excluded  and reflected on df); *p < .05; **p < .01; ***p < .001
+</UNSPECIFIED>
+<PAGE_BREAK>

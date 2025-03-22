@@ -1,0 +1,37 @@
+<TABLE>
+Drug  Name  (Brand Name)                    Biomarker(s)                    Indication(s)
+Adjuvant Therapy
+1       Cevimeline (Evoxac®)                        CYP2D6                          Dry mouth
+2       Rasburicase (Elitek®)                       G6PD;  CYB5R1-4                 Hyperuricemia, hemolysis, and
+                                                                                    methemoglobinemia
+3       Sodium  phenylacetate and sodium            NAGS;  CPS1; ASS1; OTC; ASL;    Urea cycle disorders
+        benzoate  (Ammonul®)                        ARG
+4       Sodium  phenylbutyrate (Buphenyl®)          CPS1; OTC;  ASS1                Urea cycle disorders
+Analgesia & Anesthesiology
+5       Celecoxib (Celebrex®)                       CYP2C9                          Pain
+6       Codeine                                     CYP2D6;  CYP3A4;   UGT2B7       Pain
+7       Mivacurium  (Mivacron®)                     Cholinesterase gene             Anesthesia adjunct
+8       Tramadol (Ultram®)                          CYP2D6                          Pain
+Cardiovascular
+9       Carvedilol (Coreg®)                         CYP2D6                          Cardiovascular disease
+10      Clopidogrel (Plavix®)                       CYP2C19                         Antiplatelet response
+11      Isosorbide and hydralazine (Bidil®)         NAT1; NAT2                      Heart failure
+12      Lomitapide                                  LDLR                            Familial hypercholesterolemia
+13      Metoprolol (Toprol-XL®)                     CYP2D6                          Cardiovascular disease
+14      Mipomersen   sodium (Kynamro®)              LDLR                            Familial hypercholesterolemia
+15      Pravastatin                                 LDR                             High cholesterol
+16      Propafenone  (Rythmol  SR®)                 CYP2D6                          Cardiac arrhythmia
+17      Quinidine                                   CYP2D6                          Cardiac arrhythmia, malaria
+18      Simvastatin (Zocor®)                        SLCO1B1                         High cholesterol
+19      Warfarin (Coumadin®)                        CYP2C9;  VKORC1;   protein C    Anti-blood clotting, stroke
+                                                    or S deficiencies               prevention
+Endocrinology
+20      Glyburide                                   G6PD                            Diabetes
+21      Chlorpropamide                              G6PD                            Diabetes
+22      Glimepiride                                 G6PD;  CYP2C9                   Diabetes
+23      Glipizide                                   G6PD                            Diabetes
+</TABLE>
+<PAGE_HEADER>
+The Personalized Medicine Report 57
+</PAGE_HEADER>
+<PAGE_BREAK>

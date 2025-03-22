@@ -1,0 +1,33 @@
+<TEXT>
+Antimalarial efficacy screening: in vitro and in vivo protocols. Supplemental file. animals are prepared and stained with Giemsa. Parasitemia is determined microscopically by counting 4 fields of approximately 100 erythrocytes per field. For low parasitemias (<1%), up to 4000 erythrocytes have to be counted. Alternatively the parasitemia can also be determined by FACS analysis, which works particularly well for parasitemias >1%. The difference between the mean value of the control group (taken as 100%) and those of the experimental groups is calculated and expressed as percent reduction (= activity) using the following equation:
+</TEXT>
+<TEXT>
+For slow acting drugs, additional smears should be taken on day 5 and day 6, the parasitemia determined and the activity calculated. Untreated control mice typically will die approximately one week after infection. For treated mice the survival-time (in days) is recorded and the mean survival time is calculated in comparison to untreated and standard drug treated groups. Mice still without parasitaemia on day 30 post-infection are considered cured. Observations concerning adverse effects due to the drug, including weight loss, are recorded.
+</TEXT>
+<SECTION_HEADER>
+7% Tween80/ 3% ethanol:
+</SECTION_HEADER>
+<FORM>
+Standard suspending  vehicle (SSV):
+Na-CMC    (carboxy methylcellulose)         5.0 g
+Benzyl  alcohol                             5.0 mL
+Tween  80                                   4.0 mL
+0.9%  aqueous NaCl  solution                1.0 L
+SSV  should be prepared  one day before use. This solution is stable for 3 weeks at 4°C.
+</FORM>
+<SECTION_HEADER>
+2. Secondary Biological Assessment.
+</SECTION_HEADER>
+<TEXT>
+Compounds showing good in vivo activity in the primary 4-day suppressive test should be evaluated further in secondary in vivo models (Supplemental Box 1). Mice, maintenance, drug preparation and application, and assessment of parasitemia are the same as for the basic 4-day treatment protocol. These secondary in vivo methods include:
+</TEXT>
+<TEXT>
+Dose ranging test: Here, compounds are tested at a minimum of 4 different doses (the “dose ranging, full 4-day test”, typically 100, 30, 10 and 3 mg/kg, by both s.c. and p.o. routes of administration). ED 50 and ED 90 values are calculated by plotting the log dose against probit activity (for example, using Microcal “Origin”). These reflect the drug concentrations at which 50% and 90% of suppression of parasitemia is achieved. Note that with short half-life drugs it may be necessary to dose multiple times per day. Two other parameters measured in this study are relative potency compared to an appropriate standard drug, and oral bioavailability (assessed by comparison of oral and parenteral administration). However,
+</TEXT>
+<UNSPECIFIED>
+                  mean  parasitemia treated
+Activity = 100 - {------------------------------ x 100}
+                   mean  parasitemia control
+                                                                                5
+</UNSPECIFIED>
+<PAGE_BREAK>

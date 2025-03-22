@@ -1,0 +1,27 @@
+<FORM>
+Drug Name   (Brand Name)                     Biomarker(s)                     Indication(s)
+Psychiatry (cont.)
+121      Protriptyline (Vivactil®)                    CYP2D6                           Depression
+122      Risperidone                                  CYP2D6                           Schizophrenia, bipolar mania,
+                                                                                       irritability with autistic disorder
+123      Thioridazine (Mellaril®)                     CYP2D6                           Schizophrenia
+124      Trimipramine (Surmontil®)                    CYP2D6;   CYP2C19                Depression
+Pulmonary
+125      Ivacaftor (Kalydeco®)                        CFTR                             Cystic fibrosis
+Rheumatology
+126      Azathioprine (Imuran®)                       TPMT                             Rheumatoid  arthritis, organ
+                                                                                       transplant
+127      Flurbiprofen (Ansaid®)                       CYP2C9                           Arthritis
+128      Pegloticase (Krystexxa®)                     G6PD                             Uric acid management,  gout
+Toxicology
+129      Sodium nitrite                               G6PD                             Cyanide poisoning
+Transplantation
+130      Mycophenolic  acid (Myfortic®)               HPRT1                            Kidney transplant
+131      Tacrolimus                                   CYP3A5                           Organ  transplant
+Urology
+132      Tolterodine (Detrol®)                        CYP2D6                           Overactive bladder
+</FORM>
+<PAGE_HEADER>
+Appendix 62
+</PAGE_HEADER>
+<PAGE_BREAK>

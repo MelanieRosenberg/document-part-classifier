@@ -1,0 +1,43 @@
+<TITLE>
+Providing HVAC/R Control Solutions Worldwide
+</TITLE>
+<FORM>
+Company     *                                                              Name   *
+Title                                                                      Email  *
+Phone    *                                                                 Mobile
+</FORM>
+<FORM>
+Do you want  to override any       YES
+setpoints?                                     NO            If yes, what setpoints?
+                                              Network      Connection
+</FORM>
+<FORM>
+Fill In Applicable Fields Only
+BACnet  MSTP                                         Address          (Number can be 0-99)
+ Modbus  RTU                                 Baud  Rate
+ Johnson   N2                              MAX  Masters
+   Lontalk                                   Network  #
+</FORM>
+<UNSPECIFIED>
+                                                                               Office:  239-694-0089        Fax:   239-694-0031
+                                                                                                         www.mcscontrols.com
+                                                   General       Information
+                             Building      Management           System       Information(BMS)
+                      Do you  want:
+                                                                None                   Hardwired                 Network
+   BMS   Target Reset
+   BMS   Run/Stop
+   BMS   Demand   Step  Limiting
+   BMS   Demand   FLA%   Limiting
+If communication   to the BMS   is lost default the BMS run  to:     ON (run the unit)  NO CHANGE (leave the unit in the current mode)
+                                                                     OFF (shut the unit off)
+IP Address                                                        Subnet  Mask
+Default Gateway                                                   MCS   Port
+                                                            Ethernet
+                              BACnet  IP                           BACnet   Device  ID              BACnet   IP Port
+                             Modbus    IP
+                                                              RS485
+                                                          Comments
+                                        Is there any other information  we  should  know?
+</UNSPECIFIED>
+<PAGE_BREAK>

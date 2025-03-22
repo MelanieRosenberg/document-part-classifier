@@ -1,0 +1,44 @@
+<TITLE>
+Static IP Request Form
+</TITLE>
+<FORM>
+Please state the reason why  you require a static IP address:
+Need stable bandwidth
+Technical  Contact Name:   Valerie Clarke
+Technical  Contact E-Mail  Address:  clarke.valerie@flsenate.gov
+Technical  Contact Telephone   Number   (business hours): (954) 484-4000
+Technical  Contact Telephone   Number   (24x7): (904) 464-0043
+Please state the WAN   MAC   Address  of the device that will be directly connected to
+the internet connection: A9:F1:08:6F:6D:63
+Do  you require a specialized reverse DNS  entry for this static IP assignment: No
+If yes, please state the FQDN (Fully Qualified Domain   Name):
+Please read and  initial the following:
+I understand  and agree  that BPS maintains  a dynamic  border  firewall and that BPS
+is under no obligation to modify or remove  an  IP address, port or net block from the
+border  firewall to allow communication  with an  IP address, port or net block that
+has been blocked.
+Initial:
+I understand  and agree  that BPS may  revoke  the static IP address assignment
+without notice for any reason  including but not limited to – abuse complaints,
+suspicious network  traffic, inordinate bandwidth  consumption  or suspected  illegal
+activities.
+Initial:
+I understand  and agree  that BPS may  change  the static IP address assignment for
+any reason  with at minimum   5 working  days notice.
+</FORM>
+<PAGE_BREAK>
+<FORM>
+IP Address  Assigned:
+Address  Assigned  VIA:
+Static DHCP   Entry:  -
+       Router:   -
+       MAC    Address:  -
+PPPoE:
+       Username:    clarke.valerie
+       Password:   jtig8177
+CPE   Set Static:
+       Default  Gateway   IP:
+       Netmask:
+       DNS   Servers:
+</FORM>
+<PAGE_BREAK>

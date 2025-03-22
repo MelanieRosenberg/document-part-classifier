@@ -1,0 +1,42 @@
+<TABLE>
+target word                       Unigram                              Bigram
+                     CUI     ST     CUI+ST    CUI!ST      CUI     ST     CUI+ST    CUI!ST
+adjustment           44.57  31.61    46.74      44.57    47.83   38.04    27.17      47.83
+blood pressure       39.39  34.34    41.41      38.38    43.43   27.27    47.47      38.38
+degree               3.13   70.31    70.31      70.31     3.13   48.44    48.44      48.44
+evaluation           50.51  50.51    53.54      51.52    50.51   54.55    52.53      51.52
+growth               63.64  51.52    42.42      63.64     63.64  51.52    48.48      63.64
+immunosuppression    50.51  46.46    50.51      50.51    43.43   57.58    48.48      43.43
+mosaic                 0    33.33    27.08      37.50      0     28.13    22.92      22.92
+nutrition radiation  28.41 57.73 34.09 44.78 35.23 58.76 25.00 57.73 38.64 60.82 39.77 28.36 36.36 60.82 37.50 60.82
+repair               74.63  25.00    41.79      37.31     76.12  54.69    44.78      41.79
+scale                32.81  48.00    42.19      51.56      0     18.00    95.31      96.88
+sensitivity          6.00   50.56    48.00      48.00     8.00   44.94    18.00      18.00
+white                48.31  38.61    46.07      49.44     44.94  38.16    43.82      49.44
+average              38.43  43.01    46.46      48.11    36.96   40.73    45.74      47.74
+</TABLE>
+<CAPTION>
+Table 1: Accuracy of Our Approach using Different Context Descriptions
+</CAPTION>
+<TEXT>
+NLM-WSD dataset using each of the different con- text descriptions described above. The results show an approximately a 2% higher accuracy over using the basic stoplist. The exception is when using the CUI context description; the accuracy decreased by approximately 2% when using the unigram feature set and approximately 1% when using the bigram feature set. context Basic stoplist IDF stoplist unigram bigram unigram bigram CUI 41.02 37.68 38.43 36.96 ST 42.74 37.14 43.01 40.73 CUI+ST 44.13 42.71 46.46 45.74 CUI!ST 46.61 45.58 48.11 47.74
+</TEXT>
+<TITLE>
+6.1.1 Context Results
+</TITLE>
+<TEXT>
+Table 1 shows the results of our approach using the CUI and ST de(cid:2)nitions as context for the possi- ble concepts on the NLM-WSD dataset and Table 4 shows similar results using the con(cid:3)ate dataset. On the NLM-WSD dataset, the results show a large difference in accuracy between the contexts on a word by word basis making it dif(cid:2)cult to deter- mine which of the context description performs the best. The unigram results show that CUI→ST and CUI+ST obtain the highest accuracy for (cid:2)ve words, and CUI and ST obtain the highest accuracy for one word. The bigram results show that CUI→ST and CUI obtains the highest accuracy for two words, ST obtains the highest accuracy for four words, and CUI+ST obtains the highest accuracy for one word. The overall results show that using unigrams with
+</TEXT>
+<TEXT>
+the context description CUI→ST obtains the high- est overall accuracy. On the con(cid:3)ated dataset, the pseudowords a a, a o, d d and e e have a corresponding CUI de(cid:2)ni- tion for each of their possible concepts therefore the accuracy for CUI and CUI→ would be the same for these datasets and is not reported. The pseudowords a a i, x p p and d a m e do not have a CUI de(cid:2)ni- tions for each of their possible concepts. The results show that CUI obtained the highest accuracy for six out of the seven datasets and CUI→ST obtained the highest accuracy for one. These experiments were run using the unigram feature.
+</TEXT>
+<TITLE>
+6.2 NLM-WSD Results
+</TITLE>
+<TEXT>
+Table 3 shows the accuracy of the results obtained by our unsupervised vector approach using the CUI→ST context description, SenseClusters, and the results reported by Humphrey et al. (2006). As seen with the context description results, there exists a large difference in accuracy on a word by word basis between the approaches. The results show that Humphrey et al. (2006) report a higher overall accuracy compared to SenseClusters and our approach. Although, Humphrey et al. (2006) per- formed better for 5 out of the 13 words where as SenseClusters performed better for 9. The unigram feature set with gap cluster stopping returned the highest overall accuracy for SenseClusters. The number of clusters for all of the gap cluster stopping experiments were two except for growth which re- turned one. For our approach, the unigram feature set returned the highest overall accuracy.
+</TEXT>
+<PAGE_FOOTER>
+52
+</PAGE_FOOTER>
+<PAGE_BREAK>
