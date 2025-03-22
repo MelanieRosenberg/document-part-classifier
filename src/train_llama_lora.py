@@ -84,7 +84,36 @@ class LlamaLoRATrainer:
     def load_data(self, data_dir: str) -> Dataset:
         """Load dataset from directory."""
         try:
-            dataset = load_from_disk(data_dir)
+            # Load lines and tags from files
+            lines_file = os.path.join(data_dir, "lines.txt")
+            tags_file = os.path.join(data_dir, "tags.txt")
+            
+            with open(lines_file, 'r', encoding='utf-8') as f:
+                lines = [line.strip() for line in f.readlines()]
+            
+            with open(tags_file, 'r', encoding='utf-8') as f:
+                tags = [tag.strip() for tag in f.readlines()]
+            
+            # Validate that the number of lines and tags match
+            if len(lines) != len(tags):
+                logger.warning(
+                    f"Warning: Number of lines ({len(lines)}) doesn't match "
+                    f"number of tags ({len(tags)})"
+                )
+                # Use the smaller length to avoid index errors
+                min_len = min(len(lines), len(tags))
+                lines = lines[:min_len]
+                tags = tags[:min_len]
+            
+            # Convert tags to label IDs
+            label_ids = [self.label2id[tag] for tag in tags]
+            
+            # Create dataset
+            dataset = Dataset.from_dict({
+                "text": lines,
+                "label": label_ids
+            })
+            
             logger.info(f"Loaded {len(dataset)} examples from {data_dir}")
             return dataset
         except Exception as e:
