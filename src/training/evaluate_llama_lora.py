@@ -119,6 +119,9 @@ def evaluate_model(model, dataset):
     total_examples = len(dataset)
     report_interval = max(1, total_examples // 10)  # Report every 10%
     
+    # Track unexpected outputs
+    unexpected_outputs = []
+    
     for idx, example in enumerate(tqdm(dataset, desc="Evaluating")):
         # Get actual label
         label_tokens = [id for id in example["labels"] if id != -100]
@@ -144,6 +147,10 @@ def evaluate_model(model, dataset):
                 max_new_tokens=10,
                 temperature=0.1,
                 num_return_sequences=1,
+                pad_token_id=tokenizer.pad_token_id,
+                eos_token_id=tokenizer.eos_token_id,
+                do_sample=False,  # Use greedy decoding
+                early_stopping=True
             )
         
         # Decode the generated output
@@ -156,8 +163,18 @@ def evaluate_model(model, dataset):
                 response = generated_text.split("[/INST]")[1].strip()
             except IndexError:
                 response = generated_text
+                unexpected_outputs.append({
+                    "idx": idx,
+                    "text": example["text"][:100],
+                    "generated": generated_text
+                })
         else:
             response = generated_text
+            unexpected_outputs.append({
+                "idx": idx,
+                "text": example["text"][:100],
+                "generated": generated_text
+            })
         
         # Extract the predicted class
         predicted_label = None
@@ -169,6 +186,12 @@ def evaluate_model(model, dataset):
         # If no class is clearly identified, default to TEXT
         if predicted_label is None:
             predicted_label = 2
+            unexpected_outputs.append({
+                "idx": idx,
+                "text": example["text"][:100],
+                "generated": response,
+                "reason": "no_class_found"
+            })
             
         all_predictions.append(predicted_label)
         
@@ -187,6 +210,16 @@ def evaluate_model(model, dataset):
             print(f"FORM F1: {current_f1[0]:.4f}")
             print(f"TABLE F1: {current_f1[1]:.4f}")
             print(f"TEXT F1: {current_f1[2]:.4f}")
+            
+            # Print some example outputs if we have unexpected ones
+            if unexpected_outputs:
+                print("\nExample unexpected outputs:")
+                for i, unexpected in enumerate(unexpected_outputs[:3]):  # Show up to 3 examples
+                    print(f"\nExample {i+1}:")
+                    print(f"Input text: {unexpected['text']}")
+                    print(f"Generated: {unexpected['generated']}")
+                    if 'reason' in unexpected:
+                        print(f"Reason: {unexpected['reason']}")
     
     # Calculate final metrics
     precision, recall, f1, _ = precision_recall_fscore_support(
@@ -197,6 +230,11 @@ def evaluate_model(model, dataset):
     overall_precision, overall_recall, overall_f1, _ = precision_recall_fscore_support(
         all_labels, all_predictions, average='weighted'
     )
+    
+    # Print summary of unexpected outputs
+    if unexpected_outputs:
+        print(f"\nTotal unexpected outputs: {len(unexpected_outputs)}")
+        print(f"Percentage of unexpected outputs: {(len(unexpected_outputs) / total_examples) * 100:.2f}%")
     
     return {
         "overall_f1": overall_f1,
