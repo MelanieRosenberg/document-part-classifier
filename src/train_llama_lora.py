@@ -229,7 +229,9 @@ Classification: [/INST]"""
         lora_dropout: float = 0.1,
         early_stopping_patience: int = 3,
         early_stopping_threshold: float = 0.0,
-        save_total_limit: Optional[int] = None
+        save_total_limit: Optional[int] = None,
+        eval_batch_size: int = 8,
+        max_eval_samples: int = 500
     ) -> None:
         """Train the model."""
         logger.info("Starting training...")
@@ -260,12 +262,17 @@ Classification: [/INST]"""
             remove_columns=self.val_dataset.column_names
         )
         
+        # Subset validation dataset if needed
+        if max_eval_samples and len(val_processed) > max_eval_samples:
+            logger.info(f"Subsetting validation dataset from {len(val_processed)} to {max_eval_samples} examples")
+            val_processed = val_processed.select(range(max_eval_samples))
+        
         # Training arguments
         training_args = TrainingArguments(
             output_dir=str(self.run_dir),
             num_train_epochs=num_epochs,
             per_device_train_batch_size=batch_size,
-            per_device_eval_batch_size=batch_size,
+            per_device_eval_batch_size=eval_batch_size,  # Use separate eval batch size
             gradient_accumulation_steps=gradient_accumulation_steps,
             learning_rate=learning_rate,
             warmup_steps=warmup_steps,
@@ -412,6 +419,10 @@ def main():
                       help="Number of training epochs")
     parser.add_argument("--batch_size", type=int, default=32,
                       help="Training batch size")
+    parser.add_argument("--eval_batch_size", type=int, default=8,
+                      help="Evaluation batch size (smaller to prevent OOM)")
+    parser.add_argument("--max_eval_samples", type=int, default=500,
+                      help="Maximum number of samples to use for evaluation")
     parser.add_argument("--gradient_accumulation_steps", type=int, default=4,
                       help="Number of gradient accumulation steps")
     parser.add_argument("--learning_rate", type=float, default=2e-4,
@@ -475,7 +486,9 @@ def main():
         lora_dropout=args.lora_dropout,
         early_stopping_patience=args.early_stopping_patience,
         early_stopping_threshold=args.early_stopping_threshold,
-        save_total_limit=args.save_total_limit
+        save_total_limit=args.save_total_limit,
+        eval_batch_size=args.eval_batch_size,
+        max_eval_samples=args.max_eval_samples
     )
 
 if __name__ == "__main__":
