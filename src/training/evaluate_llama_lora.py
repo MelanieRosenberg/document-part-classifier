@@ -1,5 +1,5 @@
 import torch
-from transformers import AutoModelForCausalLM, AutoTokenizer
+from transformers import AutoModelForSequenceClassification, AutoTokenizer
 from peft import PeftModel
 from datasets import Dataset
 import numpy as np
@@ -13,15 +13,18 @@ label2id = {"FORM": 0, "TABLE": 1, "TEXT": 2}
 
 # Model configuration
 model_name = "/home/azureuser/llama_models/llama-3-2-1b"  # Base model path
-adapter_path = "models/llama_1b_lora/run_20250322_202241/final_model"  # Path to your trained LoRA adapter
+adapter_path = "models/llama_1b_lora/run_20250322_213248/final_model"  # Path to your trained LoRA adapter
 
 # Load tokenizer
 tokenizer = AutoTokenizer.from_pretrained(model_name)
 tokenizer.pad_token = tokenizer.eos_token
 
 # Load base model
-model = AutoModelForCausalLM.from_pretrained(
+model = AutoModelForSequenceClassification.from_pretrained(
     model_name,
+    num_labels=len(id2label),
+    id2label=id2label,
+    label2id=label2id,
     device_map="auto",
     local_files_only=True
 )
@@ -30,65 +33,21 @@ model = AutoModelForCausalLM.from_pretrained(
 model = PeftModel.from_pretrained(model, adapter_path)
 print("Loaded trained model")
 
-# Define prompt template for document classification
-def create_prompt(text):
-    return f"""<s>[INST] Classify the following document segment into one of these categories: FORM, TABLE, or TEXT.
-The segment is delimited by triple backticks.
-```
-{text}
-```
-Classification: [/INST]"""
-
-# Function to preprocess your data for causal LM
+# Function to preprocess your data for sequence classification
 def preprocess_function(examples):
-    # Create input prompts from text
-    prompts = [create_prompt(text) for text in examples["text"]]
-    
-    # Tokenize prompts
+    # Tokenize texts
     tokenized_inputs = tokenizer(
-        prompts,
+        examples["text"],
         padding="max_length",
         truncation=True,
         max_length=512,
         return_tensors="pt"
     )
     
-    # Prepare labels for each example
-    labels = []
-    for label_id in examples["label"]:
-        label_text = f" {id2label[label_id]}</s>"
-        tokenized_label = tokenizer(label_text, return_tensors="pt")
-        labels.append(tokenized_label.input_ids[0])
+    # Add labels
+    tokenized_inputs["labels"] = examples["label"]
     
-    # Tokenize and prepare inputs with labels for causal LM
-    tokenized_examples = {
-        "input_ids": [],
-        "attention_mask": [],
-        "labels": []
-    }
-    
-    for i, prompt_ids in enumerate(tokenized_inputs.input_ids):
-        prompt_length = len(prompt_ids)
-        label_ids = labels[i]
-        
-        # Create input_ids by combining prompt and label
-        input_ids = torch.cat([prompt_ids, label_ids])
-        
-        # Create attention mask
-        attention_mask = torch.ones_like(input_ids)
-        
-        # Create label_ids (set to -100 for prompt tokens to ignore them in loss)
-        label_ids_with_ignore = torch.cat([
-            torch.ones(prompt_length, dtype=torch.long) * -100,
-            label_ids
-        ])
-        
-        # Add to tokenized examples
-        tokenized_examples["input_ids"].append(input_ids)
-        tokenized_examples["attention_mask"].append(attention_mask)
-        tokenized_examples["labels"].append(label_ids_with_ignore)
-    
-    return tokenized_examples
+    return tokenized_inputs
 
 # Load and prepare your datasets
 def load_data():
@@ -111,21 +70,6 @@ test_dataset = load_data()
 # Preprocess test dataset
 test_dataset = test_dataset.map(preprocess_function, batched=True)
 
-# Function to clean up generated text
-def clean_generated_text(text):
-    # Remove special tokens
-    special_tokens = ["<|begin_of_text|>", "<|end_of_text|>", "<s>", "</s>"]
-    for token in special_tokens:
-        text = text.replace(token, "")
-    
-    # Remove prompt if it was repeated
-    if "Classify the following document segment" in text:
-        text = text.split("Classify the following document segment")[0].strip()
-    
-    # Clean up any remaining whitespace
-    text = text.strip()
-    return text
-
 # Function to evaluate the model
 def evaluate_model(model, dataset):
     model.eval()
@@ -134,18 +78,9 @@ def evaluate_model(model, dataset):
     total_examples = len(dataset)
     report_interval = max(1, total_examples // 10)  # Report every 10%
     
-    # Track unexpected outputs
-    unexpected_outputs = []
-    
     for idx, example in enumerate(tqdm(dataset, desc="Evaluating")):
         # Get actual label
-        label_tokens = [id for id in example["labels"] if id != -100]
-        if label_tokens:
-            true_label_text = tokenizer.decode(label_tokens)
-            for label_id, label_name in id2label.items():
-                if label_name in true_label_text:
-                    all_labels.append(label_id)
-                    break
+        all_labels.append(example["labels"])
         
         # Get prediction
         input_ids = torch.tensor(example["input_ids"])
@@ -157,65 +92,9 @@ def evaluate_model(model, dataset):
         }
         
         with torch.no_grad():
-            outputs = model.generate(
-                **inputs,
-                max_new_tokens=10,
-                num_return_sequences=1,
-                pad_token_id=tokenizer.pad_token_id,
-                eos_token_id=tokenizer.eos_token_id,
-                do_sample=True,  # Enable sampling
-                temperature=0.1,  # Low temperature for more deterministic output
-                top_p=0.9,  # Nucleus sampling
-                num_beams=1,  # No beam search
-                early_stopping=False  # Disable early stopping since we're not using beam search
-            )
-        
-        # Decode the generated output
-        generated_text = tokenizer.decode(outputs[0], skip_special_tokens=False)
-        
-        # Extract response more robustly
-        response = ""
-        if "[/INST]" in generated_text:
-            try:
-                response = generated_text.split("[/INST]")[1].strip()
-            except IndexError:
-                response = generated_text
-                unexpected_outputs.append({
-                    "idx": idx,
-                    "text": example["text"][:100],
-                    "generated": generated_text,
-                    "reason": "split_error"
-                })
-        else:
-            response = generated_text
-            unexpected_outputs.append({
-                "idx": idx,
-                "text": example["text"][:100],
-                "generated": generated_text,
-                "reason": "no_inst_marker"
-            })
-        
-        # Clean up the response
-        response = clean_generated_text(response)
-        
-        # Extract the predicted class
-        predicted_label = None
-        for label_name in ["FORM", "TABLE", "TEXT"]:
-            if label_name in response:
-                predicted_label = label2id[label_name]
-                break
-        
-        # If no class is clearly identified, default to TEXT
-        if predicted_label is None:
-            predicted_label = 2
-            unexpected_outputs.append({
-                "idx": idx,
-                "text": example["text"][:100],
-                "generated": response,
-                "reason": "no_class_found"
-            })
-            
-        all_predictions.append(predicted_label)
+            outputs = model(**inputs)
+            predictions = torch.argmax(outputs.logits, dim=1)
+            all_predictions.append(predictions[0].item())
         
         # Report intermediate results every 10%
         if (idx + 1) % report_interval == 0:
@@ -232,16 +111,6 @@ def evaluate_model(model, dataset):
             print(f"FORM F1: {current_f1[0]:.4f}")
             print(f"TABLE F1: {current_f1[1]:.4f}")
             print(f"TEXT F1: {current_f1[2]:.4f}")
-            
-            # Print some example outputs if we have unexpected ones
-            if unexpected_outputs:
-                print("\nExample unexpected outputs:")
-                for i, unexpected in enumerate(unexpected_outputs[:3]):  # Show up to 3 examples
-                    print(f"\nExample {i+1}:")
-                    print(f"Input text: {unexpected['text']}")
-                    print(f"Generated: {unexpected['generated']}")
-                    if 'reason' in unexpected:
-                        print(f"Reason: {unexpected['reason']}")
     
     # Calculate final metrics
     precision, recall, f1, _ = precision_recall_fscore_support(
@@ -252,11 +121,6 @@ def evaluate_model(model, dataset):
     overall_precision, overall_recall, overall_f1, _ = precision_recall_fscore_support(
         all_labels, all_predictions, average='weighted'
     )
-    
-    # Print summary of unexpected outputs
-    if unexpected_outputs:
-        print(f"\nTotal unexpected outputs: {len(unexpected_outputs)}")
-        print(f"Percentage of unexpected outputs: {(len(unexpected_outputs) / total_examples) * 100:.2f}%")
     
     return {
         "overall_f1": overall_f1,
@@ -285,26 +149,19 @@ if __name__ == "__main__":
     
     # Run classification
     for text in test_examples:
-        prompt = create_prompt(text)
-        inputs = tokenizer(prompt, return_tensors="pt").to(model.device)
+        # Tokenize input
+        inputs = tokenizer(
+            text,
+            padding="max_length",
+            truncation=True,
+            max_length=512,
+            return_tensors="pt"
+        ).to(model.device)
         
+        # Get prediction
         with torch.no_grad():
-            outputs = model.generate(
-                **inputs,
-                max_new_tokens=10,
-                temperature=0.1,
-                num_return_sequences=1,
-            )
+            outputs = model(**inputs)
+            prediction = torch.argmax(outputs.logits, dim=1)
+            predicted_label = id2label[prediction[0].item()]
         
-        # Decode the generated output
-        generated_text = tokenizer.decode(outputs[0], skip_special_tokens=False)
-        response = generated_text.split("[/INST]")[1].strip()
-        
-        # Extract the predicted class
-        prediction = "TEXT"  # default
-        for label_name in ["FORM", "TABLE", "TEXT"]:
-            if label_name in response:
-                prediction = label_name
-                break
-        
-        print(f"Text: {text[:50]}...\nPrediction: {prediction}\n")
+        print(f"Text: {text[:50]}...\nPrediction: {predicted_label}\n")
