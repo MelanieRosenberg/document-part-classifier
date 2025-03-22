@@ -529,6 +529,10 @@ class DocumentClassificationTrainer(Trainer):
         # Run standard evaluation
         output = super().evaluate(eval_dataset, ignore_keys, metric_key_prefix)
         
+        # Only log the average evaluation loss
+        if self.state.global_step % self.args.logging_steps == 0:
+            logger.info(f"Step {self.state.global_step}: eval_loss = {output['eval_loss']:.4f}")
+        
         # Add prefix to metrics
         metrics = {f"{metric_key_prefix}_{k}": v for k, v in output.items()}
         
