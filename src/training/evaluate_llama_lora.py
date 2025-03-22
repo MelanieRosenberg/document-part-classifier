@@ -119,11 +119,9 @@ def evaluate_model(model, dataset):
     
     for example in tqdm(dataset, desc="Evaluating"):
         # Get actual label
-        label_tokens = [j for j, id in enumerate(example["labels"]) if id != -100]
+        label_tokens = [id for id in example["labels"] if id != -100]
         if label_tokens:
-            # Convert label_tokens to tensor for proper indexing
-            label_tokens_tensor = torch.tensor(label_tokens)
-            true_label_text = tokenizer.decode(example["labels"][label_tokens_tensor])
+            true_label_text = tokenizer.decode(label_tokens)
             for label_id, label_name in id2label.items():
                 if label_name in true_label_text:
                     all_labels.append(label_id)
