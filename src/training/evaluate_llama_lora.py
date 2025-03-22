@@ -121,7 +121,9 @@ def evaluate_model(model, dataset):
         # Get actual label
         label_tokens = [j for j, id in enumerate(example["labels"]) if id != -100]
         if label_tokens:
-            true_label_text = tokenizer.decode(example["labels"][label_tokens])
+            # Convert label_tokens to tensor for proper indexing
+            label_tokens_tensor = torch.tensor(label_tokens)
+            true_label_text = tokenizer.decode(example["labels"][label_tokens_tensor])
             for label_id, label_name in id2label.items():
                 if label_name in true_label_text:
                     all_labels.append(label_id)
