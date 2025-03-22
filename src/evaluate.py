@@ -6,9 +6,12 @@ from typing import Dict, List, Tuple
 from datetime import datetime
 
 import torch
+import numpy as np
 from torch.utils.data import DataLoader
-from sklearn.metrics import classification_report
+from sklearn.metrics import classification_report, confusion_matrix
 from tqdm import tqdm
+import matplotlib.pyplot as plt
+import seaborn as sns
 
 from models.transformer_classifier import DocumentPartClassifier
 
@@ -18,6 +21,56 @@ logging.basicConfig(
     format='%(asctime)s - %(levelname)s - %(message)s'
 )
 logger = logging.getLogger(__name__)
+
+def create_evaluation_plots(metrics: Dict, true_labels: List[str], pred_labels: List[str], output_dir: str):
+    """
+    Create and save evaluation plots.
+    
+    Args:
+        metrics: Dictionary containing evaluation metrics
+        true_labels: List of true labels
+        pred_labels: List of predicted labels
+        output_dir: Directory to save plots
+    """
+    try:
+        # Create confusion matrix plot
+        plt.figure(figsize=(10, 8))
+        cm = confusion_matrix(true_labels, pred_labels)
+        sns.heatmap(
+            cm, 
+            annot=True, 
+            fmt='d',
+            cmap='Blues',
+            xticklabels=sorted(set(true_labels)),
+            yticklabels=sorted(set(true_labels))
+        )
+        plt.title('Confusion Matrix')
+        plt.xlabel('Predicted')
+        plt.ylabel('True')
+        plt.tight_layout()
+        plt.savefig(os.path.join(output_dir, 'confusion_matrix.png'))
+        plt.close()
+        
+        # Create bar plot of F1 scores
+        plt.figure(figsize=(10, 6))
+        tags = []
+        f1_scores = []
+        for tag, tag_metrics in metrics.items():
+            tags.append(tag)
+            f1_scores.append(tag_metrics['f1-score'])
+        
+        plt.bar(tags, f1_scores)
+        plt.title('F1 Scores by Tag')
+        plt.xlabel('Tag')
+        plt.ylabel('F1 Score')
+        plt.xticks(rotation=45)
+        plt.tight_layout()
+        plt.savefig(os.path.join(output_dir, 'f1_scores.png'))
+        plt.close()
+        
+        logger.info(f"Evaluation plots saved to {output_dir}")
+    except Exception as e:
+        logger.warning(f"Failed to create plots: {e}")
 
 def evaluate_test_set(
     model_path: str,
@@ -82,7 +135,30 @@ def evaluate_test_set(
     
     # Evaluate on test set
     logger.info("Evaluating on test set...")
-    test_f1, test_report = classifier.evaluate(test_loader, return_report=True)
+    all_preds = []
+    all_labels = []
+    
+    with torch.no_grad():
+        for batch in test_loader:
+            input_ids = batch[0].to(classifier.device)
+            attention_mask = batch[1].to(classifier.device)
+            labels = batch[2].to(classifier.device)
+            
+            # Get predictions
+            logits = classifier.model(
+                input_ids=input_ids,
+                attention_mask=attention_mask
+            )
+            preds = torch.argmax(logits, dim=1).cpu().tolist()
+            all_preds.extend(preds)
+            all_labels.extend(labels.cpu().tolist())
+    
+    # Convert numeric labels to strings
+    pred_labels = [classifier.reverse_label_map[pred] for pred in all_preds]
+    true_labels = [classifier.reverse_label_map[label] for label in all_labels]
+    
+    # Calculate metrics
+    test_report = classification_report(true_labels, pred_labels)
     
     # Parse the classification report
     report_lines = test_report.strip().split('\n')
@@ -107,10 +183,13 @@ def evaluate_test_set(
     with open(metrics_path, 'w') as f:
         json.dump(metrics, f, indent=2)
     
+    # Create evaluation plots
+    create_evaluation_plots(metrics, true_labels, pred_labels, eval_dir)
+    
     # Print evaluation results
     logger.info("\nTest Set Evaluation Results:")
     logger.info("-" * 40)
-    logger.info(f"Overall F1 Score: {test_f1:.4f}")
+    logger.info(f"Overall F1 Score: {np.mean([m['f1-score'] for m in metrics.values()]):.4f}")
     logger.info("\nPer-Tag Metrics:")
     for tag, tag_metrics in metrics.items():
         logger.info(f"\n{tag}:")
