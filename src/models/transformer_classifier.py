@@ -6,7 +6,7 @@ from typing import List, Tuple, Dict, Optional, Union
 import torch
 import torch.nn as nn
 from torch.utils.data import DataLoader, TensorDataset
-from transformers import DebertaTokenizer, DebertaModel, AdamW, get_linear_schedule_with_warmup
+from transformers import AutoTokenizer, DebertaV2Model, AdamW, get_linear_schedule_with_warmup
 from sklearn.metrics import classification_report, f1_score
 
 # Setup logging
@@ -15,11 +15,11 @@ logger = logging.getLogger(__name__)
 
 class DebertaForSequenceClassification(nn.Module):
     """
-    Standard classification model without CRF
+    DeBERTa-v3 classification model
     """
     def __init__(self, num_labels: int):
         super().__init__()
-        self.deberta = DebertaModel.from_pretrained('microsoft/deberta-v3-large')
+        self.deberta = DebertaV2Model.from_pretrained('microsoft/deberta-v3-large')
         self.dropout = nn.Dropout(0.1)
         self.classifier = nn.Linear(self.deberta.config.hidden_size, num_labels)
         
@@ -30,8 +30,9 @@ class DebertaForSequenceClassification(nn.Module):
         labels: Optional[torch.Tensor] = None
     ) -> Union[torch.Tensor, torch.Tensor]:
         outputs = self.deberta(input_ids=input_ids, attention_mask=attention_mask)
-        pooled_output = outputs[1]  # [CLS] token representation
-        pooled_output = self.dropout(pooled_output)
+        sequence_output = outputs[0]
+        # Use the [CLS] token representation (first token)
+        pooled_output = self.dropout(sequence_output[:, 0])
         logits = self.classifier(pooled_output)
         
         if labels is not None:
@@ -50,9 +51,9 @@ class DocumentPartClassifier:
         model_name: str = 'microsoft/deberta-v3-large',
         max_length: int = 512,
         batch_size: int = 16,
-        learning_rate: float = 1e-5,
+        learning_rate: float = 2e-5,
         num_epochs: int = 10,
-        context_window: int = 2,
+        context_window: int = 3,
         warmup_ratio: float = 0.1
     ):
         self.model_name = model_name
@@ -68,7 +69,7 @@ class DocumentPartClassifier:
         self.reverse_label_map = {v: k for k, v in self.label_map.items()}
         
         # Initialize tokenizer and add special tokens
-        self.tokenizer = DebertaTokenizer.from_pretrained(model_name)
+        self.tokenizer = AutoTokenizer.from_pretrained(model_name)
         special_tokens = {
             'additional_special_tokens': ['[TARGET_START]', '[TARGET_END]']
         }
@@ -85,7 +86,7 @@ class DocumentPartClassifier:
             # Resize token embeddings to account for new special tokens
             self.model.deberta.resize_token_embeddings(len(self.tokenizer))
             self.model.to(self.device)
-            logger.info(f"Initialized standard classifier with {model_name} on {self.device}")
+            logger.info(f"Initialized DeBERTa classifier with {model_name} on {self.device}")
         except Exception as e:
             logger.error(f"Error initializing model: {e}")
             raise
@@ -477,7 +478,7 @@ class DocumentPartClassifier:
             tokenizer_name = checkpoint.get('tokenizer_name', self.model_name)
             if tokenizer_name != self.model_name:
                 logger.info(f"Updating tokenizer from {self.model_name} to {tokenizer_name}")
-                self.tokenizer = DebertaTokenizer.from_pretrained(tokenizer_name)
+                self.tokenizer = AutoTokenizer.from_pretrained(tokenizer_name)
                 
                 # Add special tokens if loading an older model that didn't have them
                 special_tokens = {
