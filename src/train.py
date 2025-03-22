@@ -282,10 +282,9 @@ def train(args):
     logger.info(f"Warmup steps: {num_warmup_steps}")
     
     # Training loop
-    best_val_loss = float('inf')
-    best_metrics = None
-    patience_counter = 0
-    target_achieved = False
+    best_f1_scores = {tag: 0.0 for tag in TARGET_TAGS}  # Track best F1 for each tag
+    no_improvement_count = 0
+    best_model_state = None
     
     # Track metrics over time
     training_metrics = {
@@ -298,59 +297,41 @@ def train(args):
     for epoch in range(args.num_epochs):
         # Training phase
         classifier.model.train()
-        total_train_loss = 0
-        train_steps = 0
+        train_loss = 0
         
-        progress_bar = tqdm(train_loader, desc=f"Epoch {epoch+1}/{args.num_epochs}")
-        for batch in progress_bar:
+        for batch in train_loader:
             optimizer.zero_grad()
             
             input_ids = batch[0].to(device)
             attention_mask = batch[1].to(device)
             labels = batch[2].to(device)
             
-            # Forward pass - standard classifier forward returns loss directly when labels provided
             loss = classifier.model(
                 input_ids=input_ids,
                 attention_mask=attention_mask,
                 labels=labels
             )
             
-            # Backward pass
             loss.backward()
-            
             # Gradient clipping to prevent exploding gradients
-            torch.nn.utils.clip_grad_norm_(classifier.model.parameters(), args.max_grad_norm)
-            
-            # Optimizer step
+            torch.nn.utils.clip_grad_norm_(classifier.model.parameters(), max_norm=1.0)
             optimizer.step()
             scheduler.step()
             
-            # Update progress bar
-            total_train_loss += loss.item()
-            train_steps += 1
-            progress_bar.set_postfix({
-                'loss': f"{total_train_loss/train_steps:.4f}",
-                'lr': f"{scheduler.get_last_lr()[0]:.2e}"
-            })
-            
-            # Log metrics periodically
-            if train_steps % args.logging_steps == 0:
-                logger.info(f"Step {train_steps}/{len(train_loader)}: "
-                           f"Train Loss: {total_train_loss/train_steps:.4f}, "
-                           f"LR: {scheduler.get_last_lr()[0]:.2e}")
+            train_loss += loss.item()
         
-        avg_train_loss = total_train_loss / train_steps
-        logger.info(f"Epoch {epoch+1}/{args.num_epochs} - Train Loss: {avg_train_loss:.4f}")
+        avg_train_loss = train_loss / len(train_loader)
+        training_metrics['train_loss'].append(avg_train_loss)
         
         # Validation phase
         val_loss, val_metrics = evaluate_model(classifier, val_lines, val_tags, device)
-        logger.info(f"Epoch {epoch+1}/{args.num_epochs} - Validation Loss: {val_loss:.4f}")
-        
-        # Update metrics
-        training_metrics['epochs'].append(epoch + 1)
-        training_metrics['train_loss'].append(avg_train_loss)
         training_metrics['val_loss'].append(val_loss)
+        
+        logger.info(
+            f"Epoch {epoch+1}/{args.num_epochs} - "
+            f"Training Loss: {avg_train_loss:.4f}, "
+            f"Validation Loss: {val_loss:.4f}"
+        )
         
         # Track target tag F1 scores
         target_f1 = {tag: val_metrics.get(tag, {}).get('f1-score', 0.0) for tag in TARGET_TAGS}
@@ -368,64 +349,37 @@ def train(args):
                        f"Recall: {recall:.4f}, "
                        f"F1: {f1:.4f}")
         
-        # Check if we've achieved target F1 scores
-        target_f1_scores = {tag: val_metrics.get(tag, {}).get('f1-score', 0.0) for tag in TARGET_TAGS}
-        target_achieved = all(score >= 0.9 for score in target_f1_scores.values())
-        
-        if target_achieved:
-            logger.info("\nTarget F1 scores achieved! Saving model...")
-            model_save_path = os.path.join(output_dir, "model.pt")
-            
-            # Save complete model state
-            torch.save({
-                'model_state_dict': classifier.model.state_dict(),
-                'tokenizer_name': classifier.model_name,
-                'label_map': classifier.label_map,
-                'reverse_label_map': classifier.reverse_label_map,
-                'context_window': classifier.context_window,
-                'max_length': classifier.max_length
-            }, model_save_path)
-            
-            with open(os.path.join(output_dir, "val_metrics.json"), "w") as f:
-                json.dump(val_metrics, f, indent=2)
-            break
-        
-        # Early stopping based on validation loss
-        if val_loss < best_val_loss:
-            best_val_loss = val_loss
-            best_metrics = val_metrics
-            patience_counter = 0
-            logger.info(f"New best validation loss: {best_val_loss:.4f}! Saving model...")
-            
-            model_save_path = os.path.join(output_dir, "model.pt")
-            
-            # Save complete model state
-            torch.save({
-                'model_state_dict': classifier.model.state_dict(),
-                'tokenizer_name': classifier.model_name,
-                'label_map': classifier.label_map,
-                'reverse_label_map': classifier.reverse_label_map,
-                'context_window': classifier.context_window,
-                'max_length': classifier.max_length
-            }, model_save_path)
-            
-            with open(os.path.join(output_dir, "val_metrics.json"), "w") as f:
-                json.dump(val_metrics, f, indent=2)
-        else:
-            patience_counter += 1
-            logger.info(f"Validation loss did not improve. Patience: {patience_counter}/{args.patience}")
-            if patience_counter >= args.patience:
-                logger.info(f"\nEarly stopping triggered after {epoch+1} epochs")
+        # Early stopping check - continue if any target tag improves
+        improvement_found = False
+        for tag in TARGET_TAGS:
+            current_f1 = target_f1[tag]
+            if current_f1 > best_f1_scores[tag]:
+                best_f1_scores[tag] = current_f1
+                no_improvement_count = 0
+                best_model_state = classifier.model.state_dict().copy()
+                logger.info(f"New best F1 score for {tag}: {current_f1:.4f}")
+                improvement_found = True
                 break
+        
+        if not improvement_found:
+            no_improvement_count += 1
+            logger.info(f"No improvement in any target F1 score for {no_improvement_count} epochs")
+            
+            if no_improvement_count >= args.patience:
+                logger.info(f"Early stopping after {epoch+1} epochs")
+                break
+        
+        # Update metrics
+        training_metrics['epochs'].append(epoch + 1)
     
     # Save final model if target not achieved
-    if not target_achieved:
+    if no_improvement_count >= args.patience:
         logger.info("\nTraining completed without achieving target F1 scores")
         model_save_path = os.path.join(output_dir, "model.pt")
         
         # Save complete model state
         torch.save({
-            'model_state_dict': classifier.model.state_dict(),
+            'model_state_dict': best_model_state,
             'tokenizer_name': classifier.model_name,
             'label_map': classifier.label_map,
             'reverse_label_map': classifier.reverse_label_map,
@@ -492,7 +446,6 @@ def main():
     parser.add_argument("--learning_rate", type=float, default=5e-6, help="Learning rate")
     parser.add_argument("--weight_decay", type=float, default=0.01, help="Weight decay")
     parser.add_argument("--warmup_ratio", type=float, default=0.1, help="Ratio of warmup steps")
-    parser.add_argument("--max_grad_norm", type=float, default=1.0, help="Maximum gradient norm")
     parser.add_argument("--patience", type=int, default=3, help="Number of epochs to wait before early stopping")
     
     # Class weight arguments
