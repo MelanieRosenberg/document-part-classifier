@@ -85,7 +85,7 @@ python src/training/train_deberta.py \
 Train LLaMA with LoRA adapters:
 ```bash
 python src/training/train_llama_lora.py \
-    --model_name meta-llama/Llama-2-7b \
+    --model_name llama-3.2-1b \
     --train_data_dir data/train \
     --val_data_dir data/val \
     --output_dir models/llama_lora \
@@ -97,8 +97,7 @@ python src/training/train_llama_lora.py \
 ```
 
 Note: For LLaMA training, you need:
-- Access to the Meta LLaMA model (requires approval)
-- Sufficient GPU memory (at least 16GB recommended)
+- Sufficient GPU memory (at least 8GB recommended)
 - HuggingFace token with appropriate permissions
 
 ## Evaluation
