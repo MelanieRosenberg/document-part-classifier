@@ -76,7 +76,7 @@ test_dataset = load_data()
 test_dataset = test_dataset.map(preprocess_function, batched=True)
 
 # Function to evaluate the model
-ddef evaluate_model(model, dataset, batch_size=8):
+def evaluate_model(model, dataset, batch_size=8):
     model.eval()
     all_predictions = []
     all_labels = []
