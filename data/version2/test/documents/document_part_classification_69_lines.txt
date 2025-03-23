@@ -1,0 +1,6 @@
+Credit Card Type:          AMEX            MC            Visa
+Full Card Number:
+Expiration Date:                    /
+Month          Year
+CVV  (Security Code):
+Billing Address Zip Code:

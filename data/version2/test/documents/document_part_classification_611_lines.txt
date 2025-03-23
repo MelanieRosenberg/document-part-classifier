@@ -1,0 +1,15 @@
+Intervention       Intervention     Control Events      Control group
+Events          group  size                               size
+Denominators:
+persons
+Denominators:
+person-years
+No. deaths from all
+-cause mortality*
+No. deaths from
+cancer*
+No. with a primary
+cancer recurrence*
+No. with a second
+primary cancer
+recurrence*

@@ -1,0 +1,11 @@
+EMPLOYEE  ID                   LAST NAME                     FIRST NAME                 MIDDLE NAME
+HIRING DEPARTMENT/I.D.                    SUPERVISOR’S NAME                      SUPERVISOR’S EXT
+LEVEL (A,B, C)                        HOURLY  RATE                           MAX HOURS/WEEK
+/
+EFFECTIVE START DATE               REC #           PS POSITION NUMBER    /   JOB CODE                        END DATE
+STUDENT    ASSISTANT    (NON-WORK      STUDY)
+/
+EFFECTIVE START DATE              REC #           PS POSITION NUMBER     /  JOB CODE                        END DATE
+/
+EFFECTIVE START DATE              REC #           PS POSITION NUMBER     /  JOB CODE                        END DATE
+APPROPRIATE ADMINISTRATOR/APPROVAL NAME          APPROPRIATE ADMINISTRATOR/APPROVAL SIGNATURE               DATE

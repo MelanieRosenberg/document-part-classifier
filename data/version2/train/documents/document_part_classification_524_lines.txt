@@ -1,0 +1,34 @@
+Drug  Name  (Brand Name)                     Biomarker(s)                    Indication(s)
+Oncology  (cont.)
+74      Exemestane   (Aromasin®)                     ESR1; PGR                       Breast cancer
+75      5-Fluorouracil (5-FU) (Efudex®)              DPYD                            Multiple cancers
+76      Fulvestrant (Faslodex®)                      ESR1; PGR                       Breast cancer
+77      Gefitinib (Iressa®)                          EGFR                            Non-small  cell lung cancer
+78      Imatinib (Gleevec®)                          BCR-ABL;   PDGFRB;  KIT;        Multiple cancers,
+FIP1L1-PDGFRA                   myelodysplastic syndrome
+79      Irinotecan (Camptosar®)                      UGT1A1                          Colon  cancer, small cell lung
+cancer
+80      Lapatinib (Tykerb®)                          ERBB2;  HLA-DQA1;               Breast cancer
+HLA-DRB1
+81      Lenalidomide  (Revlimid®)                    Del (5q)                        Multiple myeloma,  mantle cell
+lymphoma,   myelodysplastic
+syndrome
+82      Letrozole (Femara®)                          ESR1; PGR                       Breast cancer
+83      Mercaptopurine   (Purinethol®)               TPMT                            Acute  lymphocytic leukemia,
+chronic myeloid leukemia,
+Crohn's disease, and ulcerative
+colitis
+84      Nilotinib (Tasigna®)                         UGT1A1;  BCR-ABL1               Chronic  myelogenous  leukemia
+85      Obinutuzumab   (Gazyva®)                     MS4A1                           Chronic  lymphocytic leukemia,
+follicular lymphoma
+86      Omacetaxine   mepesuccinate  (Synribo®)      BCR-ABL1                        Chronic  myeloid leukemia
+87      Panitumumab   (Vectibix®)                    EGFR;  KRAS                     Colon  cancer
+88      Pemetrexed   (Alimta®)                       TS                              Lung  cancer
+89      Pertuzumab   (Perjeta®)                      ERBB2                           Breast cancer
+Platinum Therapies
+90      Carboplatin                                  ERCC1                           Ovarian cancer
+91      Cisplatin                                    TPMT                            Multiple cancers
+92      Oxaliplatin                                  ERCC1                           Colorectal cancer
+93      Nedaplatin                                   ERCC1                           Multiple cancers
+94      Triplatin tetranitrate                       ERCC1                           Multiple cancers
+95      Satraplatin                                  ERCC1                           Multiple cancers

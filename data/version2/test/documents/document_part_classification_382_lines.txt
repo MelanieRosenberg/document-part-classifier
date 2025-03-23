@@ -1,0 +1,6 @@
+Survival / all-cause mortality                              Yes  /No /Not clear
+cancer  mortality                                           Yes  /No /Not clear
+primary  cancer recurrence                                  Yes  /No /Not clear
+second  primary  cancer                                     Yes  /No /Not clear
+quality of life                                             Yes  /No /Not clear
+side effects                                                Yes  /No /Not clear

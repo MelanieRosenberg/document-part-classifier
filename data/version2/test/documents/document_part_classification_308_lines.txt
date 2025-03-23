@@ -1,0 +1,48 @@
+(b) to other  researchers?
+()            ()            ()            ()           0)
+1             2             3            4             5
+of  no                                                extremely
+importance                                              important
+Does  the  paper describe applications  or illustrate potential applications?
+Describes  applications
+Mlustrates potential applications
+No  applications  described
+How   easy  is the paper to understand?
+()            ()            ()            ()            ()
+1             2             3             4             5
+Very  hard to               Average  for                Very easy to
+understand                   academic                  understand
+journals
+Suggest general ways  to improve   readability (beyond  your  comments   in the margins).
+Example:  ‘Put mathematics   in an  appendix’)
+Is the title descriptive and short?
+Yes
+No  (suggest  new  title)
+Is the abstract complete  and correct?
+Yes
+No  (suggest  changes)
+Can  the paper be  reduced  in length?
+Yes  (by what  percentage?        °%)
+ss
+If yes, please provide suggestions  on  how  to reduce length of the  manuscript:
+No
+Was  the review  of prior literature adequate?
+Yes
+No   (list some relevant papers that should  be added)
+Were  the references correct?
+Yes
+No  (show errors  here or on manuscript)
+. Does  the paper  follow the ‘Guidelines to Authors’?
+Yes
+No  (suggest changes)
+. Please classify the paper (check  all that apply):
+(a) Empirical  (check only  one item  in section (a))
+(1) Exploratory
+(2) Single dominant  hypothesis
+(3) Multiple hypotheses   (two or more  reasonable  hypotheses)
+This category  is of particular interest to the JoF.
+(b) Descriptive
+(4) Describes  methods
+(5) Describes  data
+(6) Theory  (mathematical   or verbal)
+(7) Case study

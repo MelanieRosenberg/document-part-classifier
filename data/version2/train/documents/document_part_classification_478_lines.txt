@@ -1,0 +1,61 @@
+6.  Identify the efflorescence.  Knowing the composition of efflorescing salts is sometimes of use.
+Table 1, taken from Brownell’s report lists the most probable sources of efflorescing salts.
+Commercial testing laboratories can use X-ray diffraction, petrographic analysis or chemical
+analysis can, in some instances, determine both the type of salts present and their relative
+quantity.
+7.  Consider miscellaneous sources of water when all obvious sources have been eliminated.
+Some of these sources are: condensation within the wall, poorly directed landscape sprinklers, leaky
+pipes, faulty drains and condensation on heating or plumbing pipes.
+If necessary, condensation analysis methods are described in Technical Note 47.
+When the mechanisms causing the efflorescing salts to appear have been established and the sources
+of salts or moisture are identified (usually the latter), suitable corrections must be addressed.
+Solutions to efflorescence prob- lems usually involve reducing water penetration into the masonry
+and removing the efflorescence from the wall.
+Recommendations for the correction of water penetration in masonry walls are contained in Technical
+Note 46.
+It is usually not advisable to wash efflores- cence off of the brickwork except in warm, dry
+weather, since this results in the availability of considerably more moisture which may bring more
+salts to the surface.
+Many efflorescing salts can be removed by dry brushing.
+For recommendations concerning removing efflorescence and other stains on masonry walls, see
+Technical Note 20.
+Special care should be exercised in cleaning new masonry, since improper procedures and errors can
+contribute to or cause efflorescence or stains.
+Principal Efflorescing   Salt           Most  Probable   Source
+Calcium sulfate            CaSO  4●2H 2O       Brick
+Sodium  sulfate            Na 2SO 4●10H 2O     Cement-brick  reactions
+Potassium  sulfate         K 2SO 4             Cement-brick  reactions
+Calcium carbonate          CaCO                Mortar    concrete
+3                    or
+backing
+Sodium  carbonate          Na 2CO              Mortar
+3
+Potassium  carbonate       K 2CO 3             Mortar
+Potassium  chloride        KCl                 Acid Cleaning
+Sodium  chloride           NaCl                Sea Water
+Vanadyl  sulfate           VOSO                Brick
+4
+Vanadyl  chloride          VOCl                Acid
+2                   Cleaning
+Manganese   oxide          Mn 3O               Brick
+4
+Iron oxide                 Fe 2O 3 or          Iron in contact or brick
+Fe(OH) 3            with "black core" or
+"black heart"
+Calcium hydroxide          Ca(OH) 2            Cement
+Clear water repellents, silicone and acrylic coatings are among the solutions often sug- gested for
+preventing efflorescence.
+A coating may prevent efflorescence from recurring by reducing the amount of water absorbed by an
+exposed masonry surface.
+However, applying a coating to brickwork that has a tendency to effloresce, without stopping the
+mechanisms causing that efflorescence, may lead to deg- radation of the masonry.
+Further, applying a coating that inhibits evaporation of water from the masonry may also lead to
+degradation.
+As water and dissolved salts within masonry travel toward a coated exterior surface, they may be
+stopped at the inner margin of the coating (usually 1/ 8 to 1/ 4 in.
+[3 to 6 mm] below the surface).
+At this point, the water will evapo- rate, passing through the treated area as vapor and soluble
+salts in the water will be deposited within the mason- ry.
+Known as cryptoflorescnece or subflorescence, salts that crystallize within masonry can develop
+tremendous pressures which may result in brick spalling.
+For this reason, coatings are not recommended as the sole treatment for efflorescence problems.

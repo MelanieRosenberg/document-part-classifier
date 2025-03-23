@@ -1,0 +1,44 @@
+DADOS  PESSOAIS  (preencha todos os campos)
+Nome:                                                                                              Sexo:
+Eduardo    Kugelmas                                                                          ( )feminino   (  ) masculino
+E-mail:
+kugelmas@usp.br
+Nome  do Pai:
+Luiz  F. C da  Silva
+Nome  da Mãe:
+Miguel   Pryor
+DADOS  DO  NASCIMENTO   (preencha todos os campos)
+Data:                                                         País:                                   UF:
+11/16/20                                                      Michael    Edgar   Perlman             RJ
+DOCUMENTOS     (se estrangeiro, preencher passaporte ou  identidade MERCOSUL)
+CPF: 03087750409                               Passaporte: FP287150                           Título de Eleitor:
+Identidade:                                    Data de Expedição:                             Órgão Expedidor:
+7332132                                                11/20/2020
+ENDEREÇO    RESIDENCIAL
+Logradouro:                                                                                   (Número, complemento)
+R. Siqueira  Campos,    304,  Brazil
+Bairro:                                        Cidade:                                        UF:
+COHAB                                           Recife                                    PE
+Cep:                                           Telefone:                      Celular:                       Telefone comercial:
+50010-010                                    +55  98  98471-5918                 -                                          -
+GRADUAÇÃO
+Curso
+Métodos     em   pesquisa    de  negócios
+Instituição
+University    of  São   Paulo
+Ano  de Conclusão:                                                    Número   de matrícula no conselho (se brasileiro):
+2020                                               Nenhum
+RESIDÊNCIA   EM  CURSO
+Programa  (Especialidade)                                             Ano: R1  ( ) R2 ( ) R3 ( ) R4 ( ) R5 ( ) R6 ( )
+Marketing
+Instituição:
+University    of São   Paulo
+Endereço  Butanta,   São   Paulo   - State  of São   Paulo,   Brazil
+Telefone                                                              Email
++55   11  3091-3116                                                -
+PROPOSTA    DE  RODÍZIO
+Neste campo,  inserir:
+- Meses e ano de interesse
+- Turnos da semana  de interesse
+- Serviços de interesse
+- Observações  que julgue ser pertinentes

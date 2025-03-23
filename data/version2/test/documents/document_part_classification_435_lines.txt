@@ -1,0 +1,37 @@
+sample      _pfdt
+opy     codon
+per rfip
+haplotype
+dihydrofolate    reductase
+svmnt
+[   ff  VOSviewer
+Terms  related to drug resistance, gene mutations, or countries                                                    Number   of occurrences
+Cluster # 1 (red) = 138 items
+Chloroquine  resistance transporter                                                                                          20
+Chloroquine-resistant                                                                                                         15
+Chloroquine-resistant  malaria                                                                                                21
+Chloroquine-resistant  P. falciparum                                                                                          11
+Chloroquine-resistant  parasites                                                                                              12
+Chloroquine-resistant  Plasmodium   falciparum                                                                               26
+Chloroquine-resistant  strain                                                                                                20
+CQR   (chloroquine resistance)                                                                                               38
+pfcrt mutation                                                                                                                15
+Transporter                                                                                                                  38
+Protein                                                                                                                      92
+Phenotype                                                                                                                    62
+Cluster # 2 (green) = 123 items
+Antifolate drug resistance                                                                                                   25
+dhfr gene                                                                                                                     18
+dhps gene                                                                                                                    33
+dhps mutation                                                                                                                 18
+pfdhps gene                                                                                                                  20
+Pyrimethamine   resistance                                                                                                   38
+pfcrt gene                                                                                                                   39
+pfmdr1  gene                                                                                                                 35
+Cluster # 3 (blue) = 89 items
+Artemisinin  resistance                                                                                                      90
+Artemisinin-resistant malaria                                                                                                 17
+Sub-Saharan  Africa                                                                                                          23
+Thai-Myanmar    border                                                                                                        10
+Papua                                                                                                                         15
+Asia                                                                                                                          81

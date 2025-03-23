@@ -1,0 +1,65 @@
+In the clinical laboratory, sleep is defined by its electro- encephalography (EEG) in concert with
+electromyog- raphy (EMG), electrooculography (EOG) and other telemetry.
+Using polysomnographic recordings, sleep can be classified into rapid eye movement (REM) sleep and
+non-rapid eye movement (NREM) sleep.
+The NREM sleep is further classified into 3 sleep stages namely Stage N1 sleep, Stage N2 sleep, and
+stage N3 sleep (also known as slow wave sleep, delta sleep or deep sleep), based primarily on the
+occurrence of synchronous physiologic EEG potentials.
+Drowsy awake with eyes closed is defined by the presence of alpha - the fre- quency with the most
+power on spectral analysis.
+Sleep onset (Stage N1) is generally defined as occurring at the point in which there is a decline of
+alpha rhythm (9– 11 Hz) to less than 50% of the recorded epoch.
+Stage N2 sleep is denoted by bursts of sleep spindles at sigma fre- quency (11–16 Hz) and K-complex
+events - electro- physiological down states known to negatively affect the general tendency of
+neurons to develop spike potential activity (Cash et al.
+2009).
+Deep sleep (stage N3 sleep) oc- curs in association with delta frequency oscillations (0.5– 1.5 Hz).
+REM sleep is characterized by bursts of intracra- nial theta (5–8 Hz), with alpha and gamma
+oscillations noted in scalp recordings, associated with conjugate eye.
+Class of drugs                            Eeg frequencies                                                                      Treatment  indications
+Delta            Theta            Alpha            Sigma           Beta/Gamma
+(0.5–1.5 Hz)     (5.5–8.5 Hz)     (8.5–11 Hz)      (12–16 Hz)      (21–32 Hz)
+Benzodiazepines  (BZDs)                                                     Decrease         Increase        Increase          Anxiety
+Sedation
+Barbiturates                                                                                 Increase        Increase          Anxiety
+Sedation
+Epilepsy
+Tricyclic Antidepressants (TCAs)          decrease         Decrease                                          Increase          Depression
+SSRI Antidepressants                      decrease                          Increase                                           Depression
+Anxiety
+OCD
+Amphetamines                              decrease         Decrease                                          increase          Somnolence
+Narcolepsy
+AD/HD
+Opiates                                   increase                          decrease                                           Pain
+Anticonvulsants                                            increase                                                            Epilepsy
+Phenytoin, valproate, carbamazepine
+Gamma   hydroxy  butyrate (GHB)           increase                                                                             Cataplexy
+Narcolepsy
+Classic Neuroleptics                                       increase         decrease         decrease                          Schizophrenia
+Psychosis
+movements and diminished skeletal EMG activity.
+Medi- cations producing CNS-related behavioral effects generally affect background EEG frequencies
+(Mamdema and Dan- hof 1992).
+In most cases, a consistent pattern of EEG change produced by a drug is associated with a consistent
+pattern of behavioral change (Hermann and Schaerer 1986).
+Psychoactive drugs produce alterations in physio- logic EEG rhythms consistent across therapeutic
+classifica- tions and utilized to predict the behavioral activity of new preparations, drug
+interactions and toxicities (Blume 2006) (Table 2).
+Sleep regulation is a complex interaction between the homeostatic and the endogenous circadian
+processes (Borbély et al.
+2016).
+The circadian processes of sleep are largely controlled by the suprachiasmatic nucleus (SCN) in the
+hypothalamus (Dai et al.
+1998; Hofman et al.  1996; Swaab et al.  1985; Vimal et al.  2009).
+This in- ternal human clock responds to external factors with the greatest influence being exposure
+to light/dark (LD) cycle (Lewy et al.
+1980; Morin 2015).
+The other import- ant element to the timing of the sleep/wake cycle is the endogenously produced
+neural hormone melatonin, pro- duced by the pineal gland in response to signals from the SCN.
+Melatonin can induce sedation, an effect sometimes utilized to assist children in tolerating med-
+ical procedures (Johnson et al.
+2002).
+In addition to regulation of the sleep/wake cycle, body temperature and numerous other processes
+vary with circadian rhythm (Sack et al.
+2007).  Externally introduced.

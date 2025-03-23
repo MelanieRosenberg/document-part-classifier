@@ -1,0 +1,81 @@
+medically related text and metadata features, such as “pa- tients,” “alzheimer,” “health information
+management,” and “medicine” are also important and of mostly positive polar- ity, since medical
+articles attract greater news coverage than, say, a recently published computer science paper.
+As we dis- cuss later, the presence of “alzheimer” as an important, neg- ative feature is more an
+artifact of the dataset than an iden- tification of trends in popularity.
+We also find an artifact of year (2016) of the dataset with the feature “zika virus,” due to the
+2015-2016 zika epidemic in North and South Amer- ica.
+Three publishers appear in the top 20, the Massachusetts Medical Society, the publisher of the New
+England Journal ofMedicine,oneofthemostprestigiouspeer-reviewedmed- ical journals, “The Royal
+Society,” publisher of the less pres- tigious, but longest-running scientific journal, “Philosophi-
+cal Transactions of the Royal Society,” and “Elsevier,” one of the largest science publishers.
+See Table 3 for results for this experiment.
+Relative perfor- mance on the weekly task is similar to its daily counter- part.
+Understandably, performance is best when optimized for and evaluated on smaller ranks for NDCG since
+weekly scientificarticlelistsarelongandtherearemoresuper popu- lar, possibly easier to rank,
+articles which can fill the top 7 or 35.
+Segmenting dates by week rather than day may be more realistic, since scientific articles compete
+for news coverage with articles published around the same time rather than just those published on
+the same day.
+At ranks 35 and 70, as in the daily prediction task, the models using all features perform the best,
+but not statisti- cally significantly better than models trained on some fea- ture subsets.
+At rank 7, the model trained on textual features outperforms the model with all features, but not
+statistically significantly.
+Table5givesthetopfeaturesforthemodeltrainedtoopti- mize NDCG@7 and using textual features.
+Again, medical and people-related terms, such as “diet,” “participants,” and “health” are quite
+important and of positive polarity.
+Inter- estingly, “protein” in the press release is of positive polar- ity on average, whereas it is
+negative when present in the abstract.
+We hypothesize that this may be because, on aver- age, very technical scientific papers, such as
+those mention- ing proteins and cells, are less accessible to journalists, but those which garner a
+press release are much more likely to be read and covered.
+Similar to Zhang et al.
+(2016) “95” (for 95% CI) is an important, positive feature, perhaps since this is commonly found in
+results of medical studies that may be of interest to the general public.
+SincehavingapressreleaseonEurekAlert!orScienceDaily is, understandably, correlated with increased
+news cover- age, we repeat the same experiments on the subset of sci- entific articles with press
+releases posted on EurekAlert.
+or Science Daily.  This subset consists of 20,546 scientific arti- cles.
+Thresholds between relevances are much higher on this subset, with thresholds at the daily level of
+T 1 = 3.64 and.
+# Split   Polarity       Feature            Source
+103         0.60          study        press release
+94          1.29      mesothelioma          abstract
+86          0.18           95               abstract
+75          -0.35       alzheimer           abstract
+62          0.46         patients      press release
+60          0.58           use         press release
+45          0.24         protein       press release
+44          0.21          health            abstract
+41          -0.14          cell             abstract
+40          0.13        evidence            abstract
+39          -0.20        protein            abstract
+39          0.82           diet        press release
+38          0.61          years        press release
+38          0.64         people        press release
+38          0.20       participants         abstract
+33          0.34          issue        press release
+31          0.24          world             abstract
+31          0.59        evidence       press release
+28          0.16          body              abstract
+28          0.16          years             abstract
+level, on average.
+As seen in Table 3, this problem is harder, with the best performance on the daily task at 0.6065,
+using all features, and 0.6156 on the weekly task at rank 7, using all features.
+However, although harder, this problem may be more realis- tic since, as noted in the introduction,
+many journalists start with press materials to inform what science they cover be- fore reading
+original articles.
+Table 6 displays the top 20 fea- tures for the daily experiment using all features.
+Important features for these experiments are similar to those listed for the experiments including
+all scientific articles, except fea- tures from the press release are more prevalent.
+This makes sense as press releases were issued for all articles in this sub- set (and we have the
+text of most of them), and press releases are an important source text for journalists.
+We do not list features from the weekly experiments as they are quite sim- ilar.
+In the previous experiments, we treat articles with news cov- erage from only automatic copying of
+abstracts or press re- leases as having coverage count 0.
+In this section, we also explore the binary prediction problem of differentiating be- tween those 0
+count articles and those with any amount of real news coverage.
+We create a matched sampling problem using the 34,329 scientific articles with no real news cov-
+erage as negative examples.
+For each negative example, we attempt to find a positive example: 1.
+with the same subject fields, 2.  published in the same journal, 3.  published within.
