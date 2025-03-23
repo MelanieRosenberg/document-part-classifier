@@ -1,4 +1,0 @@
-BUS   DRIVER’S     NAME:
-(Must correspond to name on driver’s license)
-DATE   OF  BIRTH:
-CLIENT/LICENSE         ID NUMBER       (from  Driver License):

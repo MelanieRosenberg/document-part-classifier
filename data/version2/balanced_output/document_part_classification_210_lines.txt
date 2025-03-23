@@ -1,7 +1,0 @@
-NOME           CPF      MATRÍCULA      DATA  DOS    CARGO/FUNÇÃO       LOTAÇÃO       TIPO DE
-COMPLETO                                  PRIMEIROS                                    VÍNCULO
-DO SERVIDOR                                SINTOMAS
-Miguel Pryor  046171124-99  27.777.891.8 03-03-1995     Gerente
-Em caso de profissional de saúde, que não se enquadre na definição de Síndrome Respiratória Aguda
-Grave (SRAG) e esteja, preferencialmente, até o sétimo dia do início dos sintomas (podendo ser até o
-décimo dia, se o profissional ainda estiver sintomático).

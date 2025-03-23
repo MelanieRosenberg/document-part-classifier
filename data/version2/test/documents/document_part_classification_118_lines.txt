@@ -1,7 +1,0 @@
-Type of Card:               MasterCard            Visa          Discover          Amex
-Card Number:
-Expiration Date:                                         3 Digit Code
-*Amount   to Charge:
-Signature:
-(Must have signature to process)
-Special Requests:

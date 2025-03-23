@@ -1,6 +1,0 @@
-cc:     trial counsel
-encls:  Opinion
-Clerk’s  Transcripts   [if applicable]
-Reporter’s   Transcripts   [if applicable]
-Petition  for Review   information    [if applicable]
-Information    on contacting   your  adopted    child [if applicable]

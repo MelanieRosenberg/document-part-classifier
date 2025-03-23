@@ -1,6 +1,0 @@
-3.
-HORÁRIO     ATUAL                               HORÁRIO     SOLICITADO
-Código  Disciplina:                              Código  Disciplina:
-Turma:           Série:                          Turma:               Série:
-JUSTIFICATIVA(S):
-( ) DEFERIDO                    ( )INDEFERIDO

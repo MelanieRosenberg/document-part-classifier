@@ -1,8 +1,0 @@
-1.  CERTIFICATE       ACCEPTED        BY
-a. NAME    (Typed  or printed) (Last, First, Middle Initial)                     b.  UNIQUE    IDENTIFICATION     (e.g., EDIPI, UID)
-c. ORGANIZATION                         d. TELEPHONE      NUMBER      (Include   e. E-MAIL   ADDRESS
-Area  Code)
-You have been authorized to receive one or more private and public key pairs and associated certificates. A private key enables you to digitally sign documents and messages and identify yourself to gain access to systems. You may have another private key to decrypt data such as encrypted messages. People and electronic systems inside and outside the DoD will use public keys associated with your private keys to verify your digital signature, or to verify your identity when you attempt to authenticate to systems, or to encrypt data sent to you. The certificates and private keys will be issued on a token, for example a Common Access Card (CAC), another hardware token, or a floppy disk. The certificates and private keys on your token are government property and may be used for official purposes only.
-Liability: I will have no claim against the DoD arising from use of the Subscriber's certificates, the key recovery process, or a Certification Authority's (CA's) determination to terminate or revoke a certificate. The DoD is not liable for any losses, including direct or indirect, incidental, consequential, special, or punitive damages, arising out of or relating to any certificate issued by a DoD CA.
-f. IDENTIFICATION       1                                                              g.  IDENTIFICATION       2
-(1) TYPE   (DoD  ID, Passport,  etc.)    (2) NUMBER                                    (1) TYPE   (DoD  ID, Passport, etc.)     (2) NUMBER

@@ -1,9 +1,0 @@
-Name   on Card:          Scott Pinheiro
-Billing Address:         571 Spring St Newport RI 02840 USA
-Credit Card Type:             Visa         Mastercard       Discover        AmEx
-Credit Card Number:      4843760100556341
-Expiration Date:         03    / 2022          CVC/Security  Code:   489
-Amount  to Charge:  $  2000                    Frequency:     Monthly     Annually
-Signature:
-Print Name:                Scott Pinheiro
-Date:                      03-03-2020

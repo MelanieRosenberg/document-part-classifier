@@ -1,9 +1,0 @@
-FROM:    Aurea Feest                                                     DATE:      04-03-2020
-Contact Name:        Aurea   Feest                      Tel #:    586 443 7340 x121  Email:     aurea.feest@hotmail.com
-Company/Event   Name:                  Amazon                                     Event Date:       WEPTAC    2016
-RESERVATION       INFORMATION                           # of Rooms:          4
-Guest Name:          Keren    Crona                     Confirmation  #:        5075
-Arrival Date:             04-03-2020                    Departure Date:         07-03-2020
-Rate per night:      $500                               + 12.05%  tax plus $2 city occupancy tax
-City:            Wheatland                               State:  CA
-Zip Code:    95692

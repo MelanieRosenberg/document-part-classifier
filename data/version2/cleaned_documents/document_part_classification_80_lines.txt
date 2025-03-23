@@ -1,7 +1,0 @@
-Name  of Teacher/Staff John Ayer
-Baton         Magnet         School
-School Building:      Rouge            High
-Device Make and Model:     2015
-Device Serial Number: 558794
-Device Wi-Fi MAC Address: F0:B0:52:36:61:70
-_______ I understand that the Brandon Valley School District reserves the right to regularly review, monitor and audit access on all internet utilization. I further understand that I do not have a right to privacy when using the Brandon Valley School District’s network.

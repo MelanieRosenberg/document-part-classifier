@@ -1,8 +1,0 @@
-Precast hollow-core concrete planks generally bear on the interior wythe of a cavity wall. The plank rests a minimum of 3 in. (75 mm) on a bearing pad that separates the plank from a concrete masonry bond beam below. Anchorage to the wall may be achieved with reinforcing steel (see Fig. 22) or, when lateral loads are small, planks may be solidly grouted to the wall. In either case, connections should be designed by a structural engineer.
-Wood floor joists normally have a 3 in. (75 mm) fire cut end and bear only on the interior wythe of a cavity wall. The ends of the joist must not project into the cavity; they can form a ledge, which may create a moisture bridge across the cavity. Wood floor joists may also be fastened to metal joist hangers attached to a ledger bolted to the inner wythe of the cavity wall, or joist hangers may be embedded in the inner wythe of the cavity wall. See Fig. 23.
-CONCRETE                r            ANCHOR   BOLT
-MASONRY
-REINFORCED
-BOND  BEAM
-JOIST HANGER:
-FLOOR JOIST,

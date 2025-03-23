@@ -1,3 +1,0 @@
-Número  do Banco:                         Nome   do Banco: Banco   do  Brasil
-Número  da Agência:                       Nome   da Agência:
-Conta-corrente nº: 37406-8                Dígito: 271    Conta-poupança   nº: 30450-6               Dígito: 284

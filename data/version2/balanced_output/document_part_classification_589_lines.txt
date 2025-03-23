@@ -1,5 +1,0 @@
-Nutrient               Biologic       Val./reproduc     Coef      Details
-tissue
-Enterodiol             Serum          Validity          0.13 to   Urinary  enterodiol and enterolactone and serum enterolactone were
-Enterolactone          Urine                            0.29      significantly correlated with dietary fiber intake (r = 0.13-0.29) Cancer
-Epidemiol  Biomarkers  Prev. 2004  May;13(5):698-708

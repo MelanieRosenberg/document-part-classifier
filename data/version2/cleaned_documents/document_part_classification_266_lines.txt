@@ -1,9 +1,0 @@
-Dados  da amostra
-Nome:   Miguel Pryor
-Data de nascimento:  03 / 03 / 1994             Sexo: ( ) Feminino  ( ) Masculino
-Endereço:  R. da Ajuda,
-Nº: 5 - 5º    Bairro: Andar  - Centro  Cidade: Rio  de Janeiro       CEP:  20040-007
-E-mail: michael.pryor@bunge.com
-Telefone: (  ) +55-98-98400-1957
-RG:  27.777.891.8                           CPF: 046171124-99
-Médico  solicitante: Julio Milko                                 CRM:   88794

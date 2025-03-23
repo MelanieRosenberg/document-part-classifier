@@ -1,3 +1,0 @@
-(  ) febre:  temperatura      axilar:          °C          (  ) não
-(  ) tosse                                                 (  ) não
-(  ) outros:
