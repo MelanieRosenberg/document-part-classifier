@@ -16,7 +16,7 @@ label2id = {"FORM": 0, "TABLE": 1, "TEXT": 2}
 
 # Model configuration
 model_name = "/home/azureuser/llama_models/llama-3-2-1b"  # Base model path
-adapter_path = "models/llama_1b_lora/run_20250322_213248/final_model"  # Path to your trained LoRA adapter
+adapter_path = "models/llama_1b_lora/run_20250323_011310/final_model"  # Path to your trained LoRA adapter
 
 # Load tokenizer
 tokenizer = AutoTokenizer.from_pretrained(model_name)
@@ -76,7 +76,7 @@ test_dataset = load_data()
 test_dataset = test_dataset.map(preprocess_function, batched=True)
 
 # Function to evaluate the model
-def evaluate_model(model, dataset, batch_size=8):
+ddef evaluate_model(model, dataset, batch_size=8):
     model.eval()
     all_predictions = []
     all_labels = []
@@ -127,20 +127,30 @@ def evaluate_model(model, dataset, batch_size=8):
 
     return {
         "overall_f1": overall_f1,
+        "overall_precision": overall_precision,
+        "overall_recall": overall_recall,
         "form_f1": f1[0],
         "table_f1": f1[1],
         "text_f1": f1[2],
+        "form_precision": precision[0],
+        "table_precision": precision[1],
+        "text_precision": precision[2],
+        "form_recall": recall[0],
+        "table_recall": recall[1],
+        "text_recall": recall[2]
     }
-
 
 # Run evaluation
 print("Starting evaluation...")
 results = evaluate_model(model, test_dataset)
 print("\nTest Results:")
 print(f"Overall F1: {results['overall_f1']:.4f}")
-print(f"FORM F1: {results['form_f1']:.4f}")
-print(f"TABLE F1: {results['table_f1']:.4f}")
-print(f"TEXT F1: {results['text_f1']:.4f}")
+print(f"Overall Precision: {results['overall_precision']:.4f}")
+print(f"Overall Recall: {results['overall_recall']:.4f}")
+print("\nPer-Class Performance:")
+print(f"FORM - F1: {results['form_f1']:.4f}, Precision: {results['form_precision']:.4f}, Recall: {results['form_recall']:.4f}")
+print(f"TABLE - F1: {results['table_f1']:.4f}, Precision: {results['table_precision']:.4f}, Recall: {results['table_recall']:.4f}")
+print(f"TEXT - F1: {results['text_f1']:.4f}, Precision: {results['text_precision']:.4f}, Recall: {results['text_recall']:.4f}")
 
 # Example inference
 if __name__ == "__main__":
