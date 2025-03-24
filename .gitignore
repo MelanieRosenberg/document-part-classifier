@@ -58,3 +58,4 @@ wandb/
 training_log.txt
 val_metrics.json
 args.json 
+src/data/* linguist-documentation
